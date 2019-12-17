@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'create js profile' do
     scenario 'successfully' do
         job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
-
+        
         login_as job_seeker
 
         visit root_path
@@ -39,35 +39,36 @@ feature 'create js profile' do
         click_on 'Enviar'
 
         expect(page).to have_content 'Você deve corrigir todos os erros para prosseguir'
-        expect(page).to have_content 'Nome não pode ficar vazio'
-        expect(page).to have_content 'CPF não pode ficar vazio'
-        expect(page).to have_content 'Apelido não pode ficar vazio'
-        expect(page).to have_content 'Data de nascimento não pode ficar vazio'
-        expect(page).to have_content 'Escolaridade não pode ficar vazio'
-        expect(page).to have_content 'Descrição não pode ficar vazio'
-        expect(page).to have_content 'Experiencia não pode ficar vazio'
+        expect(page).to have_content "Name can't be blank"
+        expect(page).to have_content "Document can't be blank"
+        expect(page).to have_content "Nick name can't be blank"
+        expect(page).to have_content "Day of birth can't be blank"
+        expect(page).to have_content "Education level can't be blank"
+        expect(page).to have_content "Description can't be blank"
+        expect(page).to have_content "Experience can't be blank"
 
     end
     scenario 'CPF must be unique' do
         job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
-        Profile.create!(name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
-                        education_level: 'Graduado', description: 'Ciencia da computacao',
-                        experience: 'Trabalhei com computacao')
+        job_seeker2 = JobSeeker.create!(email: 'test2@test.com', password: '234567')
+        Profile.create!(job_seeker: job_seeker, name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João',
+                        day_of_birth: '12/01/1986', education_level: 'Graduado', 
+                        description: 'Ciencia da computacao', experience: 'Trabalhei com computacao')
 
-        login_as(job_seeker)
+        login_as(job_seeker2)
         
         visit root_path
         click_on 'Criar Perfil'
-        fill_in 'Nome:', with: 'Maria da Silva'
+        fill_in 'Nome:', with: 'Maria Santos'
         fill_in 'CPF:', with: '595.487.167-12'
         fill_in 'Apelido:', with: 'Maria'
         fill_in 'Data de nascimento:', with: '10/02/1987'
-        fill_in 'Escolaridade:', with: 'Graduado'
+        fill_in 'Escolaridade:', with: 'Pós-Graduado'
         fill_in 'Descrição:', with: 'Ciencia da computacao'
-        fill_in 'Experiência:', with: 'Trabalhei com computacao'
+        fill_in 'Experiência:', with: 'Trabalhei muito com computacao'
         click_on 'Enviar'
 
-        expect(page).to have_content 'CPF já cadastrado'
+        expect(page).to have_content 'Document has already been taken'
 
 
     end

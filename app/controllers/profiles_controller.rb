@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
 
     def create
         @profile = Profile.new(profile_params)
+        @profile.job_seeker = current_job_seeker
         if @profile.save
             flash[:alert] = 'Perfil criado com sucesso!'
             redirect_to @profile
@@ -29,6 +30,7 @@ class ProfilesController < ApplicationController
 
     def update
         find_profile
+        @profile.job_seeker = current_job_seeker
         if @profile.update(profile_params)
             flash[:alert] = 'Perfil criado com sucesso!'
             redirect_to @profile
@@ -41,7 +43,7 @@ class ProfilesController < ApplicationController
     private
 
     def profile_params
-        params.require(:profile).permit(:job_seeker,:name, :document, :nick_name, :day_of_birth, 
+        params.require(:profile).permit(:name, :document, :nick_name, :day_of_birth, 
                                         :education_level, :description, :experience)
     end
 

@@ -6,6 +6,7 @@ class Profile < ApplicationRecord
     validates :education_level, presence:true
     validates :description, presence:true
     validates :experience, presence:true
+
     belongs_to :job_seeker
 
 end

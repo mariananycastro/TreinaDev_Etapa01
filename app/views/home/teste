@@ -9,3 +9,4 @@
   <dt>Categoria:</dt>
     <dd><%= @car_model.car_category.name %></dd>
 </dl>
+

@@ -1,9 +1,4 @@
 <h1> ola </h1>
 
 <%= render partial: 'shared/log' %>
-
-<% if job_seeker_signed_in? %>
-<nav>
-      <%= link_to 'Criar Perfil', new_profile_path %>
-</nav>
-<% end %>
+<%= render partial: 'profiles/button_create_edit_profile' %>
