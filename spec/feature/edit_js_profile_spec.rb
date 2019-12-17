@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 feature 'edit js profile' do
-    xscenario 'successfully' do
-        Profile.create!(name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
+    scenario 'successfully' do
+        job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
+        Profile.create!(job_seeker: job_seeker, name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
                         education_level: 'Graduado', description: 'Ciencia da computacao',
                         experience: 'Trabalhei com computacao')
 
+        login_as job_seeker
         visit root_path
         click_on 'Editar Perfil'
         fill_in 'Nome:', with: 'Joao da Silva Santos'
@@ -29,9 +31,15 @@ feature 'edit js profile' do
 
     end
 
-    xscenario 'must complete all fields' do
+    scenario 'must complete all fields' do
+        job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
+        Profile.create!(job_seeker: job_seeker, name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
+                        education_level: 'Graduado', description: 'Ciencia da computacao',
+                        experience: 'Trabalhei com computacao')
 
-        visit edit_profile_path
+        login_as job_seeker
+        visit root_path
+        click_on 'Editar Perfil'
         fill_in 'Nome:', with: ''
         fill_in 'CPF:', with: ''
         fill_in 'Apelido:', with: ''
@@ -43,36 +51,14 @@ feature 'edit js profile' do
         click_on 'Enviar'
 
         expect(page).to have_content 'Você deve corrigir todos os erros para prosseguir'
-        expect(page).to have_content 'Nome não pode ficar vazio'
-        expect(page).to have_content 'CPF não pode ficar vazio'
-        expect(page).to have_content 'Apelido não pode ficar vazio'
-        expect(page).to have_content 'Data de nascimento não pode ficar vazio'
-        expect(page).to have_content 'Escolaridade não pode ficar vazio'
-        expect(page).to have_content 'Descrição não pode ficar vazio'
-        expect(page).to have_content 'Experiencia não pode ficar vazio'
+        expect(page).to have_content "Name can't be blank"
+        expect(page).to have_content "Document can't be blank"
+        expect(page).to have_content "Nick name can't be blank"
+        expect(page).to have_content "Day of birth can't be blank"
+        expect(page).to have_content "Education level can't be blank"
+        expect(page).to have_content "Description can't be blank"
+        expect(page).to have_content "Experience can't be blank"
 
     end
-    xscenario 'CPF must be unique' do
-        Profile.create!(name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
-                        education_level: 'Graduado', description: 'Ciencia da computacao',
-                        experience: 'Trabalhei com computacao')
-        Profile.create!(name: 'Maria Santos', document: '663.134.739-49', nick_name: 'Maria', day_of_birth: '12/01/1986', 
-                        education_level: 'Pós-graduação', description: 'Ciencia da computacao',
-                        experience: 'Trabalhei com computacao')
-        
-        visit root_path
-        click_on 'Editar Perfil'
-        fill_in 'Nome:', with: 'João da Silva'
-        fill_in 'CPF:', with: '663.134.739-49'
-        fill_in 'Apelido:', with: 'João'
-        fill_in 'Data de nascimento:', with: '12/01/1986'
-        fill_in 'Escolaridade:', with: 'Graduado'
-        fill_in 'Descrição:', with: 'Ciencia da computacao'
-        fill_in 'Experiência:', with: 'Trabalhei com computacao'
-        click_on 'Enviar'
 
-        expect(page).to have_content 'CPF já cadastrado'
-
-
-    end
 end

@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_150323) do
+ActiveRecord::Schema.define(version: 2019_12_17_202004) do
+
+  create_table "job_opportunities", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "habilities"
+    t.integer "salary_range"
+    t.integer "opportunity_level"
+    t.date "end_date_opportunity"
+    t.string "region"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "job_seekers", force: :cascade do |t|
     t.string "email", default: "", null: false
