@@ -9,8 +9,8 @@ feature 'create job opportunity' do
         fill_in 'Descrição Detalhada:', with: 'Trabalhar em empresa multinacional como programador'
         fill_in 'Habilidades Desejadas', with: 'Formação em Computação'
         fill_in 'Faixa Salarial', with: '5000'
-        fill_in 'Nível da Vaga', with: 'Pleno'
-        fill_in 'Data Limite para inscrição', with: '02/02/2020'
+        choose 'Pleno'
+        fill_in 'Data Limite para inscrição', with: '2020-02-02'
         fill_in 'Região', with: 'São Paulo'
         click_on 'Enviar'
 
@@ -19,10 +19,10 @@ feature 'create job opportunity' do
         expect(page).to have_content 'Formação em Computação'
         expect(page).to have_content '5000'
         expect(page).to have_content 'Pleno'
-        expect(page).to have_content '02/02/2020'
+        expect(page).to have_content '2020-02-02'
         expect(page).to have_content 'São Paulo'
 
-        expect(page).to have_content 'Vaga cadastrada com sucesso!'
+        expect(page).to have_content 'Vaga criada com sucesso!'
     end
 
     scenario 'must complete all fields' do
@@ -33,7 +33,7 @@ feature 'create job opportunity' do
         fill_in 'Descrição Detalhada:', with: ''
         fill_in 'Habilidades Desejadas:', with: ''
         fill_in 'Faixa Salarial:', with: ''
-        fill_in 'Nível da Vaga:', with: ''
+        have_select '', from: 'Nível da Vaga'
         fill_in 'Data Limite para inscrição:', with: ''
         fill_in 'Região:', with: ''
         click_on 'Enviar'

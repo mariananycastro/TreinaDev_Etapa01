@@ -25,7 +25,7 @@
     </p>
     <p>
         <%= f.label :opportunity_level, 'Nível da Vaga:' %>
-        <%= f.text_field :opportunity_level %>
+        <%= f.collection_radio_buttons :opportunity_level, JobOpportunity.opportunity_levels, :first , :first %>
     </p>
     <p>
         <%= f.label :end_date_opportunity, 'Data Limite para inscrição:' %>

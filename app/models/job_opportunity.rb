@@ -7,4 +7,6 @@ class JobOpportunity < ApplicationRecord
     validates :end_date_opportunity, presence:true
     validates :region, presence:true
 
+    enum opportunity_level: {Estagiário:0, Júnior:5, Pleno:10, Sênior:15, Especialista:20, Diretor:25}
+
 end
