@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+    before_action :authenticate_job_seeker!
 
     def index
     end
@@ -40,7 +41,8 @@ class ProfilesController < ApplicationController
     private
 
     def profile_params
-        params.require(:profile).permit(:name, :document, :nick_name, :day_of_birth, :education_level, :description, :experience)
+        params.require(:profile).permit(:job_seeker,:name, :document, :nick_name, :day_of_birth, 
+                                        :education_level, :description, :experience)
     end
 
     def find_profile

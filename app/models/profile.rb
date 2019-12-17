@@ -1,12 +1,11 @@
 class Profile < ApplicationRecord
-    validates :name, presence: {message: 'Nome não pode ficar vazio'}, case_sensitive: false
-    validates :document, presence: {message: 'CPF não pode ficar vazio'}, uniqueness: {message: 'CPF já cadastrado'}
-    validates :nick_name, presence: {message: 'Apelido não pode ficar vazio'}
-    validates :day_of_birth, presence: {message: 'Data de nascimento não pode ficar vazio'}
-    validates :education_level, presence: {message: 'Escolaridade não pode ficar vazio'}
-    validates :description, presence: {message: 'Descrição não pode ficar vazio'}
-    validates :experience, presence: {message: 'Experiencia não pode ficar vazio'}
-
+    validates :name, presence:true, case_sensitive: false
+    validates :document, presence:true, uniqueness:true
+    validates :nick_name, presence:true
+    validates :day_of_birth, presence:true
+    validates :education_level, presence:true
+    validates :description, presence:true
+    validates :experience, presence:true
     belongs_to :job_seeker
 
 end

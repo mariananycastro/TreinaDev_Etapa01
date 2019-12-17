@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_132116) do
+ActiveRecord::Schema.define(version: 2019_12_17_150323) do
 
   create_table "job_seekers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 2019_12_17_132116) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "document"
+    t.integer "job_seeker_id"
+    t.index ["job_seeker_id"], name: "index_profiles_on_job_seeker_id"
   end
 
+  add_foreign_key "profiles", "job_seekers"
 end
