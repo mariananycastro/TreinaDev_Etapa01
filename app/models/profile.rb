@@ -7,4 +7,6 @@ class Profile < ApplicationRecord
     validates :description, presence: {message: 'Descrição não pode ficar vazio'}
     validates :experience, presence: {message: 'Experiencia não pode ficar vazio'}
 
+    belongs_to :job_seeker
+
 end
