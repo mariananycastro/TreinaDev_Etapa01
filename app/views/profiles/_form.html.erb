@@ -1,0 +1,44 @@
+<% if @profile.errors.any? %>
+  <ul>
+  <% @profile.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @profile, local: true do |f| %>
+<p> 
+    <%= f.label :name, 'Nome:' %>
+    <%= f.text_field :name %>
+</p>
+<p>
+    <%= f.label :nick_name, 'Apelido:' %>
+    <%= f.text_field :nick_name %>
+</p>
+<p>
+    <%= f.label :document, 'CPF:' %>
+    <%= f.text_field :document %>
+</p>
+<p> 
+    <%= f.label :day_of_birth, 'Data de nascimento:' %>
+    <%= f.date_field :day_of_birth %>
+</p>
+<p>
+    <%= f.label :education_level, 'Escolaridade:' %>
+    <%= f.text_field :education_level %>
+</p>
+<p>
+    <%= f.label :description, 'Descrição:' %>
+    <%= f.text_field :description %>
+</p>
+<p>
+    <%= f.label :experience, 'Experiência:' %>
+    <%= f.text_field :experience %>
+</p>
+<p>
+    <%= f.submit 'Enviar' %>
+</p>
+
+<%end %>
+
+<p><%= link_to 'Home', root_path %> </p>

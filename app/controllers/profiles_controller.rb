@@ -1,0 +1,51 @@
+class ProfilesController < ApplicationController
+
+    def index
+    end
+
+    def new
+        @profile = Profile.new
+    end
+
+    def create
+        @profile = Profile.new(profile_params)
+        if @profile.save
+            flash[:alert] = 'Perfil criado com sucesso!'
+            redirect_to @profile
+        else
+            flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
+            render :new
+        end
+    end
+
+    def show
+        @profile = Profile.find(params[:id])
+    end
+
+    def edit
+        find_profile
+        if @profile.update(profile_params)
+            flash[:alert] = 'Perfil criado com sucesso!'
+            redirect_to @profile
+        else
+            flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
+            render :edit
+        end
+    end
+
+    def update
+        find_profile
+
+    end
+
+    private
+
+    def profile_params
+        params.require(:profile).permit(:name, :document, :nick_name, :day_of_birth, :education_level, :description, :experience)
+    end
+
+    def find_profile
+        @profile = Profile.find(params[:id])
+    end
+
+end

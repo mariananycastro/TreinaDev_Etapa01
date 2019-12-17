@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'create js profile' do
+feature 'edit js profile' do
     scenario 'successfully' do
 
         visit root_path
@@ -63,4 +63,3 @@ feature 'create js profile' do
 
     end
 end
-
