@@ -1,5 +1,9 @@
 class JobOpportunitiesController < ApplicationController
 
+    def index
+        @job_opportunities = JobOpportunity.all
+    end
+
     def new
         @job_opportunity = JobOpportunity.new
     end
@@ -19,6 +23,20 @@ class JobOpportunitiesController < ApplicationController
         find_job_opportunity
     end
 
+    def edit
+        find_job_opportunity
+    end
+
+    def update
+        find_job_opportunity
+        if @job_opportunity.update(job_opportunity_params)
+            flash[:alert] = 'Vaga atualizada com sucesso!'
+            redirect_to @job_opportunity
+        else
+            flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
+            render :edit
+        end
+    end
     private
 
     def job_opportunity_params

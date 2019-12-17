@@ -9,4 +9,7 @@ class JobOpportunity < ApplicationRecord
 
     enum opportunity_level: {Estagiário:0, Júnior:5, Pleno:10, Sênior:15, Especialista:20, Diretor:25}
 
+    def description_job_opportunity
+        "#{name} #{opportunity_level} #{end_date_opportunity} #{region}"
+    end
 end

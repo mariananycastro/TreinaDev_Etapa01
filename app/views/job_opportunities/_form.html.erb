@@ -1,0 +1,45 @@
+<% if @job_opportunity.errors.any? %>
+  <ul>
+  <% @job_opportunity.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @job_opportunity, local: true do |f| %>
+    <p> 
+        <%= f.label :name, 'Título da Vaga:' %>
+        <%= f.text_field :name %>
+    </p>
+    <p>
+        <%= f.label :description, 'Descrição Detalhada:' %>
+        <%= f.text_field :description %>
+    </p>
+    <p>
+        <%= f.label :habilities, 'Habilidades Desejadas:' %>
+        <%= f.text_field :habilities %>
+    </p>
+    <p> 
+        <%= f.label :salary_range, 'Faixa Salarial:' %>
+        <%= f.number_field :salary_range %>
+    </p>
+    <p>
+        <%= f.label :opportunity_level, 'Nível da Vaga:' %>
+        <%= f.collection_radio_buttons :opportunity_level, JobOpportunity.opportunity_levels, :first , :first %>
+    </p>
+    <p>
+        <%= f.label :end_date_opportunity, 'Data Limite para inscrição:' %>
+        <%= f.date_field :end_date_opportunity %>
+    </p>
+    <p>
+        <%= f.label :region, 'Região:' %>
+        <%= f.text_field :region %>
+    </p>
+    <p>
+        <%= f.submit 'Enviar' %>
+    </p>
+    
+    <%end %>
+
+    <p><%= link_to 'Home', root_path %> </p>
+    <%= render partial: 'shared/log' %>
