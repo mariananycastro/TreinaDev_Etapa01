@@ -19,10 +19,14 @@ class ProfilesController < ApplicationController
     end
 
     def show
-        @profile = Profile.find(params[:id])
+        find_profile
     end
 
     def edit
+        find_profile
+    end
+
+    def update
         find_profile
         if @profile.update(profile_params)
             flash[:alert] = 'Perfil criado com sucesso!'
@@ -31,11 +35,6 @@ class ProfilesController < ApplicationController
             flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
             render :edit
         end
-    end
-
-    def update
-        find_profile
-
     end
 
     private
