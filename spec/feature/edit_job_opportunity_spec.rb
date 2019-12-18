@@ -1,59 +1,61 @@
 require 'rails_helper'
 
 feature 'edit js profile' do
-    xscenario 'successfully' do
-        job_opportunity = JobOpportunity.create!()
+    scenario 'successfully' do
+        job_opportunity = JobOpportunity.create!(name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+                                                 habilities: 'Saber programar', salary_range: 5000, 
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 region: 'Sâo Paulo')
 
         visit root_path
-        click_on 'Editar'
-        fill_in 'Título da Vaga:', with: 'Programador Ruby'
+        click_on 'Vagas Cadastradas'
+        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+        click_on 'Editar Vaga'
+        fill_in 'Título da Vaga:', with: 'Programador Ruby Avançado'
         fill_in 'Descrição Detalhada:', with: 'Trabalhar em empresa multinacional como programador'
         fill_in 'Habilidades Desejadas', with: 'Formação em Computação'
-        fill_in 'Faixa Salarial', with: '5000'
-        choose 'Pleno'
-        fill_in 'Data Limite para inscrição', with: '2020-02-02'
-        fill_in 'Região', with: 'São Paulo'
+        fill_in 'Faixa Salarial', with: '6000'
+        choose 'Especialista'
+        fill_in 'Data Limite para inscrição', with: '2020-03-02'
+        fill_in 'Região', with: 'Paraná'
         click_on 'Enviar'
-
         
-        expect(page).to have_content 'Programador Ruby'
+        expect(page).to have_content 'Programador Ruby Avançado'
         expect(page).to have_content 'Trabalhar em empresa multinacional como programador'
         expect(page).to have_content 'Formação em Computação'
-        expect(page).to have_content '5000'
-        expect(page).to have_content 'Pleno'
-        expect(page).to have_content '2020-02-02'
-        expect(page).to have_content 'São Paulo'
+        expect(page).to have_content '6000'
+        expect(page).to have_content 'Especialista'
+        expect(page).to have_content '2020-03-02'
+        expect(page).to have_content 'Paraná'
 
-        expect(page).to have_content 'Vaga criada com sucesso!'
+        expect(page).to have_content 'Vaga atualizada com sucesso!'
     end
 
-    xscenario 'must complete all fields' do
-        job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
-        Profile.create!(job_seeker: job_seeker, name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
-                        education_level: 'Graduado', description: 'Ciencia da computacao',
-                        experience: 'Trabalhei com computacao')
+    scenario 'must complete all fields' do
+        job_opportunity = JobOpportunity.create!(name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+                                                 habilities: 'Saber programar', salary_range: 5000, 
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 region: 'Sâo Paulo')
 
-        login_as job_seeker
         visit root_path
-        click_on 'Editar Perfil'
-        fill_in 'Nome:', with: ''
-        fill_in 'CPF:', with: ''
-        fill_in 'Apelido:', with: ''
-        fill_in 'Data de nascimento:', with: ''
-        fill_in 'Escolaridade:', with: ''
-        fill_in 'Descrição:', with: ''
-        fill_in 'Experiência:', with: ''
-        click_on 'Enviar'
+        click_on 'Vagas Cadastradas'
+        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+        click_on 'Editar Vaga'
+        fill_in 'Título da Vaga:', with: ''
+        fill_in 'Descrição Detalhada:', with: ''
+        fill_in 'Habilidades Desejadas', with: ''
+        fill_in 'Faixa Salarial', with: ''
+        fill_in 'Data Limite para inscrição', with: ''
+        fill_in 'Região', with: ''
         click_on 'Enviar'
 
         expect(page).to have_content 'Você deve corrigir todos os erros para prosseguir'
         expect(page).to have_content "Name can't be blank"
-        expect(page).to have_content "Document can't be blank"
-        expect(page).to have_content "Nick name can't be blank"
-        expect(page).to have_content "Day of birth can't be blank"
-        expect(page).to have_content "Education level can't be blank"
         expect(page).to have_content "Description can't be blank"
-        expect(page).to have_content "Experience can't be blank"
+        expect(page).to have_content "Habilities can't be blank"
+        expect(page).to have_content "Salary range can't be blank"
+        expect(page).to have_content "End date opportunity can't be blank"
+        expect(page).to have_content "Region can't be blank"
 
     end
 
