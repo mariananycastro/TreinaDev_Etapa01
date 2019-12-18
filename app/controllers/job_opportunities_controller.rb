@@ -40,6 +40,12 @@ class JobOpportunitiesController < ApplicationController
             render :edit
         end
     end
+
+    def destroy
+        find_job_opportunity
+        @job_opportunity.destroy
+        redirect_to job_opportunities_path
+    end
     
     private
 
