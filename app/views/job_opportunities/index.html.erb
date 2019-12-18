@@ -1,12 +1,17 @@
-<% if @job_opportunities.empty? %>
-    <p> Nenhuma vaga cadastrada <p>
-<% else %>
-    <% @job_opportunities.each do |opportunity| %>
-    <p>
-    <%= link_to opportunity.description_job_opportunity, opportunity %>               
-    </p>
-    <% end %>
-<% end %>
+<% if headhunter_signed_in? || job_seeker_signed_in?%>
 
-<p><%= link_to 'Home', root_path %></p>
-<p><%= link_to 'Cadastrar Nova Vaga', new_job_opportunity_path %></p>
+    <% if @job_opportunities.empty? %>
+        <p> Nenhuma vaga cadastrada </p>
+    <% else %>
+        <% @job_opportunities.each do |opportunity| %>
+        <p>
+        <%= link_to opportunity.description_job_opportunity, opportunity %>               
+        </p>
+        <% end %>
+    <% end %>
+    <p><%= link_to 'Home', root_path %></p>
+<% end %>
+    
+<% if headhunter_signed_in?%>
+    <p><%= link_to 'Cadastrar Nova Vaga', new_job_opportunity_path %></p>
+<% end %>

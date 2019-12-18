@@ -1,17 +1,27 @@
 
-<p><%= render partial: 'shared/log_headhunter' %></p>
+<% if job_seeker_signed_in?%>
+    <p><%= render partial: 'shared/log_job_seeker' %></p>
+<% elsif headhunter_signed_in?%><p>
+    <p><%= render partial: 'shared/log_headhunter' %></p>
+<% end %>
 
-<h3><%= @job_opportunity.name %></h3>
+<% if headhunter_signed_in? || job_seeker_signed_in?%>
 
-<ul>
-    <li>Descrição Detalhada: <%= @job_opportunity.description %></li>
-    <li>Habilidades Desejadas: <%= @job_opportunity.habilities %></li>
-    <li>Faixa Salarial: <%= @job_opportunity.salary_range %></li>
-    <li>Nível da Vaga: <%= @job_opportunity.opportunity_level%></li>
-    <li>Data Limite para inscrição: <%= @job_opportunity.end_date_opportunity %></li>
-    <li>Região: <%= @job_opportunity.region %></li>
-</ul>
+    <h3><%= @job_opportunity.name %></h3>
 
-<p><%= link_to 'Home', root_path %> </p>
-<p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
-<p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>
+    <ul>
+        <li>Descrição Detalhada: <%= @job_opportunity.description %></li>
+        <li>Habilidades Desejadas: <%= @job_opportunity.habilities %></li>
+        <li>Faixa Salarial: <%= @job_opportunity.salary_range %></li>
+        <li>Nível da Vaga: <%= @job_opportunity.opportunity_level%></li>
+        <li>Data Limite para inscrição: <%= @job_opportunity.end_date_opportunity %></li>
+        <li>Região: <%= @job_opportunity.region %></li>
+    </ul>
+    
+    <p><%= link_to 'Home', root_path %> </p>
+<% end %>
+
+<% if headhunter_signed_in?%><p>
+    <p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
+    <p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>
+<% end %>

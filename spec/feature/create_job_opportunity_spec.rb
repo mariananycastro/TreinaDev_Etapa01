@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'create job opportunity' do
+feature 'headhunter create job opportunity' do
     scenario 'successfully' do
         headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'edit js profile' do
+feature 'headhunter edit js profile' do
     scenario 'successfully' do
         headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
