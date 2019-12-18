@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'create job opportunity' do
     scenario 'successfully' do
+        headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')
+
+        login_as(headhunter, scope: :headhunter)
         
         visit root_path
         click_on 'Cadastrar Nova Vaga'
@@ -26,6 +29,9 @@ feature 'create job opportunity' do
     end
 
     scenario 'must complete all fields' do
+        headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')
+
+        login_as(headhunter, scope: :headhunter)
         
         visit root_path
         click_on 'Cadastrar Nova Vaga'

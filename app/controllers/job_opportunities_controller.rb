@@ -11,6 +11,7 @@ class JobOpportunitiesController < ApplicationController
 
     def create
         @job_opportunity = JobOpportunity.new(job_opportunity_params)
+        @job_opportunity.headhunter = current_headhunter
         if @job_opportunity.save
             flash[:alert] = 'Vaga criada com sucesso!'
             redirect_to @job_opportunity 
@@ -30,6 +31,7 @@ class JobOpportunitiesController < ApplicationController
 
     def update
         find_job_opportunity
+        @job_opportunity.headhunter = current_headhunter
         if @job_opportunity.update(job_opportunity_params)
             flash[:alert] = 'Vaga atualizada com sucesso!'
             redirect_to @job_opportunity

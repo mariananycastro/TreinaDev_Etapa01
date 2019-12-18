@@ -1,5 +1,4 @@
 
-<p><%= render partial: 'shared/log_job_seeker' %></p>
 <p><%= render partial: 'shared/log_headhunter' %></p>
 
 <h3><%= @job_opportunity.name %></h3>
@@ -14,7 +13,5 @@
 </ul>
 
 <p><%= link_to 'Home', root_path %> </p>
-
-<%if headhunter_signed_in? %>
-    <p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
-    <p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>
+<p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
+<p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>

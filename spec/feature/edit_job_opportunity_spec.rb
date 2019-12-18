@@ -2,11 +2,13 @@ require 'rails_helper'
 
 feature 'edit js profile' do
     scenario 'successfully' do
-        job_opportunity = JobOpportunity.create!(name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+        headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')        
+        job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
                                                  opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                  region: 'Sâo Paulo')
 
+        login_as(headhunter, scope: :headhunter)
         visit root_path
         click_on 'Vagas Cadastradas'
         click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
@@ -32,11 +34,13 @@ feature 'edit js profile' do
     end
 
     scenario 'must complete all fields' do
-        job_opportunity = JobOpportunity.create!(name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+        headhunter = Headhunter.create!(email: 'test@test.com', password: '123456') 
+        job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
                                                  opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                  region: 'Sâo Paulo')
 
+        login_as(headhunter, scope: :headhunter)
         visit root_path
         click_on 'Vagas Cadastradas'
         click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
