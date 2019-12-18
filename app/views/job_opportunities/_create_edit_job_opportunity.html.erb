@@ -1,0 +1,6 @@
+<p>
+<% if headhunter_signed_in? %>
+    <p><%= link_to 'Cadastrar Nova Vaga', new_job_opportunity_path %></p>
+    <p><%= link_to 'Vagas Cadastradas', job_opportunities_path %></p>
+<% end %>
+<p>

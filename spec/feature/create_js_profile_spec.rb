@@ -4,7 +4,7 @@ feature 'create js profile' do
     scenario 'successfully' do
         job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
         
-        login_as job_seeker
+        login_as(job_seeker, scope: :job_seeker)
 
         visit root_path
         click_on 'Criar Perfil'
@@ -32,7 +32,7 @@ feature 'create js profile' do
     scenario 'must complete all fields' do
         job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
 
-        login_as(job_seeker)
+        login_as(job_seeker, scope: :job_seeker)
 
         visit root_path
         click_on 'Criar Perfil'
@@ -55,7 +55,7 @@ feature 'create js profile' do
                         day_of_birth: '12/01/1986', education_level: 'Graduado', 
                         description: 'Ciencia da computacao', experience: 'Trabalhei com computacao')
 
-        login_as(job_seeker2)
+        login_as(job_seeker2, scope: :job_seeker)
         
         visit root_path
         click_on 'Criar Perfil'

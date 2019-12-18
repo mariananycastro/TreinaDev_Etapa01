@@ -5,7 +5,7 @@ feature 'log in job seeker' do
         job_seeker = JobSeeker.create!(email: 'teste@test.com', password: '123456')
         
         visit root_path
-        click_on 'Entrar'
+        click_link('entrar_job_seeker')
         fill_in 'Email', with: job_seeker.email
         fill_in 'Senha', with: job_seeker.password
         click_on 'Log in'
@@ -21,7 +21,7 @@ feature 'log in job seeker' do
         job_seeker = JobSeeker.create!(email: 'teste@test.com', password: '123456')
 
         visit root_path
-        click_on 'Entrar'
+        click_link('entrar_job_seeker')
         fill_in 'Email', with: job_seeker.email
         fill_in 'Senha', with: job_seeker.password
         click_on 'Log in'

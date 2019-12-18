@@ -1,0 +1,8 @@
+<h4> Área Head Hunter </h4>
+<p>
+<% if headhunter_signed_in? %>
+  <%= link_to 'Log out', destroy_headhunter_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Entrar', new_headhunter_session_path, html_options = {id: 'entrar_headhunter'}%>
+<% end %> 
+</p>

@@ -1,7 +1,9 @@
+
+<h3> Área Candidato </h3>
 <p>
 <% if job_seeker_signed_in? %>
   <%= link_to 'Log out', destroy_job_seeker_session_path, method: :delete %>
 <% else %>
-  <%= link_to 'Entrar', new_job_seeker_session_path %>
+  <%= link_to 'Entrar', new_job_seeker_session_path, html_options = {id: 'entrar_job_seeker'} %>
 <% end %> 
 </p>

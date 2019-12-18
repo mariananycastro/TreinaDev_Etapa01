@@ -7,6 +7,8 @@ class JobOpportunity < ApplicationRecord
     validates :end_date_opportunity, presence:true
     validates :region, presence:true
 
+    belongs_to :headhunter
+
     enum opportunity_level: {Estagiário:0, Júnior:5, Pleno:10, Sênior:15, Especialista:20, Diretor:25}
 
     def description_job_opportunity

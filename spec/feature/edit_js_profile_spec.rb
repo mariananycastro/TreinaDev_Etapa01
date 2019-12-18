@@ -7,7 +7,7 @@ feature 'edit js profile' do
                         education_level: 'Graduado', description: 'Ciencia da computacao',
                         experience: 'Trabalhei com computacao')
 
-        login_as job_seeker
+        login_as(job_seeker, scope: :job_seeker)
         visit root_path
         click_on 'Editar Perfil'
         fill_in 'Nome:', with: 'Joao da Silva Santos'
@@ -37,7 +37,7 @@ feature 'edit js profile' do
                         education_level: 'Graduado', description: 'Ciencia da computacao',
                         experience: 'Trabalhei com computacao')
 
-        login_as job_seeker
+        login_as(job_seeker, scope: :job_seeker)
         visit root_path
         click_on 'Editar Perfil'
         fill_in 'Nome:', with: ''

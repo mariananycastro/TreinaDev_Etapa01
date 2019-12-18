@@ -1,4 +1,5 @@
 class JobOpportunitiesController < ApplicationController
+    before_action :authenticate_headhunter!
 
     def index
         @job_opportunities = JobOpportunity.all
@@ -37,6 +38,7 @@ class JobOpportunitiesController < ApplicationController
             render :edit
         end
     end
+    
     private
 
     def job_opportunity_params

@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_202004) do
+ActiveRecord::Schema.define(version: 2019_12_18_115052) do
+
+  create_table "headhunters", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_headhunters_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
+  end
 
   create_table "job_opportunities", force: :cascade do |t|
     t.string "name"
@@ -22,6 +34,8 @@ ActiveRecord::Schema.define(version: 2019_12_17_202004) do
     t.string "region"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "headhunter_id"
+    t.index ["headhunter_id"], name: "index_job_opportunities_on_headhunter_id"
   end
 
   create_table "job_seekers", force: :cascade do |t|
@@ -50,5 +64,6 @@ ActiveRecord::Schema.define(version: 2019_12_17_202004) do
     t.index ["job_seeker_id"], name: "index_profiles_on_job_seeker_id"
   end
 
+  add_foreign_key "job_opportunities", "headhunters"
   add_foreign_key "profiles", "job_seekers"
 end
