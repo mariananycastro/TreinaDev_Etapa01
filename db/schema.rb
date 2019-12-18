@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_115052) do
+ActiveRecord::Schema.define(version: 2019_12_18_165236) do
 
   create_table "headhunters", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -64,6 +64,17 @@ ActiveRecord::Schema.define(version: 2019_12_18_115052) do
     t.index ["job_seeker_id"], name: "index_profiles_on_job_seeker_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "job_seeker_id"
+    t.integer "job_opportunity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_opportunity_id"], name: "index_subscriptions_on_job_opportunity_id"
+    t.index ["job_seeker_id"], name: "index_subscriptions_on_job_seeker_id"
+  end
+
   add_foreign_key "job_opportunities", "headhunters"
   add_foreign_key "profiles", "job_seekers"
+  add_foreign_key "subscriptions", "job_opportunities"
+  add_foreign_key "subscriptions", "job_seekers"
 end

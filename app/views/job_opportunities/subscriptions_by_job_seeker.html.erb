@@ -1,0 +1,15 @@
+<p> Inscrições </p>
+
+<% if job_seeker_signed_in?%>
+
+    <% if @subscriptions .empty? %>
+        <p> Nenhuma inscrição </p>
+    <% else %>
+        <% @subscriptions.each do |subscription| %>
+        <p>
+        <%= link_to subscription.opportunity.description_job_opportunity, subscription %>               
+        </p>
+        <% end %>
+    <% end %>
+    <p><%= link_to 'Home', root_path %></p>
+<% end %>
