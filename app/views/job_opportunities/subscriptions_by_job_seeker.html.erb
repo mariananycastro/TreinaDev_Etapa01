@@ -2,12 +2,13 @@
 
 <% if job_seeker_signed_in?%>
 
-    <% if @subscriptions .empty? %>
+    <% if @subscriptions.empty? %>
         <p> Nenhuma inscrição </p>
     <% else %>
         <% @subscriptions.each do |subscription| %>
         <p>
-        <%= link_to subscription.opportunity.description_job_opportunity, subscription %>               
+        <%= subscription.job_opportunity.description_job_opportunity%>     
+        <%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(subscription), method: :delete, data: { confirm: 'Are you sure?'} %>
         </p>
         <% end %>
     <% end %>

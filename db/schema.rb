@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_165236) do
+ActiveRecord::Schema.define(version: 2019_12_18_213903) do
 
   create_table "headhunters", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_165236) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["job_opportunity_id"], name: "index_subscriptions_on_job_opportunity_id"
+    t.index ["job_seeker_id", "job_opportunity_id"], name: "index_subscriptions_on_job_seeker_id_and_job_opportunity_id", unique: true
     t.index ["job_seeker_id"], name: "index_subscriptions_on_job_seeker_id"
   end
 

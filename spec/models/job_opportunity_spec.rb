@@ -42,6 +42,7 @@ RSpec.describe JobOpportunity, type: :model do
       expect(subscription.job_opportunity).to eq job_opportunity
     
     end
+
   end
 
 end

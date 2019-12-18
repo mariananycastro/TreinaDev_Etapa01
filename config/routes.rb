@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :profiles 
   resources :job_opportunities do
     post 'subscribe', on: :member
-    delete 'subscribe', on: :member
+    delete 'cancel_subscription', on: :member
     get 'subscriptions_by_job_seeker', on: :collection
   end
   resources :subscriptions
