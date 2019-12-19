@@ -53,18 +53,24 @@ class JobOpportunitiesController < ApplicationController
     end
 
     def subscribe
-        @job_seeker = current_job_seeker
-        find_job_opportunity
-        @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
-        if @subscription.nil?
-            @subscription = Subscription.new(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
-            if @subscription.save
-                flash[:alert] = 'Inscrição realizada com sucesso!'
+        @profile = Profile.find_by(job_seeker:current_job_seeker)
+        if !@profile.nil?
+            @job_seeker = current_job_seeker
+            find_job_opportunity
+            @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
+            if @subscription.nil?
+                @subscription = Subscription.new(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
+                if @subscription.save
+                    flash[:alert] = 'Inscrição realizada com sucesso!'
+                    redirect_to job_opportunity_path(@job_opportunity)
+                end
+            else
+                flash[:alert] = 'Inscrição já realizada!'
                 redirect_to job_opportunity_path(@job_opportunity)
             end
         else
-            flash[:alert] = 'Inscrição já realizada!'
-            redirect_to job_opportunity_path(@job_opportunity)
+            flash[:alert] = 'Você deve preencher seu perfil antes de continuar'
+            redirect_to new_profile_path
         end
     end
 
