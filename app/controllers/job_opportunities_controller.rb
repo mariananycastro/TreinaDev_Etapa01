@@ -26,6 +26,8 @@ class JobOpportunitiesController < ApplicationController
 
     def show
         find_job_opportunity
+        @job_seeker = current_job_seeker
+        @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
     end
 
     def edit
@@ -77,7 +79,7 @@ class JobOpportunitiesController < ApplicationController
         @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
         if @subscription.destroy
             flash[:alert] = 'Inscrição cancelada'
-            redirect_to subscriptions_by_job_seeker_job_opportunities_path
+            redirect_to job_opportunity_path(@job_opportunity)
         end
     end
 

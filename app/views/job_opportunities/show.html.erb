@@ -24,10 +24,15 @@
 <% if headhunter_signed_in? %>
     <p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
     <p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>
+    <p><%= link_to 'Vagas Cadastradas', job_opportunities_path %></p>
 <% end %>
 
 <% if job_seeker_signed_in? %>
-    <p> <%= link_to 'Inscrição para Vaga', subscribe_job_opportunity_path, method: :post %> </p>
-    <p> <%= link_to 'Cancelar Inscrição', subscribe_job_opportunity_path, method: :delete %> </p>
-    <p> <%= link_to 'Inscrições', subscriptions_by_job_seeker_job_opportunities_path, method: :get %> </p>
+    <% if  @subscription.nil? %>
+        <p> <%= link_to 'Inscrição para Vaga', subscribe_job_opportunity_path, method: :post %> </p>
+    <% else %>
+        <h3> Você já está inscrito para esta vaga </h3>
+        <p> <%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path, method: :delete %> </p>
+    <% end %>
+        <%= link_to 'Vagas', job_opportunities_path %>
 <% end %>

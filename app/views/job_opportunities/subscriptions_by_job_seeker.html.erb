@@ -1,8 +1,11 @@
-<p> Inscrições </p>
-
 <% if job_seeker_signed_in?%>
 
-    <% if @subscriptions.nil? %>
+    <p><%= render partial: 'shared/log_job_seeker' %></p>
+
+
+    <p> Vagas Inscritas </p>
+
+    <% if @subscriptions.empty? %>
         <p> Nenhuma inscrição </p>
     <% else %>
         <% @subscriptions.each do |subscription| %>
@@ -13,4 +16,5 @@
         <% end %>
     <% end %>
     <p><%= link_to 'Home', root_path %></p>
+    <p><%= link_to 'Vagas', job_opportunities_path %> </p>
 <% end %>

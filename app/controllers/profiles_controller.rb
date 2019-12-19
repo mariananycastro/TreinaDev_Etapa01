@@ -9,14 +9,19 @@ class ProfilesController < ApplicationController
     end
 
     def create
-        @profile = Profile.new(profile_params)
-        @profile.job_seeker = current_job_seeker
-        if @profile.save
-            flash[:alert] = 'Perfil criado com sucesso!'
-            redirect_to @profile
+        if @profile.nil?
+            @profile = Profile.new(profile_params)
+            @profile.job_seeker = current_job_seeker
+            if @profile.save
+                flash[:alert] = 'Perfil criado com sucesso!'
+                redirect_to @profile
+            else
+                flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
+                render :new
+            end
         else
-            flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
-            render :new
+            flash[:alert] = 'Perfil já cadastrado!'
+            redirect_to @profile
         end
     end
 
