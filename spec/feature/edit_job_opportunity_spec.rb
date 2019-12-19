@@ -3,7 +3,8 @@ require 'rails_helper'
 feature 'headhunter edit job opportunity' do
     scenario 'successfully' do
         headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')        
-        job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+        job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
+                                                 description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
                                                  opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                  region: 'Sâo Paulo')
@@ -11,7 +12,8 @@ feature 'headhunter edit job opportunity' do
         login_as(headhunter, scope: :headhunter)
         visit root_path
         click_on 'Vagas Cadastradas'
-        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
+                " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
         click_on 'Editar Vaga'
         fill_in 'Título da Vaga:', with: 'Programador Ruby Avançado'
         fill_in 'Descrição Detalhada:', with: 'Trabalhar em empresa multinacional como programador'
@@ -35,7 +37,8 @@ feature 'headhunter edit job opportunity' do
 
     scenario 'must complete all fields' do
         headhunter = Headhunter.create!(email: 'test@test.com', password: '123456') 
-        job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+        job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
+                                                 description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
                                                  opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                  region: 'Sâo Paulo')
@@ -43,7 +46,8 @@ feature 'headhunter edit job opportunity' do
         login_as(headhunter, scope: :headhunter)
         visit root_path
         click_on 'Vagas Cadastradas'
-        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity}"\
+                    " #{job_opportunity.region}"
         click_on 'Editar Vaga'
         fill_in 'Título da Vaga:', with: ''
         fill_in 'Descrição Detalhada:', with: ''

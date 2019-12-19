@@ -24,7 +24,7 @@
 <% if headhunter_signed_in? %>
     <p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
     <p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>
-    <p><%= link_to 'Vagas Cadastradas', job_opportunities_path %></p>
+    <p><%= link_to 'Vagas Cadastradas', job_opportunity_of_headhunter_job_opportunities_path %></p>
 <% end %>
 
 <% if job_seeker_signed_in? %>

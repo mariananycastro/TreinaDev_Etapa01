@@ -6,7 +6,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
+                                                       region: 'São Paulo')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', education_level: 'Graduado',
                                         description: 'na faculdade', experience: 'programei', document: '521.730.870-29',
                                         job_seeker: job_seeker)
@@ -28,7 +28,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
+                                                       region: 'São Paulo')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', education_level: 'Graduado',
                                         description: 'na faculdade', experience: 'programei', document: '521.730.870-29',
                                         job_seeker: job_seeker)
@@ -54,7 +54,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
+                                                       region: 'São Paulo')
 
             login_as(job_seeker, scope: :job_seeker)
             visit root_path
@@ -70,7 +70,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
+                                                       region: 'São Paulo')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', education_level: 'Graduado',
                                         description: 'na faculdade', experience: 'programei', document: '521.730.870-29',
                                         job_seeker: job_seeker)

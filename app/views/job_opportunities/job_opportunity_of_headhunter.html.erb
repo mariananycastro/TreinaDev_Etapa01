@@ -1,5 +1,4 @@
-
-    <% if @job_opportunities.empty? %>
+ <% if @job_opportunities.nil? %>
         <p> Nenhuma vaga cadastrada </p>
     <% else %>
         <% @job_opportunities.each do |opportunity| %>
@@ -8,5 +7,7 @@
         </p>
         <% end %>
     <% end %>
-    <p><%= link_to 'Home', root_path %></p>
-    <p> <%= link_to 'Inscrições', subscriptions_by_job_seeker_job_opportunities_path, method: :get %> </p>
+<p><%= link_to 'Home', root_path %></p>
+<p><%= link_to 'Cadastrar Nova Vaga', new_job_opportunity_path %></p>
+
+

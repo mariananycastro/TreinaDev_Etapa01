@@ -1,9 +1,10 @@
 class JobOpportunitiesController < ApplicationController
     before_action :authenticate_headhunter!, except: [:index, :show, :subscribe, :subscriptions_by_job_seeker, 
                                                         :cancel_subscription]
-    before_action :authenticate_job_seeker_and_headhunter, only: [:index, :show, :subscribe,
+    before_action :authenticate_job_seeker_and_headhunter, only: [:show, :subscribe,
                                                                  :subscriptions_by_job_seeker, :cancel_subscription]
-
+    before_action :authenticate_job_seeker!, only: [:index]
+    
     def index
         @job_opportunities = JobOpportunity.all
     end
@@ -89,6 +90,12 @@ class JobOpportunitiesController < ApplicationController
         end
     end
 
+    def job_opportunity_of_headhunter
+        @headhunter = current_headhunter
+        @job_opportunities = JobOpportunity.where(headhunter:@headhunter)
+    end
+
+
     private
 
     def job_opportunity_params
@@ -104,5 +111,5 @@ class JobOpportunitiesController < ApplicationController
         :authenticate_job_seeker! || :authenticate_headhunter!
     end
 
-end
+ end
 

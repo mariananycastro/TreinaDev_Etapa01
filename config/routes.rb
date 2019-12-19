@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     post 'subscribe', on: :member
     delete 'cancel_subscription', on: :member
     get 'subscriptions_by_job_seeker', on: :collection
+    get 'job_opportunity_of_headhunter', on: :collection
   end
   resources :subscriptions
 end

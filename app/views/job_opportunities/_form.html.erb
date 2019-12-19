@@ -1,3 +1,5 @@
+  <%= render partial: 'shared/log_headhunter' %>
+  
 <% if @job_opportunity.errors.any? %>
   <ul>
   <% @job_opportunity.errors.full_messages.each do |message| %>
@@ -42,4 +44,5 @@
     <%end %>
 
     <p><%= link_to 'Home', root_path %> </p>
-    <%= render partial: 'shared/log_headhunter' %>
+    <p><%= link_to 'Vagas Cadastradas', job_opportunity_of_headhunter_job_opportunities_path %></p>
+  
