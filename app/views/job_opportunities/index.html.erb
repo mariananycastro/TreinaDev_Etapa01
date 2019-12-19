@@ -1,6 +1,6 @@
 <% if headhunter_signed_in? || job_seeker_signed_in?%>
 
-    <% if @job_opportunities.empty? %>
+    <% if @job_opportunities.nil? %>
         <p> Nenhuma vaga cadastrada </p>
     <% else %>
         <% @job_opportunities.each do |opportunity| %>

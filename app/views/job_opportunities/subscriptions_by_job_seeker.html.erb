@@ -2,7 +2,7 @@
 
 <% if job_seeker_signed_in?%>
 
-    <% if @subscriptions.empty? %>
+    <% if @subscriptions.nil? %>
         <p> Nenhuma inscrição </p>
     <% else %>
         <% @subscriptions.each do |subscription| %>

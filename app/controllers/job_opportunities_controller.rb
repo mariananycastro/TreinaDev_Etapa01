@@ -52,10 +52,16 @@ class JobOpportunitiesController < ApplicationController
 
     def subscribe
         @job_seeker = current_job_seeker
-        @job_opportunity = JobOpportunity.find(params[:id])
-        @subscription = Subscription.new(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
-        if @subscription.save!
-            flash[:alert] = 'Inscrição realizada com sucesso!'
+        find_job_opportunity
+        @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
+        if @subscription.nil?
+            @subscription = Subscription.new(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
+            if @subscription.save
+                flash[:alert] = 'Inscrição realizada com sucesso!'
+                redirect_to job_opportunity_path(@job_opportunity)
+            end
+        else
+            flash[:alert] = 'Inscrição já realizada!'
             redirect_to job_opportunity_path(@job_opportunity)
         end
     end
