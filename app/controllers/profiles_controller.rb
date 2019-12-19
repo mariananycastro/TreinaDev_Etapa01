@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_job_seeker!
+    before_action :authenticate_job_seeker!, except: [:show]
+    before_action :authenticate_job_seeker_and_headhunter, only: [:show]
 
     def index
     end
@@ -46,6 +47,10 @@ class ProfilesController < ApplicationController
     end
 
     private
+
+    def authenticate_job_seeker_and_headhunter
+        :authenticate_job_seeker! || :authenticate_headhunter!
+    end
 
     def profile_params
         params.require(:profile).permit(:name, :document, :nick_name, :day_of_birth, 

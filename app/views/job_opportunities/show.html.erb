@@ -21,12 +21,16 @@
     <p><%= link_to 'Home', root_path %> </p>
 <% end %>
 
+
 <% if headhunter_signed_in? %>
+    <h3>inscrições</h3>
     <% if @subscriptions.empty? %>
         <p> Não há inscrições </p>
     <% else %> 
-        <p><%= @subscriptions.each do |subscription| %>
-            <%= subscription.job_seeker.email %>
+        <p><% @subscriptions.each do |subscription| %>
+            <% subscription.profiles.each do |profile| %>
+                <%= link_to profile.job_seeker_profile, profile_path(profile)%>
+            <% end %>        
         </p>
         <% end %>
     <% end %>

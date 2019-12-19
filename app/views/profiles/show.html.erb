@@ -1,4 +1,9 @@
-<%= render partial: 'shared/log_job_seeker' %>
+<% if job_seeker_signed_in?%>
+    <p><%= render partial: 'shared/log_job_seeker' %></p>
+<% elsif headhunter_signed_in?%>
+    <p><%= render partial: 'shared/log_headhunter' %></p>
+<% end %>
+
 <h3><%= @profile.name %></h3>
 
 <ul>
@@ -11,4 +16,7 @@
 </ul>
 
 <p><%= link_to 'Home', root_path %> </p>
-<p><%= link_to 'Editar Perfil', edit_profile_path(@profile) %> </p>
+
+<% if job_seeker_signed_in? %>
+    <p><%= link_to 'Editar Perfil', edit_profile_path(@profile) %> </p>
+<% end %>
