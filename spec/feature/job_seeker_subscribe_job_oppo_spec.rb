@@ -1,5 +1,5 @@
 require 'rails_helper'
-    feature 'successfully' do
+    feature 'Job Seeker subscribe' do
         it 'successfully' do
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
@@ -15,7 +15,7 @@ require 'rails_helper'
             visit root_path
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
-            click_on 'Inscrição para Vaga'
+            click_on 'Candidatar para Vaga'
 
             expect(page).to have_content 'Inscrição realizada com sucesso!'
             expect(current_path).to eq(job_opportunity_path(job_opportunity))
@@ -38,7 +38,7 @@ require 'rails_helper'
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity}"\
                     " #{job_opportunity.region}"
-            click_on 'Inscrição para Vaga'
+            click_on 'Candidatar para Vaga'
             visit root_path
             click_on 'Inscrições'
                 
@@ -80,7 +80,7 @@ require 'rails_helper'
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} "\
                         "#{job_opportunity.region}"
-            click_on 'Inscrição para Vaga'
+            click_on 'Candidatar para Vaga'
             click_on 'Cancelar Inscrição'
 
             expect(page).to have_content 'Inscrição cancelada'

@@ -1,5 +1,5 @@
 require 'rails_helper'
-    feature 'js cant subscribe without profile' do
+    feature 'job seeker cant subscribe without profile' do
         scenario 'cant subscribe' do
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
@@ -14,7 +14,7 @@ require 'rails_helper'
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} "\
                         "#{job_opportunity.region}"
-            click_on 'Inscrição para Vaga'
+            click_on 'Candidatar para Vaga'
 
             expect(page).to have_content 'Você deve preencher seu perfil antes de continuar'
             expect(current_path).to eq(new_profile_path)

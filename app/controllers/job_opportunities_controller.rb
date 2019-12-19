@@ -29,6 +29,8 @@ class JobOpportunitiesController < ApplicationController
         find_job_opportunity
         @job_seeker = current_job_seeker
         @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
+        
+        @subscriptions = Subscription.where(job_opportunity:@job_opportunity)
     end
 
     def edit

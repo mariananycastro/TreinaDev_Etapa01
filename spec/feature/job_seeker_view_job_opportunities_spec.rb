@@ -13,7 +13,8 @@ feature 'job seeker can view job opportunities' do
         login_as(job_seeker, scope: :job_seeker)
         visit root_path
         click_on 'Vagas'
-        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+        click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
+                " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
                
         expect(page).to have_content 'Programador Ruby'
         expect(page).to have_content 'Vaga para programador Ruby'

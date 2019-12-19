@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'edit js profile' do
+feature 'Job seeker edit profile' do
     scenario 'successfully' do
         job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
         Profile.create!(job_seeker: job_seeker, name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 

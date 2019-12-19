@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'create js profile only once' do
+feature 'job seeker create profile only once' do
     scenario 'successfully' do
         job_seeker = JobSeeker.create!(email: 'test@test.com', password: '123456')
 
