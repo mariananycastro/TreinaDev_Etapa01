@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :headhunters
-  devise_for :job_seekers
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "home#index"
-  resources :profiles 
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :headhunters
+  devise_for :job_seekers 
+  resources :job_seekers do  
+    resources :profiles, only: [:new, :create, :edit, :update ]
+  end 
+  resources :profiles, only: [:show]
   resources :job_opportunities do
     post 'subscribe', on: :member
     delete 'cancel_subscription', on: :member

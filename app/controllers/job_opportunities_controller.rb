@@ -73,7 +73,7 @@ class JobOpportunitiesController < ApplicationController
             end
         else
             flash[:alert] = 'Você deve preencher seu perfil antes de continuar'
-            redirect_to new_profile_path
+            redirect_to  new_job_seeker_profile_path(current_job_seeker)
         end
     end
 

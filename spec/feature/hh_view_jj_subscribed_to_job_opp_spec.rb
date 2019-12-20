@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "headhunter views subscriptions of job seeker and job seeker's profile" do
-    scenario 'successfully' do
+    xscenario 'successfully' do
         
         job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
         profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -39,7 +39,7 @@ feature "headhunter views subscriptions of job seeker and job seeker's profile" 
         expect(page).to have_content 'Ja trabalhei com TI'
         
     end
-    scenario 'dont have subscription' do
+    xscenario 'dont have subscription' do
         
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',

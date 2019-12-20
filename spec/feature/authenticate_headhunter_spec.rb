@@ -33,10 +33,4 @@ feature 'log in headhunter' do
         expect(page).not_to have_link('Log out')
     end
 
-    scenario 'must sign in' do
-
-        visit new_profile_path
-
-        expect(page).to have_content('You need to sign in or sign up before continuing.')
-    end
 end

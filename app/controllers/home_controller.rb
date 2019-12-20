@@ -3,7 +3,7 @@ class HomeController < ApplicationController
         if headhunter_signed_in?
             render :homehh 
         elsif job_seeker_signed_in?
-            render :homejs      
+            render :homejs
         end
     end    
 end

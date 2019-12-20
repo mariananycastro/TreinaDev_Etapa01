@@ -6,7 +6,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @profile, local: true do |f| %>
+<%= form_with model: [@job_seeker, @profile], local: true do |f| %>
 <p> 
     <%= f.label :name, 'Nome:' %>
     <%= f.text_field :name %>

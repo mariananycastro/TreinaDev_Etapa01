@@ -18,7 +18,7 @@
 <p><%= link_to 'Home', root_path %> </p>
 
 <% if job_seeker_signed_in? %>
-    <p><%= link_to 'Editar Perfil', edit_profile_path(@profile) %> </p>
+    <p><%= link_to 'Editar Perfil', edit_job_seeker_profile_path(@profile) %> </p>
 <% end %>
 
 <% if headhunter_signed_in? %>
@@ -26,11 +26,11 @@
         <% @subscriptions.each do |subscription| %>
             <% if subscription.subscription_comment.nil? %>
                 <p>Vaga: <%= subscription.job_opportunity.description_job_opportunity %>
-                <%= link_to 'Inserir Comentário', new_subscription_comment_path%></p>
+                <#%= link_to 'Inserir Comentário', create_subscription_comment_path%></p>
             <% else %>
                 <p>Comentário Vaga:<%= @job_opportunity.description_job_opportunity %></p>
                 <p><%= @subscription_comment.subscription.comment%></p>
-                <%= link_to 'Editar', new_subscription_comment_path %>
+                <%%%= link_to 'Editar', new_subscription_comment_path %>
             <% end %>
         <% end %>
     <% end %>

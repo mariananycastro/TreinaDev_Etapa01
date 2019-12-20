@@ -17,7 +17,7 @@ require 'rails_helper'
             click_on 'Candidatar para Vaga'
 
             expect(page).to have_content 'Você deve preencher seu perfil antes de continuar'
-            expect(current_path).to eq(new_profile_path)
+            expect(current_path).to eq(new_job_seeker_profile_path(job_seeker))
             
         end
     end

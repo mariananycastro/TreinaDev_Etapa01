@@ -1,7 +1,7 @@
 require 'rails_helper'
 
     feature 'headhunter creates comment of job seeker' do
-        scenario 'successfully' do
+        xscenario 'successfully' do
 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -39,7 +39,7 @@ require 'rails_helper'
             except(page).not_to have_button 'Inserir Comentário'
         end
 
-        scenario 'edit comment' do
+        xscenario 'edit comment' do
 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -80,7 +80,7 @@ require 'rails_helper'
             except(page).not_to have_button 'Inserir Comentário'
         end
 
-        scenario 'delete comment' do
+       xscenario 'delete comment' do
 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
