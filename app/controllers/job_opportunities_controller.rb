@@ -1,13 +1,17 @@
 class JobOpportunitiesController < ApplicationController
-    before_action :authenticate_headhunter!
+    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe]
+    before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show]
+    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe]
     before_action :get_headhunter
-    before_action :set_job_opportunity, only: [:show, :edit, :update, :destroy]
-    before_action :set_job_opportunities, only: [:index]
-
-
+    before_action :set_job_opportunity, only: [:edit, :update, :destroy]
     
     def index
-        @job_opportunities_of_headhunter = @headhunter.job_opportunities
+        if headhunter_signed_in?
+            set_job_opportunities
+            @job_opportunities_of_headhunter = @headhunter.job_opportunities
+        else
+            @all_job_opportunities = JobOpportunity.all
+        end
     end
 
     def new
@@ -26,6 +30,7 @@ class JobOpportunitiesController < ApplicationController
     end
 
     def show
+        find_job_opportunity
     end
 
     def edit
@@ -46,12 +51,14 @@ class JobOpportunitiesController < ApplicationController
         redirect_to headhunter_job_opportunities_path
     end
 
-    def subscribe
-        @profile = Profile.find_by(job_seeker:current_job_seeker)
+
+    
+
+    def job_seeker_subscribe
+        find_profile
         if !@profile.nil?
             @job_seeker = current_job_seeker
             find_job_opportunity
-            @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
             if @subscription.nil?
                 @subscription = Subscription.new(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
                 if @subscription.save
@@ -68,28 +75,23 @@ class JobOpportunitiesController < ApplicationController
         end
     end
 
-    def subscriptions_by_job_seeker
-        @job_seeker = current_job_seeker
-        @subscriptions = Subscription.where(job_seeker:@job_seeker)
-    end
-
     def cancel_subscription
-        @job_seeker = current_job_seeker
-        @job_opportunity = JobOpportunity.find(params[:id])
-        @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
-        if @subscription.destroy
+        find_profile
+        find_job_opportunity
+         @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
+        if @subscription.destroy!
             flash[:alert] = 'Inscrição cancelada'
             redirect_to job_opportunity_path(@job_opportunity)
         end
     end
 
-    def job_opportunity_of_headhunter
-        @headhunter = current_headhunter
-        @job_opportunities = JobOpportunity.where(headhunter:@headhunter)
-    end
 
 
     private
+
+    def authenticate_headhunter_and_job_seeker
+        :authenticate_headhunter! || :authenticate_job_seeker!
+    end
 
     def get_headhunter
         @headhunter = current_headhunter
@@ -106,6 +108,14 @@ class JobOpportunitiesController < ApplicationController
     def job_opportunity_params
         params.require(:job_opportunity).permit(:name, :description, :habilities, :salary_range, :opportunity_level,
                         :end_date_opportunity, :region)
+    end
+
+    def find_job_opportunity
+        @job_opportunity = JobOpportunity.find(params[:id])
+    end
+    
+    def find_profile
+        Profile.find_by(job_seeker:current_job_seeker)
     end
 
  end

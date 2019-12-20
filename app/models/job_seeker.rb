@@ -5,5 +5,5 @@ class JobSeeker < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :profile
-  has_many :job_opportunities, through: :subscription
+  has_many :subscriptions
 end

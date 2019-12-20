@@ -1,6 +1,8 @@
-
+<% if headhunter_signed_in? %>
     <p><%= render partial: 'shared/log_headhunter' %></p>
-
+<% elsif job_seeker_signed_in? %>
+    <p><%= render partial: 'shared/log_headhunter' %></p>
+<% end %>
 
     <h3><%= @job_opportunity.name %></h3>
 
@@ -15,8 +17,20 @@
     
     <p><%= link_to 'Home', root_path %> </p>
 
+<% if headhunter_signed_in? %>
     <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
     <p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(@job_opportunity) %> </p>
     <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<% end %>
+
+<% if job_seeker_signed_in? %>
+    <% if @subscription.nil? %>
+        <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(current_job_seeker), method: 'post' %> </p>
+    <% else %>
+        <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(current_job_seeker), method: 'delete' %> </p>
+    <% end %>
+<% end %>
+
+
 
 

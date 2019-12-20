@@ -3,7 +3,7 @@
 <%= render partial: 'profiles/button_create_edit_profile' %>
 
 <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
-<p> <%= link_to 'Inscrições', subscriptions_by_job_seeker_job_opportunities_path, method: :get %> </p>
+<p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
 
 
 

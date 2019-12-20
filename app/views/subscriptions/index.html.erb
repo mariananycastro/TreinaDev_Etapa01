@@ -1,0 +1,15 @@
+<p><%= render partial: 'shared/log_job_seeker' %></p>
+
+
+<% if @job_seeker_subscriptions.empty? %>
+    <p> Não há Inscrições </p>
+<% else %>
+    <p>
+    <%= @job_seeker_subscriptions.each do |subscription| %>
+    <%= subscription.job_opportunity.description_job_opportunity %>
+    </p>
+    <% end %>
+<% end %>
+
+<p><%= link_to 'Home', root_path %></p>
+<p><%= link_to 'Vagas', job_opportunities_path %> </p>

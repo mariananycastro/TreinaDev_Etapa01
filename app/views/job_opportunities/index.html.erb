@@ -1,5 +1,5 @@
-
-    <% if @job_opportunities.empty? %>
+<% if headhunter_signed_in? %>
+    <% if @job_opportunities_of_headhunter.empty? %>
         <p> Nenhuma vaga cadastrada </p>
     <% else %>
         <% @job_opportunities_of_headhunter.each do |opportunity| %>
@@ -8,5 +8,18 @@
         </p>
         <% end %>
     <% end %>
-    <p><%= link_to 'Home', root_path %></p>
-    <p> <%= link_to 'Inscrições', subscriptions_by_job_seeker_job_opportunities_path, method: :get %> </p>
+    
+<% elsif job_seeker_signed_in? %>
+    <% if @all_job_opportunities.empty? %>
+        <p> Nenhuma vaga cadastrada </p>
+    <% else %>
+        <% @all_job_opportunities.each do |opportunity| %>
+        <p>
+        <%= link_to opportunity.description_job_opportunity, opportunity %>               
+        </p>
+        <% end %>
+    <% end %>
+<% end %>
+
+<p><%= link_to 'Home', root_path %></p>
+ 

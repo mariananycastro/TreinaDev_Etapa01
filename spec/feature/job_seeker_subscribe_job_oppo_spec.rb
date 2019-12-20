@@ -15,7 +15,7 @@ require 'rails_helper'
             visit root_path
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
-            click_on 'Candidatar para Vaga'
+            click_on 'Inscrição para Vaga'
 
             expect(page).to have_content 'Inscrição realizada com sucesso!'
             expect(current_path).to eq(job_opportunity_path(job_opportunity))
@@ -38,11 +38,11 @@ require 'rails_helper'
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity}"\
                     " #{job_opportunity.region}"
-            click_on 'Candidatar para Vaga'
+            click_on 'Inscrição para Vaga'
             visit root_path
             click_on 'Inscrições'
                 
-            expect(current_path).to eq(subscriptions_by_job_seeker_job_opportunities_path)
+            expect(current_path).to eq(job_seeker_subscriptions_path(job_seeker))
             expect(page).to have_content("#{job_opportunity.name} #{job_opportunity.opportunity_level} "\
                                         "#{job_opportunity.end_date_opportunity} #{job_opportunity.region}")
             
@@ -60,8 +60,8 @@ require 'rails_helper'
             visit root_path
             click_on 'Inscrições'
                 
-            expect(current_path).to eq(subscriptions_by_job_seeker_job_opportunities_path)
-            expect(page).to have_content('Nenhuma inscrição')           
+            expect(current_path).to eq(job_seeker_subscriptions_path(job_seeker))
+            expect(page).to have_content('Não há Inscrições')           
         end
 
         it 'and delete' do
@@ -80,7 +80,7 @@ require 'rails_helper'
             click_on 'Vagas'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} "\
                         "#{job_opportunity.region}"
-            click_on 'Candidatar para Vaga'
+            click_on 'Inscrição para Vaga'
             click_on 'Cancelar Inscrição'
 
             expect(page).to have_content 'Inscrição cancelada'
