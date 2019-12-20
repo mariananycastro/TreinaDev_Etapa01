@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     get 'job_opportunity_of_headhunter', on: :collection
   end
   resources :subscriptions
+  resources :subscription_comments, only: [:new, :create] 
+
 end

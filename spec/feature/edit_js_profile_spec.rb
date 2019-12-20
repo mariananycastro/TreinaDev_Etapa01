@@ -22,7 +22,7 @@ feature 'Job seeker edit profile' do
         expect(page).to have_content 'Joao da Silva Santos'
         expect(page).to have_content '595.487.167-12'
         expect(page).to have_content 'Joãzinho'
-        expect(page).to have_content '12/01/1986'
+        expect(page).to have_content '1986-01-12'
         expect(page).to have_content 'Pós-graduação'
         expect(page).to have_content 'Ciencia da computacao'
         expect(page).to have_content 'Trabalhei com computacao'

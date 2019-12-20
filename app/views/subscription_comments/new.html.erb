@@ -1,0 +1,8 @@
+
+<%= form_with model: @subscription_comment, local:true do |f| %>
+    <%= f.label :comment, 'Comentário:'%>
+    <%= f.text_field :comment %>
+    <%= f.submit 'Salvar'%>
+<% end %>
+
+      

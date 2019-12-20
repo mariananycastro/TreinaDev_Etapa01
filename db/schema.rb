@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_213903) do
+ActiveRecord::Schema.define(version: 2019_12_19_230916) do
 
   create_table "headhunters", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 2019_12_18_213903) do
 
   create_table "job_opportunities", force: :cascade do |t|
     t.string "name"
-    t.string "description"
-    t.string "habilities"
-    t.integer "salary_range"
+    t.text "description"
+    t.text "habilities"
+    t.text "salary_range"
     t.integer "opportunity_level"
     t.date "end_date_opportunity"
     t.string "region"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_213903) do
   create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.string "nick_name"
-    t.string "day_of_birth"
+    t.date "day_of_birth"
     t.string "education_level"
     t.text "description"
     t.text "experience"
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(version: 2019_12_18_213903) do
     t.string "document"
     t.integer "job_seeker_id"
     t.index ["job_seeker_id"], name: "index_profiles_on_job_seeker_id"
+  end
+
+  create_table "subscription_comments", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "subscription_id"
+    t.index ["subscription_id"], name: "index_subscription_comments_on_subscription_id", unique: true
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -76,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_213903) do
 
   add_foreign_key "job_opportunities", "headhunters"
   add_foreign_key "profiles", "job_seekers"
+  add_foreign_key "subscription_comments", "subscriptions"
   add_foreign_key "subscriptions", "job_opportunities"
   add_foreign_key "subscriptions", "job_seekers"
 end

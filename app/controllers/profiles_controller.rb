@@ -28,6 +28,9 @@ class ProfilesController < ApplicationController
 
     def show
         find_profile
+        @job_seeker = JobSeeker.find_by(profile:@profile)
+        @job_opportunities = JobOpportunity.where(headhunter:current_headhunter) 
+        @subscriptions = Subscription.where(job_seeker:@job_seeker, job_opportunity:@job_opportunities)  
     end
 
     def edit
