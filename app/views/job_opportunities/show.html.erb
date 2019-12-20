@@ -1,11 +1,6 @@
 
-<% if job_seeker_signed_in?%>
-    <p><%= render partial: 'shared/log_job_seeker' %></p>
-<% elsif headhunter_signed_in?%>
     <p><%= render partial: 'shared/log_headhunter' %></p>
-<% end %>
 
-<% if headhunter_signed_in? || job_seeker_signed_in?%>
 
     <h3><%= @job_opportunity.name %></h3>
 
@@ -19,32 +14,9 @@
     </ul>
     
     <p><%= link_to 'Home', root_path %> </p>
-<% end %>
+
+    <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+    <p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(@job_opportunity) %> </p>
+    <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
 
 
-<% if headhunter_signed_in? %>
-    <h3>inscrições</h3>
-    <% if @subscriptions.empty? %>
-        <p> Não há inscrições </p>
-    <% else %> 
-        <p><% @subscriptions.each do |subscription| %>
-            <% subscription.profiles.each do |profile| %>
-                <%= link_to profile.job_seeker_profile, profile_path(profile)%>
-            <% end %>        
-        </p>
-        <% end %>
-    <% end %>
-    <p><%= link_to 'Nova Vaga', new_job_opportunity_path %> </p>
-    <p><%= link_to 'Editar Vaga', edit_job_opportunity_path(@job_opportunity) %> </p>
-    <p><%= link_to 'Vagas Cadastradas', job_opportunity_of_headhunter_job_opportunities_path %></p>
-<% end %>
-
-<% if job_seeker_signed_in? %>
-    <% if  @subscription.nil? %>
-        <p> <%= link_to 'Candidatar para Vaga', subscribe_job_opportunity_path, method: :post %> </p>
-    <% else %>
-        <h3> Você já está inscrito para esta vaga </h3>
-        <p> <%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path, method: :delete %> </p>
-    <% end %>
-        <%= link_to 'Vagas', job_opportunities_path %>
-<% end %>

@@ -1,4 +1,4 @@
-<% if job_seeker_signed_in? %>
+
 <nav>
       <% if current_job_seeker.profile != nil %>
             <%= link_to 'Editar Perfil', edit_job_seeker_profile_path(current_job_seeker, current_job_seeker.profile) %>
@@ -6,4 +6,3 @@
             <%= link_to 'Criar Perfil', new_job_seeker_profile_path(current_job_seeker) %>
       <% end %>
 </nav>
-<% end %>

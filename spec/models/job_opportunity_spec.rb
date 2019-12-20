@@ -45,4 +45,24 @@ RSpec.describe JobOpportunity, type: :model do
 
   end
 
+  context '.index' do
+    it 'sucessfully' do
+      headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
+      job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+                                                 habilities: 'Saber programar', salary_range: 5000, 
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 region: 'Sâo Paulo')
+      job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+                                                 habilities: 'Saber programar', salary_range: 5000, 
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 region: 'Sâo Paulo')
+
+      job_opportunities = headhunter.job_opportunities.where(headhunter:headhunter)
+      job_opportunities_of_headhunter = headhunter.job_opportunities
+
+      expect(job_opportunities.count).to eq 2
+
+    end
+  end
+
 end

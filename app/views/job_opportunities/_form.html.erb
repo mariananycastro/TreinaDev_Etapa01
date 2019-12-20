@@ -8,7 +8,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @job_opportunity, local: true do |f| %>
+<%= form_with model: [@headhunter, @job_opportunity], local: true do |f| %>
     <p> 
         <%= f.label :name, 'Título da Vaga:' %>
         <%= f.text_field :name %>
@@ -44,5 +44,6 @@
     <%end %>
 
     <p><%= link_to 'Home', root_path %> </p>
-    <p><%= link_to 'Vagas Cadastradas', job_opportunity_of_headhunter_job_opportunities_path %></p>
+    <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter, 
+                                                                    current_headhunter.job_opportunities) %></p>
   

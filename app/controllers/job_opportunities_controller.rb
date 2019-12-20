@@ -1,21 +1,21 @@
 class JobOpportunitiesController < ApplicationController
-    before_action :authenticate_headhunter!, except: [:index, :show, :subscribe, :subscriptions_by_job_seeker, 
-                                                        :cancel_subscription]
-    before_action :authenticate_job_seeker_and_headhunter, only: [:show, :subscribe,
-                                                                 :subscriptions_by_job_seeker, :cancel_subscription]
-    before_action :authenticate_job_seeker!, only: [:index]
+    before_action :authenticate_headhunter!
+    before_action :get_headhunter
+    before_action :set_job_opportunity, only: [:show, :edit, :update, :destroy]
+    before_action :set_job_opportunities, only: [:index]
+
+
     
     def index
-        @job_opportunities = JobOpportunity.all
+        @job_opportunities_of_headhunter = @headhunter.job_opportunities
     end
 
     def new
-        @job_opportunity = JobOpportunity.new
+        @job_opportunity = @headhunter.job_opportunities.build
     end
 
     def create
-        @job_opportunity = JobOpportunity.new(job_opportunity_params)
-        @job_opportunity.headhunter = current_headhunter
+        @job_opportunity = @headhunter.job_opportunities.build(job_opportunity_params)
         if @job_opportunity.save
             flash[:alert] = 'Vaga criada com sucesso!'
             redirect_to @job_opportunity 
@@ -26,20 +26,12 @@ class JobOpportunitiesController < ApplicationController
     end
 
     def show
-        find_job_opportunity
-        @job_seeker = current_job_seeker
-        @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
-        
-        @subscriptions = Subscription.where(job_opportunity:@job_opportunity)
     end
 
     def edit
-        find_job_opportunity
     end
 
     def update
-        find_job_opportunity
-        @job_opportunity.headhunter = current_headhunter
         if @job_opportunity.update(job_opportunity_params)
             flash[:alert] = 'Vaga atualizada com sucesso!'
             redirect_to @job_opportunity
@@ -50,9 +42,8 @@ class JobOpportunitiesController < ApplicationController
     end
 
     def destroy
-        find_job_opportunity
         @job_opportunity.destroy
-        redirect_to job_opportunities_path
+        redirect_to headhunter_job_opportunities_path
     end
 
     def subscribe
@@ -100,17 +91,21 @@ class JobOpportunitiesController < ApplicationController
 
     private
 
+    def get_headhunter
+        @headhunter = current_headhunter
+    end
+
+    def set_job_opportunities
+        @job_opportunities = @headhunter.job_opportunities.where(headhunter:@headhunter)
+    end
+
+    def set_job_opportunity
+        @job_opportunity = @headhunter.job_opportunities.find_by(headhunter:@headhunter)
+    end
+   
     def job_opportunity_params
         params.require(:job_opportunity).permit(:name, :description, :habilities, :salary_range, :opportunity_level,
                         :end_date_opportunity, :region)
-    end
-
-    def find_job_opportunity
-        @job_opportunity = JobOpportunity.find(params[:id])
-    end
-    
-    def authenticate_job_seeker_and_headhunter
-        :authenticate_job_seeker! || :authenticate_headhunter!
     end
 
  end

@@ -2,7 +2,7 @@
     <% if @job_opportunities.empty? %>
         <p> Nenhuma vaga cadastrada </p>
     <% else %>
-        <% @job_opportunities.each do |opportunity| %>
+        <% @job_opportunities_of_headhunter.each do |opportunity| %>
         <p>
         <%= link_to opportunity.description_job_opportunity, opportunity %>               
         </p>
