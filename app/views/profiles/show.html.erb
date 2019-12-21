@@ -19,15 +19,21 @@
 
 <% if job_seeker_signed_in? %>
     <p><%= link_to 'Editar Perfil', edit_job_seeker_profile_path(@profile) %> </p>
-
     <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
 <% end %>
 
 <% if headhunter_signed_in? %>
-    <p><%= link_to 'Cadastrar Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %></p>
-    <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter,
-                                 current_headhunter.job_opportunities) %></p>Vagas
-    <p><#%= link_to 'Voltar',  %></p>
-
+    <% @subscriptions.each do |subscription|%>
+        <p><%= subscription.job_opportunity.description_job_opportunity %>
+        <% if subscription.subscription_comment.nil?%>
+            <%= link_to 'Adicionar Comentário', new_job_opportunity_subscription_subscription_comment_path(subscription.job_opportunity, subscription)  %>
+        <%else%>
+            <%= link_to 'Editar Comentário', edit_job_opportunity_subscription_subscription_comment_path(subscription.job_opportunity, subscription, subscription.subscription_comment) %></p>
+        <% end %>
+        <p><%= link_to 'Cadastrar Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %></p>
+        <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter,
+                                     current_headhunter.job_opportunities) %></p>Vagas
+        <p><#%= link_to 'Voltar', redirect_to :back %></p>
+    <% end %>
 <% end %>
 

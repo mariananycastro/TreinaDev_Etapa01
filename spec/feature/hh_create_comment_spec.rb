@@ -1,7 +1,7 @@
 require 'rails_helper'
 
     feature 'headhunter creates comment of job seeker' do
-        xscenario 'successfully' do
+        scenario 'successfully' do
 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -12,15 +12,8 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
-    
-            login_as(job_seeker, scope: :job_seeker)
-            visit root_path
-            click_on 'Vagas'
-            click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
-                        " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
-            click_on 'Candidatar para Vaga'
-            logout(:job_seeker)
+                                                       region: 'São Paulo')
+            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
             
     
             login_as(headhunter, scope: :headhunter)
@@ -29,17 +22,17 @@ require 'rails_helper'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
                     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
-            click_on 'Inserir Comentário'
-            fill_in 'Comentário:', with: 'Gostei desse candidato'
-            click_on 'Salvar'
+            click_on 'Adicionar Comentário'
+            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
+            click_on 'Salvar Comentário'
 
-            except(page).to have_content ('Gostei desse candidato')
-            except(page).to have_button 'Editar'
-            except(page).not_to have_button 'Salvar'
-            except(page).not_to have_button 'Inserir Comentário'
+            expect(page).to have_content ('Gostei desse candidato')
+            expect(page).to have_button 'Editar Comentário'
+            expect(page).not_to have_button 'Salvar Comentário'
+            expect(page).not_to have_button 'Adicionar Comentário'
         end
 
-        xscenario 'edit comment' do
+        scenario 'edit comment' do
 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -50,15 +43,9 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
+                                                       region: 'São Paulo')
     
-            login_as(job_seeker, scope: :job_seeker)
-            visit root_path
-            click_on 'Vagas'
-            click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
-                        " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
-            click_on 'Candidatar para Vaga'
-            logout(:job_seeker)
+            @subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
             
     
             login_as(headhunter, scope: :headhunter)
@@ -67,20 +54,20 @@ require 'rails_helper'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
                     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
-            click_on 'Inserir Comentário'
-            fill_in 'Comentário', with: 'Gostei desse candidato'
-            click_on 'Salvar'
-            click_on 'Editar'
-            click_on 'Salvar'
+            click_on 'Adicionar Comentário'
+            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
+            click_on 'Salvar Comentário'
+            click_on 'Editar Comentário'
+            click_on 'Salvar Comentário'
             fill_in 'Comentário', with: 'Não gosto mais'
 
-            except(page).to have_content ('Não gosto mais')
-            except(page).to have_button 'Editar'
-            except(page).not_to have_button 'Salvar'
-            except(page).not_to have_button 'Inserir Comentário'
+            expect(page).to have_content ('Não gosto mais')
+            expect(page).to have_button 'Editar Comentário'
+            expect(page).not_to have_button 'Salvar Comentário'
+
         end
 
-       xscenario 'delete comment' do
+       scenario 'delete comment' do
 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -91,15 +78,9 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
-                                                       region: 'Sâo Paulo')
+                                                       region: 'São Paulo')
     
-            login_as(job_seeker, scope: :job_seeker)
-            visit root_path
-            click_on 'Vagas'
-            click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
-                        " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
-            click_on 'Candidatar para Vaga'
-            logout(:job_seeker)
+            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
             
     
             login_as(headhunter, scope: :headhunter)
@@ -108,11 +89,11 @@ require 'rails_helper'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
                     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
-            click_on 'Inserir Comentário'
-            fill_in 'Comentário', with: 'Gostei desse candidato'
-            click_on 'Salvar'
+            click_on 'Adicionar Comentário'
+            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
+            click_on 'Salvar Comentário'
             click_on 'Deletar'
  
-            except(page).to have_button 'Inserir Comentário'
+            expect(page).to have_button 'Adicionar Comentário'
         end
     end

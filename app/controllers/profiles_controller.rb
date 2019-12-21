@@ -10,7 +10,10 @@ class ProfilesController < ApplicationController
             set_profile
         elsif headhunter_signed_in?
             @profile = Profile.find(params[:id])
-        end        
+            @job_seeker = @profile.job_seeker
+            @job_opportunities = JobOpportunity.where(headhunter:current_headhunter)
+            @subscriptions = Subscription.where(job_seeker:@job_seeker, job_opportunity:@job_opportunities)
+       end        
     end
 
     def new
@@ -18,18 +21,13 @@ class ProfilesController < ApplicationController
     end
 
     def create
-        if @profile.nil?
-            @profile = @job_seeker.build_profile(profile_params)
-            if @profile.save
-                flash[:alert] = 'Perfil criado com sucesso!'
-                redirect_to @profile
-            else
-                flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
-                render :new
-            end
-        else
-            flash[:alert] = 'Perfil já cadastrado!'
+        @profile = @job_seeker.build_profile(profile_params)
+        if @profile.save
+            flash[:alert] = 'Perfil criado com sucesso!'
             redirect_to @profile
+        else
+            flash.now[:alert] = 'Você deve corrigir todos os erros para prosseguir'
+            render :new
         end
     end
 
@@ -45,6 +43,7 @@ class ProfilesController < ApplicationController
             render :edit
         end
     end
+
 
     private
 
