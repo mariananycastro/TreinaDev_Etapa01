@@ -31,6 +31,9 @@ class JobOpportunitiesController < ApplicationController
 
     def show
         find_job_opportunity
+
+        @subscriptions = Subscription.where(job_opportunity:@job_opportunity)
+
         find_profile
         @job_seeker = current_job_seeker
         @subscription = Subscription.find_by(job_seeker: @job_seeker, job_opportunity: @job_opportunity)

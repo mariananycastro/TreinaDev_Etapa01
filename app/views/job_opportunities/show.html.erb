@@ -18,6 +18,16 @@
     <p><%= link_to 'Home', root_path %> </p>
 
 <% if headhunter_signed_in? %>
+    <% if @subscriptions.empty?%>
+        <p> Não há inscrições para esta vaga <p>
+    <%else%>
+        <% @subscriptions.each do |subscription| %>
+        <ul>
+            <li><%= link_to subscription.job_seeker.profile.job_seeker_profile, profile_path(subscription.job_seeker.profile) %></li>
+         </ul>
+        <% end %>
+    <% end %>
+
     <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
     <p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(@job_opportunity) %> </p>
     <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>

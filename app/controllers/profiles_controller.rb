@@ -1,9 +1,16 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_job_seeker!, except: [:destroy]
-    before_action :get_job_seeker, except: [:delete]
-    before_action :set_profile, only: [:show,:edit, :update]
+    before_action :authenticate_job_seeker!, except: [:show]
+    before_action :authenticate_job_seeker_and_headhunter, only: [:show] 
+    before_action :get_job_seeker, except: [:show]
+    before_action :set_profile, only: [:edit, :update]
 
     def show 
+        if job_seeker_signed_in?
+            get_job_seeker
+            set_profile
+        elsif headhunter_signed_in?
+            @profile = Profile.find(params[:id])
+        end        
     end
 
     def new
@@ -41,6 +48,10 @@ class ProfilesController < ApplicationController
 
     private
 
+    def authenticate_job_seeker_and_headhunter
+        :authenticate_job_seeker! || :authenticate_headhunter!
+    end
+        
     def get_job_seeker
         @job_seeker = current_job_seeker
     end
