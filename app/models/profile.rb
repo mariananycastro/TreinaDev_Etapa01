@@ -8,8 +8,7 @@ class Profile < ApplicationRecord
     validates :experience, presence:true
 
     belongs_to :job_seeker
-    has_many :subscriptions, through: :job_seeker
-
+    
     def job_seeker_profile
         "#{name} #{document} #{education_level}"
     end

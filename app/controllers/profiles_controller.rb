@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
     end
 
     def new
-        @profile = @job_seeker.build_profile
+        @profile = Profile.new
     end
 
     def create

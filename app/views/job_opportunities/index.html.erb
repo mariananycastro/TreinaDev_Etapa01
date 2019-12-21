@@ -1,4 +1,6 @@
 <% if headhunter_signed_in? %>
+
+<%= render partial: 'shared/log_headhunter' %>
     <% if @job_opportunities_of_headhunter.empty? %>
         <p> Nenhuma vaga cadastrada </p>
     <% else %>
@@ -7,6 +9,8 @@
         <%= link_to opportunity.description_job_opportunity, opportunity %>               
         </p>
         <% end %>
+       <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+    
     <% end %>
     
 <% elsif job_seeker_signed_in? %>

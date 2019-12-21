@@ -8,7 +8,7 @@ class JobOpportunity < ApplicationRecord
     validates :region, presence:true
 
     belongs_to :headhunter
-    has_many :job_seekers, through: :subscription
+    has_many :subscriptions
 
     enum opportunity_level: {Estagiário:0, Júnior:5, Pleno:10, Sênior:15, Especialista:20, Diretor:25}
 

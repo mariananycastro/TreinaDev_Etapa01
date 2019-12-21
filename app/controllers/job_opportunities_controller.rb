@@ -1,6 +1,6 @@
 class JobOpportunitiesController < ApplicationController
-    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe]
-    before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show]
+    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription]
+    before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show, :cancel_subscription]
     before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe]
     before_action :get_headhunter
     before_action :set_job_opportunity, only: [:edit, :update, :destroy]
@@ -31,6 +31,9 @@ class JobOpportunitiesController < ApplicationController
 
     def show
         find_job_opportunity
+        find_profile
+        @job_seeker = current_job_seeker
+        @subscription = Subscription.find_by(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
     end
 
     def edit
@@ -56,7 +59,10 @@ class JobOpportunitiesController < ApplicationController
 
     def job_seeker_subscribe
         find_profile
-        if !@profile.nil?
+        if @profile.nil?
+            flash[:alert] = 'Você deve preencher seu perfil antes de continuar'
+            redirect_to  new_job_seeker_profile_path(current_job_seeker)
+        else
             @job_seeker = current_job_seeker
             find_job_opportunity
             if @subscription.nil?
@@ -69,17 +75,15 @@ class JobOpportunitiesController < ApplicationController
                 flash[:alert] = 'Inscrição já realizada!'
                 redirect_to job_opportunity_path(@job_opportunity)
             end
-        else
-            flash[:alert] = 'Você deve preencher seu perfil antes de continuar'
-            redirect_to  new_job_seeker_profile_path(current_job_seeker)
         end
     end
 
     def cancel_subscription
         find_profile
         find_job_opportunity
+        @job_seeker = current_job_seeker
          @subscription = Subscription.find_by(job_opportunity:@job_opportunity, job_seeker:@job_seeker)
-        if @subscription.destroy!
+        if @subscription.destroy
             flash[:alert] = 'Inscrição cancelada'
             redirect_to job_opportunity_path(@job_opportunity)
         end
@@ -115,7 +119,7 @@ class JobOpportunitiesController < ApplicationController
     end
     
     def find_profile
-        Profile.find_by(job_seeker:current_job_seeker)
+        @profile = Profile.find_by(job_seeker:current_job_seeker)
     end
 
  end

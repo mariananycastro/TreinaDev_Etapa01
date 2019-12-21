@@ -5,7 +5,7 @@
     <p> Não há Inscrições </p>
 <% else %>
     <p>
-    <%= @job_seeker_subscriptions.each do |subscription| %>
+    <% @job_seeker_subscriptions.each do |subscription| %>
     <%= subscription.job_opportunity.description_job_opportunity %>
     </p>
     <% end %>

@@ -27,8 +27,10 @@
     <% if @subscription.nil? %>
         <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(current_job_seeker), method: 'post' %> </p>
     <% else %>
-        <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(current_job_seeker), method: 'delete' %> </p>
+        <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(@subscription), method: 'delete' %> </p>
     <% end %>
+    <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
+    <p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
 <% end %>
 
 
