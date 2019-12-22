@@ -1,13 +1,5 @@
 <%= render partial: 'shared/log_headhunter' %>
   
-<% if @subscription_comment.errors.any? %>
-  <ul>
-  <% @subscription_comment.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-  </ul>
-<% end %>
-
 <%= form_with model: [@job_opportunity, @subscription, @subscription_comment], local:true do |f| %>
     <p> Comentário para vaga: <%= f.label :comment, @subscription.job_opportunity.description_job_opportunity %> </p>
     <p> <%= f.text_field :comment %></p>

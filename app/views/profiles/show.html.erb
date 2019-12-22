@@ -25,15 +25,24 @@
 <% if headhunter_signed_in? %>
     <% @subscriptions.each do |subscription|%>
         <p><%= subscription.job_opportunity.description_job_opportunity %>
-        <% if subscription.subscription_comment.nil?%>
-            <%= link_to 'Adicionar Comentário', new_job_opportunity_subscription_subscription_comment_path(subscription.job_opportunity, subscription)  %>
+        <% if subscription.subscription_comment.nil? || subscription.subscription_comment.comment.empty? %>
+            <%= link_to 'Adicionar Comentário', 
+                new_job_opportunity_subscription_subscription_comment_path(
+                    subscription.job_opportunity, subscription)  %> </p>
         <%else%>
-            <%= link_to 'Editar Comentário', edit_job_opportunity_subscription_subscription_comment_path(subscription.job_opportunity, subscription, subscription.subscription_comment) %></p>
+            <p>Comentário: <%= subscription.subscription_comment.comment %> </p>
+            <p><%= link_to 'Editar Comentário', 
+                edit_job_opportunity_subscription_subscription_comment_path(
+                    subscription.job_opportunity, subscription, subscription.subscription_comment) %>
+            <%= link_to 'Deletar Comentário', 
+                job_opportunity_subscription_subscription_comment_path(
+                    subscription.job_opportunity, subscription, subscription.subscription_comment), method: 'delete' %></p>
         <% end %>
+    <% end %>
         <p><%= link_to 'Cadastrar Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %></p>
         <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter,
                                      current_headhunter.job_opportunities) %></p>Vagas
         <p><#%= link_to 'Voltar', redirect_to :back %></p>
-    <% end %>
+    
 <% end %>
 

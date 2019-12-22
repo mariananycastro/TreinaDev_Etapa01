@@ -1,7 +1,7 @@
 <% if headhunter_signed_in? %>
     <p><%= render partial: 'shared/log_headhunter' %></p>
 <% elsif job_seeker_signed_in? %>
-    <p><%= render partial: 'shared/log_headhunter' %></p>
+    <p><%= render partial: 'shared/log_job_seeker' %></p>
 <% end %>
 
     <h3><%= @job_opportunity.name %></h3>
@@ -35,7 +35,7 @@
 
 <% if job_seeker_signed_in? %>
     <% if @subscription.nil? %>
-        <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(current_job_seeker), method: 'post' %> </p>
+        <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(@job_opportunity, current_job_seeker), method: 'post' %> </p>
     <% else %>
         <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(@subscription), method: 'delete' %> </p>
     <% end %>

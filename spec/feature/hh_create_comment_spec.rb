@@ -25,11 +25,10 @@ require 'rails_helper'
             click_on 'Adicionar Comentário'
             fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
             click_on 'Salvar Comentário'
-
+            
             expect(page).to have_content ('Gostei desse candidato')
-            expect(page).to have_button 'Editar Comentário'
-            expect(page).not_to have_button 'Salvar Comentário'
-            expect(page).not_to have_button 'Adicionar Comentário'
+            expect(page).to have_link 'Editar Comentário'
+            expect(page).not_to have_link 'Salvar Comentário'
         end
 
         scenario 'edit comment' do
@@ -58,12 +57,12 @@ require 'rails_helper'
             fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
             click_on 'Salvar Comentário'
             click_on 'Editar Comentário'
+            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo' , with: 'Não gosto mais'
             click_on 'Salvar Comentário'
-            fill_in 'Comentário', with: 'Não gosto mais'
 
             expect(page).to have_content ('Não gosto mais')
-            expect(page).to have_button 'Editar Comentário'
-            expect(page).not_to have_button 'Salvar Comentário'
+            expect(page).to have_link 'Editar Comentário'
+            expect(page).not_to have_link 'Salvar Comentário'
 
         end
 
@@ -81,7 +80,7 @@ require 'rails_helper'
                                                        region: 'São Paulo')
     
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
-            
+            subscription_comment = SubscriptionComment.create!(comment:'Gostei de  vc', subscription:subscription)          
     
             login_as(headhunter, scope: :headhunter)
             visit root_path
@@ -89,11 +88,8 @@ require 'rails_helper'
             click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
                     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
-            click_on 'Adicionar Comentário'
-            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
-            click_on 'Salvar Comentário'
-            click_on 'Deletar'
+            click_on 'Deletar Comentário'
  
-            expect(page).to have_button 'Adicionar Comentário'
+            expect(page).to have_link 'Adicionar Comentário'
         end
     end

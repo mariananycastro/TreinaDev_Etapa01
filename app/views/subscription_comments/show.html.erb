@@ -1,13 +1,21 @@
 
 <p><%= render partial: 'shared/log_headhunter' %></p>
 
-<h3><%= @profile_description %></h3>
-<h3><% @job_opportunity_description %> </h3>
-
+<% if @subscription_comment.nil? %>
+    <p> Não há comentários </p>
+<% else %>
+    <h3><%= @profile_description %></h3>
+    <h3><% @job_opportunity_description %> </h3>
 <ul>
     <li><%= @subscription_comment.comment %></li>
 </ul>
+<% end %>
 
 
-<%= link_to 'Editar Comentário', edit_job_opportunity_subscription_subscription_comment_path(@subscription.job_opportunity, @subscription, @subscription_comment) %></p>
+<p><%= link_to 'Editar Comentário', 
+    edit_job_opportunity_subscription_subscription_comment_path(
+        @subscription.job_opportunity, @subscription, @subscription_comment) %></p>
+<p><%= link_to 'Deletar Comentário', 
+    job_opportunity_subscription_subscription_comment_path(
+        @subscription.job_opportunity, @subscription, @subscription_comment), method: 'delete' %></p>
 <p><%= link_to 'Home', root_path %> </p>

@@ -1,4 +1,4 @@
 class SubscriptionComment < ApplicationRecord
-    belongs_to :subscription, dependent: :destroy
+    belongs_to :subscription
 
 end

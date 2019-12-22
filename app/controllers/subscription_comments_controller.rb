@@ -10,10 +10,10 @@ class SubscriptionCommentsController < ApplicationController
 
     def create
         @subscription = Subscription.find(params[:subscription_id])
-        @job_opportunity = @subscription.job_opportunity
         @subscription_comment = @subscription.build_subscription_comment(params.require(:subscription_comment).permit(:comment))
         if @subscription_comment.save
-            redirect_to job_opportunity_subscription_subscription_comment_path(@job_opportunity, @subscription_comment, @subscription)
+            redirect_to job_opportunity_subscription_subscription_comment_path(
+                        @subscription.job_opportunity, @subscription, @subscription_comment)
         end
     end 
 
@@ -33,15 +33,19 @@ class SubscriptionCommentsController < ApplicationController
     def update
         @subscription_comment = SubscriptionComment.find(params[:id])
         @subscription = @subscription_comment.subscription
-        @job_opportunity = @subscription.job_opportunity
         @subscription_comment.update(params.require(:subscription_comment).permit(:comment))
-        redirect_to job_opportunity_subscription_subscription_comment_path(@job_opportunity, @subscription_comment, @subscription)
+        redirect_to job_opportunity_subscription_subscription_comment_path(
+                        @subscription.job_opportunity, @subscription, @subscription_comment)
     end 
 
+    def destroy
+        @subscription_comment = SubscriptionComment.find(params[:id])
+        @subscription = @subscription_comment.subscription
+        @subscription_comment.delete    
+        redirect_to  profile_path(@subscription.job_seeker.profile)
+    end
 
-    #    @profile = Profile.find(params[:id])
-    #    @job_seeker = profile.job_seeker
-    #    @job_opportunities = JobOpportunity.where(headhunter:current_headhunter)
-    #    @subscriptions = Subscription.where(job_seeker:@job_seeker,job_opportunity:@job_opportunity)
-    #    @subscription_comment = SubscriptionComment.find_by(@subscription)
+
+
+
 end
