@@ -30,8 +30,8 @@
                 new_job_opportunity_subscription_subscription_comment_path(
                     subscription.job_opportunity, subscription)  %> </p>
         <%else%>
-            <p>Comentário: <%= subscription.subscription_comment.comment %> </p>
-            <p><%= link_to 'Editar Comentário', 
+            <p>Comentário: <%= subscription.subscription_comment.comment %>
+            <%= link_to 'Editar Comentário', 
                 edit_job_opportunity_subscription_subscription_comment_path(
                     subscription.job_opportunity, subscription, subscription.subscription_comment) %>
             <%= link_to 'Deletar Comentário', 
