@@ -1,0 +1,9 @@
+<h1> Proposta para candidato: <%= @subscription.job_seeker.profile.nick_name %></h1>
+<h2> Vaga: <%= @subscription.job_opportunity.description_job_opportunity %> </h2>
+<%= form_with url: job_opportunity_subscription_invitations_path, local:true do |f| %>
+    <%= f.label :title, 'Título:'%>
+    <%= f.text_field :title %>
+    <%= f.label :message, 'Mensagem:'%>
+    <%= f.text_field :message %>
+    <%= f.submit 'Enviar Proposta'%>
+<% end %>

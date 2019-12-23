@@ -2,7 +2,7 @@ class JobOpportunitiesController < ApplicationController
     before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription]
     before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show, :cancel_subscription]
     before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe]
-    before_action :get_headhunter
+    before_action :get_headhunter, except: [:job_seeker_subscribe]
     before_action :set_job_opportunity, only: [:edit, :update, :destroy]
     
     def index
@@ -91,9 +91,7 @@ class JobOpportunitiesController < ApplicationController
             redirect_to job_opportunity_path(@job_opportunity)
         end
     end
-
-
-
+    
     private
 
     def authenticate_headhunter_and_job_seeker

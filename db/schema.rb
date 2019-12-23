@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_230916) do
+ActiveRecord::Schema.define(version: 2019_12_23_163141) do
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.boolean "status", default: false
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+  end
 
   create_table "headhunters", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +30,14 @@ ActiveRecord::Schema.define(version: 2019_12_19_230916) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.boolean "status"
+    t.text "message"
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "job_opportunities", force: :cascade do |t|
@@ -77,6 +93,9 @@ ActiveRecord::Schema.define(version: 2019_12_19_230916) do
     t.integer "job_opportunity_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "hh_answer_id"
+    t.string "hh_answer_type"
+    t.index ["hh_answer_type", "hh_answer_id"], name: "index_subscriptions_on_hh_answer_type_and_hh_answer_id"
     t.index ["job_opportunity_id"], name: "index_subscriptions_on_job_opportunity_id"
     t.index ["job_seeker_id", "job_opportunity_id"], name: "index_subscriptions_on_job_seeker_id_and_job_opportunity_id", unique: true
     t.index ["job_seeker_id"], name: "index_subscriptions_on_job_seeker_id"

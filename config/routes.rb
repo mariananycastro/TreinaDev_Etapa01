@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     delete 'cancel_subscription', on: :member
     resources :subscriptions, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
       resources :subscription_comments
+      resources :feedbacks, except: [:index, :edit, :update, :destroy] 
+      resources :invitations, except: [:index, :edit, :update, :destroy]
     end
   end
 

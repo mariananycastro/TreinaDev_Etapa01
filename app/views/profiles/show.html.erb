@@ -38,6 +38,19 @@
                 job_opportunity_subscription_subscription_comment_path(
                     subscription.job_opportunity, subscription, subscription.subscription_comment), method: 'delete' %></p>
         <% end %>
+        <% if  %>
+            <% if subscription.hh_answer.nil?%>
+           <p> <%= link_to 'Enviar Proposta', 
+                    new_job_opportunity_subscription_invitation_path(
+                        subscription.job_opportunity, subscription) %> </p>
+            <p> <%= link_to 'Recusar Inscrição', 
+                    new_job_opportunity_subscription_feedback_path(
+                        subscription.job_opportunity, subscription) %></p>
+            <% else %>
+                <p> Aguardando resposta </p>
+            <% end %>
+        <% end %>
+
     <% end %>
         <p><%= link_to 'Cadastrar Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %></p>
         <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter,
