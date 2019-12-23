@@ -8,6 +8,7 @@ feature 'Job Seeker create profile' do
 
         visit root_path
         click_on 'Criar Perfil'
+        attach_file 'Foto:', Rails.root.join('spec', 'support', 'avatar.JPG')
         fill_in 'Nome:', with: 'Joao da Silva'
         fill_in 'CPF:', with: '595.487.167-12'
         fill_in 'Apelido:', with: 'João'

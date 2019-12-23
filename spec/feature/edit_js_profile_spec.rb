@@ -10,6 +10,7 @@ feature 'Job seeker edit profile' do
         login_as(job_seeker, scope: :job_seeker)
         visit root_path
         click_on 'Editar Perfil'
+        attach_file 'Foto:', Rails.root.join('spec', 'support', 'avatar.JPG')
         fill_in 'Nome:', with: 'Joao da Silva Santos'
         fill_in 'CPF:', with: '595.487.167-12'
         fill_in 'Apelido:', with: 'Joãzinho'

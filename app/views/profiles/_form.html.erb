@@ -8,6 +8,10 @@
 
 <%= form_with model: [@job_seeker, @profile], local: true do |f| %>
 <p> 
+    <%= f.label :avatar, 'Foto:' %>
+    <%= f.file_field :avatar %>
+</p>
+</p>
     <%= f.label :name, 'Nome:' %>
     <%= f.text_field :name %>
 </p>

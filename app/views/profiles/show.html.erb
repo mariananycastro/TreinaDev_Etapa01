@@ -4,8 +4,10 @@
     <p><%= render partial: 'shared/log_headhunter' %></p>
 <% end %>
 
-<h3><%= @profile.name %></h3>
 
+<%= image_tag @profile.avatar, size: "150x150" %>
+<h3><%= @profile.name %></h3>
+    
 <ul>
     <li><%= @profile.nick_name %></li>
     <li><%= @profile.document %></li>

@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
         if job_seeker_signed_in?
             get_job_seeker
             set_profile
+           
         elsif headhunter_signed_in?
             @profile = Profile.find(params[:id])
             @job_seeker = @profile.job_seeker
@@ -60,7 +61,7 @@ class ProfilesController < ApplicationController
     end
 
     def profile_params
-        params.require(:profile).permit(:name, :document, :nick_name, :day_of_birth, 
+        params.require(:profile).permit(:avatar, :name, :document, :nick_name, :day_of_birth, 
                                         :education_level, :description, :experience)
     end
 

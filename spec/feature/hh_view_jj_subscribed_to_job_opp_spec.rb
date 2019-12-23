@@ -56,6 +56,7 @@ feature "headhunter views subscriptions of job seeker and job seeker's profile" 
                                     education_level: 'Graduado',
                                     description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
                                     job_seeker: job_seeker)
+        profile = profile.avatar.attach(io: File.open('\wsl$\Ubuntu\home\ma\workspace\etapa01\spec\support'), filename: "avatar.JPG", content_type: "avatar/JPG")
         job_seeker2 = JobSeeker.create!(email: 'js2@test.com', password: '123456')
         profile2 = Profile.create!(name: 'Ana', nick_name: 'Aninha', day_of_birth: '1986-03-02', 
                                     education_level: 'Graduada',
