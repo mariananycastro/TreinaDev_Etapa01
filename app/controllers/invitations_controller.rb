@@ -8,9 +8,8 @@ class InvitationsController < ApplicationController
     def create
         @subscription = Subscription.find(params[:subscription_id])
         @invitation = Invitation.new(params.permit(:title, :message))
-        @invitation.subscription = @subscription
-        @invitation.status = true
         @invitation.save
+        @subscription.update_attribute(:hh_answer, @invitation)
         flash[:alert] = 'Proposta enviada com sucesso'
         redirect_to job_opportunity_subscription_invitation_path(@subscription.job_opportunity, @subscription, @invitation)
     end

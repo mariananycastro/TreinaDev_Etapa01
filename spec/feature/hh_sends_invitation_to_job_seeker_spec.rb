@@ -54,8 +54,7 @@ require 'rails_helper'
             click_on 'Enviar Feedback'
                 
             expect(page).to have_content 'Inscrição rejeitada. Feedback enviado com sucesso.'
-            
-
 
         end
+
     end

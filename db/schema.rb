@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_163141) do
+ActiveRecord::Schema.define(version: 2019_12_23_182342) do
 
   create_table "feedbacks", force: :cascade do |t|
-    t.boolean "status", default: false
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -33,7 +32,6 @@ ActiveRecord::Schema.define(version: 2019_12_23_163141) do
   end
 
   create_table "invitations", force: :cascade do |t|
-    t.boolean "status"
     t.text "message"
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
