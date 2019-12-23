@@ -12,14 +12,15 @@ require 'rails_helper'
                                                      opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-            subscription.update(hh_answer:invitation, status: 'invited')
+            feedback = Feedback.create!(title:'Nao deu', message:'Sorry.')
+            subscription.update(hh_answer:feedback, status:'rejected')
 
     
             login_as(job_seeker, scope: :job_seeker)
+    
             visit root_path
 
-            expect(page).to have_content 'Você tem uma proposta para a vaga: Programador Ruby Pleno 2020-02-02 São Paulo'
+            expect(page).to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2020-02-02 São Paulo'
 
         end
 
@@ -35,8 +36,8 @@ require 'rails_helper'
                                                      opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-            subscription.update(hh_answer:invitation, status: 'invited')
+            feedback = Feedback.create!(title:'Nao deu', message:'Sorry.')
+            subscription.update(hh_answer:feedback, status:'rejected')
 
 
     
@@ -46,8 +47,8 @@ require 'rails_helper'
 
             expect(page).to have_content profile.nick_name
             expect(page).to have_content job_opportunity.description_job_opportunity        
-            expect(page).to have_content 'Passou'
-            expect(page).to have_content 'Vamos agendar uma entrevista'
+            expect(page).to have_content 'Nao deu'
+            expect(page).to have_content 'Sorry'
 
         end
     end

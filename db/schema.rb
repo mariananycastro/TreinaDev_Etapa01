@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_182342) do
+ActiveRecord::Schema.define(version: 2019_12_23_145752) do
 
   create_table "feedbacks", force: :cascade do |t|
+    t.string "title"
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
   end
 
   create_table "headhunters", force: :cascade do |t|
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2019_12_23_182342) do
   end
 
   create_table "invitations", force: :cascade do |t|
-    t.text "message"
     t.string "title"
+    t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -89,10 +89,12 @@ ActiveRecord::Schema.define(version: 2019_12_23_182342) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "job_seeker_id"
     t.integer "job_opportunity_id"
+    t.integer "subscriptions", default: 0
+    t.integer "status", default: 0
+    t.string "hh_answer_type"
+    t.integer "hh_answer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "hh_answer_id"
-    t.string "hh_answer_type"
     t.index ["hh_answer_type", "hh_answer_id"], name: "index_subscriptions_on_hh_answer_type_and_hh_answer_id"
     t.index ["job_opportunity_id"], name: "index_subscriptions_on_job_opportunity_id"
     t.index ["job_seeker_id", "job_opportunity_id"], name: "index_subscriptions_on_job_seeker_id_and_job_opportunity_id", unique: true
