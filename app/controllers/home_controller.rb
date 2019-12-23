@@ -5,7 +5,10 @@ class HomeController < ApplicationController
             @job_opportunities = @headhunter.job_opportunities.find_by(headhunter:@headhunter)
             render :homehh 
         elsif job_seeker_signed_in?
+            @job_seeker = current_job_seeker
+            @subscriptions = Subscription.all
             render :homejs
+
         end
     end    
 end

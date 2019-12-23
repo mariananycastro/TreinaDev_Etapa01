@@ -1,4 +1,6 @@
 class FeedbacksController < ApplicationController
+    before_action :authenticate_headhunter!, except: [:show]
+    before_action :authenticate_headhunter_and_job_seeker, only: [:show]
 
     def new
         @subscription = Subscription.find(params[:subscription_id])
@@ -16,6 +18,12 @@ class FeedbacksController < ApplicationController
 
     def show
         @feedback = Feedback.find(params[:id])
+    end
+
+    private
+    
+    def authenticate_headhunter_and_job_seeker
+        :authenticate_headhunter! || :authenticate_job_seeker!
     end
 
 end

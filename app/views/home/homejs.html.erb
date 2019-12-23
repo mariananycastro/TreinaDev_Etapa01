@@ -5,6 +5,15 @@
 <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
 <p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
 
+<% @subscriptions.each do |subscription|%>
+    <% if !subscription.hh_answer.nil? %>
+        <p> Você tem uma proposta para a vaga: 
+        <%= link_to subscription.job_opportunity.description_job_opportunity, 
+                job_opportunity_subscription_invitation_path(subscription.job_opportunity, subscription, subscription.hh_answer) %>
+        </p>
+    <% end %>
+<% end %>
+
 
 
 
