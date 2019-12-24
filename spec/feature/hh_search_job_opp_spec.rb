@@ -1,8 +1,7 @@
 require 'rails_helper'
     feature 'js search for job opportunity' do
-        scenario 'successfully' do
+        xscenario 'successfully' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
-        job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                  description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
@@ -14,7 +13,7 @@ require 'rails_helper'
                                                  opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                  region: 'São Paulo')
 
-        login_as(job_seeker, scope: :job_seeker)
+        login_as(headhunter, scope: :headhunter)
         visit root_path
         click_on 'Vagas'
         fill_in 'Buscar vaga:', with: 'Ruby'
@@ -25,9 +24,9 @@ require 'rails_helper'
             
         end
 
-        scenario 'by description' do
+        xscenario 'by description' do
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
-            job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
+            headhunter2 = Headhunter.create!(email: 'hh2@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador', 
                                                      description: 'Vaga para programador Ruby',
                                                      habilities: 'Saber programar', salary_range: 5000, 
@@ -39,7 +38,7 @@ require 'rails_helper'
                                                      opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                      region: 'São Paulo')
     
-            login_as(job_seeker, scope: :job_seeker)
+            login_as(headhunter, scope: :headhunter)
             visit root_path
             click_on 'Vagas'
             fill_in 'Buscar vaga:', with: 'Ruby'
@@ -49,7 +48,7 @@ require 'rails_helper'
             expect(page).not_to have_css('#search', text: 'Desenvolvedor Java Pleno 2020-02-02 São Paulo')
         end
 
-        scenario 'by salary' do
+        xscenario 'by salary' do
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador', 

@@ -93,7 +93,12 @@ class JobOpportunitiesController < ApplicationController
     end
 
     def search
-        @search_job_opportunities = JobOpportunity.where('name like?', "%#{params[:q]}%")
+
+        @search_job_opportunities = JobOpportunity.where(
+            'name LIKE :q OR description LIKE :q OR habilities LIKE :q OR salary_range LIKE :q OR region LIKE :q
+                            OR  end_date_opportunity LIKE :q',
+                            q: "%#{params[:q]}%")
+            
         @all_job_opportunities = JobOpportunity.all
         render :index
     end
