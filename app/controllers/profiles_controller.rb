@@ -1,7 +1,8 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_job_seeker!, except: [:show]
+    before_action :authenticate_job_seeker!, except: [:show, :search]
     before_action :authenticate_job_seeker_and_headhunter, only: [:show] 
-    before_action :get_job_seeker, except: [:show]
+    before_action :authenticate_headhunter!, only: [:search]
+    before_action :get_job_seeker, except: [:show, :search]
     before_action :set_profile, only: [:edit, :update]
 
     def show 
@@ -44,6 +45,15 @@ class ProfilesController < ApplicationController
             render :edit
         end
     end
+
+    def search
+        @search = Profile.where(
+                'name LIKE :q OR nick_name LIKE :q OR day_of_birth LIKE :q OR education_level LIKE :q OR description LIKE :q OR experience LIKE :q
+                 OR document LIKE :q',
+                    q: "%#{params[:q]}%")
+        render :index
+    end
+    
 
 
     private

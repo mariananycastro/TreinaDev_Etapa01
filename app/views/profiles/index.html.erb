@@ -1,0 +1,14 @@
+<h4> Pesquisar candidato </h4>
+<%= form_with url: search_profiles_path, local:true, method: :get do %>
+    <%= label_tag :q, 'Buscar Candidatos:' %>
+    <%= text_field_tag :q %>
+    <%= submit_tag 'Pesquisar' %>
+<% end %>
+
+<% if @search.present? %>
+    <% @search.each do |profile| %>
+        <ul> 
+            <li><%= link_to profile.job_seeker_profile, profile %></li><br>
+        </ul>
+    <% end %>
+<% end %>

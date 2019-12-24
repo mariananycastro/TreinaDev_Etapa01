@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :profiles, only: [:new, :create, :edit, :update ]
     resources :subscriptions, only: [:index]
   end 
-  resources :profiles, only: [:show]  
+  resources :profiles, only: [:show] do
+    get 'search', on: :collection    
+  end
 
 end
