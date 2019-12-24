@@ -1,6 +1,6 @@
 <h4> Pesquisar candidato </h4>
 <%= form_with url: search_profiles_path, local:true, method: :get do %>
-    <%= label_tag :q, 'Buscar Candidatos:' %>
+    <%= label_tag :q, 'Buscar Candidatos:   ' %>
     <%= text_field_tag :q %>
     <%= submit_tag 'Pesquisar' %>
 <% end %>

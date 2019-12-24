@@ -22,7 +22,7 @@ feature 'headhunter create job opportunity' do
         expect(page).to have_content 'Formação em Computação'
         expect(page).to have_content '5000'
         expect(page).to have_content 'Pleno'
-        expect(page).to have_content '2020-02-02'
+        expect(page).to have_content  '2020-02-02'
         expect(page).to have_content 'São Paulo'
 
         expect(page).to have_content 'Vaga criada com sucesso!'

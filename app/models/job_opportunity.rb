@@ -6,6 +6,7 @@ class JobOpportunity < ApplicationRecord
     validates :opportunity_level, presence:true
     validates :end_date_opportunity, presence:true
     validates :region, presence:true
+    validate :end_date_opportunity_must_be_greater_than_today
 
     belongs_to :headhunter
     has_many :subscriptions
@@ -15,4 +16,13 @@ class JobOpportunity < ApplicationRecord
     def description_job_opportunity
         "#{name} #{opportunity_level} #{end_date_opportunity} #{region}"
     end
+
+    
+
+    def end_date_opportunity_must_be_greater_than_today  
+        if end_date_opportunity.present? && end_date_opportunity <= Date.current
+          errors.add(:end_date_opportunity, 'deve ser maior que data de hoje')    
+        end    
+    end
+      
 end
