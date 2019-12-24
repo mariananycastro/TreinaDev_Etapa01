@@ -7,7 +7,7 @@ feature "headhunter views subscriptions of job seeker and job seeker's profile" 
         profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                     education_level: 'Graduado',
                                     description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                    job_seeker: job_seeker)
+                                    job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                    habilities: 'Saber programar', salary_range: 5000, 
@@ -55,13 +55,12 @@ feature "headhunter views subscriptions of job seeker and job seeker's profile" 
         profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                     education_level: 'Graduado',
                                     description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                    job_seeker: job_seeker)
-        profile = profile.avatar.attach(io: File.open('\wsl$\Ubuntu\home\ma\workspace\etapa01\spec\support'), filename: "avatar.JPG", content_type: "avatar/JPG")
+                                    job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
         job_seeker2 = JobSeeker.create!(email: 'js2@test.com', password: '123456')
         profile2 = Profile.create!(name: 'Ana', nick_name: 'Aninha', day_of_birth: '1986-03-02', 
                                     education_level: 'Graduada',
                                     description: 'USP', experience: 'Ja trabalhei muito com TI', document: '911.386.250-27',
-                                    job_seeker: job_seeker2)
+                                    job_seeker: job_seeker2, avatar: fixture_file_upload('avatar.JPG'))
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                    description: 'Vaga para programador Ruby',

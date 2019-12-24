@@ -7,7 +7,7 @@ require 'rails_helper'
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                         education_level: 'Graduado',
                                         description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                        job_seeker: job_seeker)
+                                        job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
@@ -37,7 +37,7 @@ require 'rails_helper'
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                         education_level: 'Graduado',
                                         description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                        job_seeker: job_seeker)
+                                        job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
@@ -72,7 +72,7 @@ require 'rails_helper'
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                         education_level: 'Graduado',
                                         description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                        job_seeker: job_seeker)
+                                        job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
@@ -99,7 +99,7 @@ require 'rails_helper'
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                         education_level: 'Graduado',
                                         description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                        job_seeker: job_seeker)
+                                        job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
@@ -131,7 +131,7 @@ require 'rails_helper'
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
                                         education_level: 'Graduado',
                                         description: 'UEM', experience: 'Ja trabalhei com TI', document: '521.730.870-29',
-                                        job_seeker: job_seeker)
+                                        job_seeker: job_seeker, avatar: fixture_file_upload('avatar.JPG'))
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')
             headhunter2 = Headhunter.create!(email: 'hh2@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
