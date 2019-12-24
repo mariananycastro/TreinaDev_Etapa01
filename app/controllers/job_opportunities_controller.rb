@@ -1,7 +1,7 @@
 class JobOpportunitiesController < ApplicationController
-    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription]
+    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription, :search]
     before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show, :cancel_subscription]
-    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe]
+    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe, :search]
     before_action :get_headhunter, except: [:job_seeker_subscribe]
     before_action :set_job_opportunity, only: [:edit, :update, :destroy]
     
@@ -90,6 +90,12 @@ class JobOpportunitiesController < ApplicationController
             flash[:alert] = 'Inscrição cancelada'
             redirect_to job_opportunity_path(@job_opportunity)
         end
+    end
+
+    def search
+        @search_job_opportunities = JobOpportunity.where('name like?', "%#{params[:q]}%")
+        @all_job_opportunities = JobOpportunity.all
+        render :index
     end
     
     private

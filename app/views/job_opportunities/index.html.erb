@@ -14,6 +14,24 @@
     <% end %>
     
 <% elsif job_seeker_signed_in? %>
+    <h4> Pesquisar vaga </h4>
+    <%= form_with url: search_job_opportunities_path, method: :get, local:true do %>
+        <%= label_tag :q, 'Buscar vaga:' %>
+        <%= text_field_tag :q %>
+        <%= submit_tag 'Pesquisar' %>
+    <% end %>
+    <% if @search_job_opportunities.present? %>
+        <% @search_job_opportunities.each do |opportunity| %>
+            <ul> 
+                <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
+            </ul>
+        <% end %>
+    <% end %>
+
+
+
+    <h4> Vagas: </h4>
+
     <% if @all_job_opportunities.empty? %>
         <p> Nenhuma vaga cadastrada </p>
     <% else %>

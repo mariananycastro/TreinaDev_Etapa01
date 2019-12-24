@@ -1,6 +1,6 @@
 require 'rails_helper'
     feature 'js search for job opportunity' do
-        xscenario 'successfully' do
+        scenario 'successfully' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
         job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
@@ -17,9 +17,8 @@ require 'rails_helper'
         login_as(job_seeker, scope: :job_seeker)
         visit root_path
         click_on 'Vagas'
-        click_on 'Pesquisar Vaga'
-        fill_in 'Pesquisar por Nome de Vaga:', with: 'Ruby'
-        click_on 'Buscar'
+        fill_in 'Buscar vaga:', with: 'Ruby'
+        click_on 'Pesquisar'
 
         expect(page).to have_content 'Programador Ruby'
         expect(page).not_to have_content 'Desevolvedor Java'

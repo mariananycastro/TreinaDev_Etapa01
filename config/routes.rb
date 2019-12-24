@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :job_opportunities, only: [:index, :show] do
     post 'job_seeker_subscribe', on: :member
     delete 'cancel_subscription', on: :member
+    get 'search', on: :collection
     resources :subscriptions, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
       resources :subscription_comments
       resources :feedbacks, except: [:index, :edit, :update, :destroy] 
