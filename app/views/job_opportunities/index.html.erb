@@ -1,47 +1,65 @@
 <% if headhunter_signed_in? %>
 
 <%= render partial: 'shared/log_headhunter' %>
-    <% if @job_opportunities_of_headhunter.empty? %>
-        <p> Nenhuma vaga cadastrada </p>
-    <% else %>
-        <% @job_opportunities_of_headhunter.each do |opportunity| %>
-        <p>
-        <%= link_to opportunity.description_job_opportunity, opportunity %>               
-        </p>
+
+    <div id='search_hh' >
+        <h4> Pesquisar vaga </h4>
+        <%= form_with url: search_headhunter_job_opportunities_path, method: :get, local:true do %>
+            <%= label_tag :q, 'Buscar vaga:' %>
+            <%= text_field_tag :q %>
+            <%= submit_tag 'Pesquisar' %>
         <% end %>
-       <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
-    
-    <% end %>
+        <% if @search_hh_job_opportunities.present? %>
+            <% @search_hh_job_opportunities.each do |opportunity| %>
+                <ul> 
+                    <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
+                </ul>
+            <% end %>
+        <% end %>
+    </div>
+    <div id='hh_all_opportunities' >
+        <% if @job_opportunities_of_headhunter.empty? %>
+            <p> Nenhuma vaga cadastrada </p>
+        <% else %>
+            <% @job_opportunities_of_headhunter.each do |opportunity| %>
+            <p>
+            <%= link_to opportunity.description_job_opportunity, opportunity %>               
+            </p>
+            <% end %>
+           <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+
+        <% end %>
+    </div>
     
 <% elsif job_seeker_signed_in? %>
     <div id='search' >
-    <h4> Pesquisar vaga </h4>
-    <%= form_with url: search_job_opportunities_path, method: :get, local:true do %>
-        <%= label_tag :q, 'Buscar vaga:' %>
-        <%= text_field_tag :q %>
-        <%= submit_tag 'Pesquisar' %>
-    <% end %>
-    <% if @search_job_opportunities.present? %>
-        <% @search_job_opportunities.each do |opportunity| %>
-            <ul> 
-                <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
-            </ul>
+        <h4> Pesquisar vaga </h4>
+        <%= form_with url: search_job_opportunities_path, method: :get, local:true do %>
+            <%= label_tag :q, 'Buscar vaga:' %>
+            <%= text_field_tag :q %>
+            <%= submit_tag 'Pesquisar' %>
         <% end %>
-    <% end %>
+        <% if @search_job_opportunities.present? %>
+            <% @search_job_opportunities.each do |opportunity| %>
+                <ul> 
+                    <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
+                </ul>
+            <% end %>
+        <% end %>
     </div>
 
     <div id='all_job_opportunities'>
-    <h4> Vagas: </h4>
+        <h4> Vagas: </h4>
 
-    <% if @all_job_opportunities.empty? %>
-        <p> Nenhuma vaga cadastrada </p>
-    <% else %>
-        <% @all_job_opportunities.each do |opportunity| %>
-        <p>
-        <%= link_to opportunity.description_job_opportunity, opportunity %>               
-        </p>
+        <% if @all_job_opportunities.empty? %>
+            <p> Nenhuma vaga cadastrada </p>
+        <% else %>
+            <% @all_job_opportunities.each do |opportunity| %>
+            <p>
+            <%= link_to opportunity.description_job_opportunity, opportunity %>               
+            </p>
+            <% end %>
         <% end %>
-    <% end %>
     </div>
 <% end %>
 

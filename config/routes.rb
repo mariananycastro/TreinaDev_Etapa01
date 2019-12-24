@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :headhunters
   resources :headhunters, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
-    resources :job_opportunities
+    resources :job_opportunities do
+      get 'search', on: :collection
+    end
   end
   resources :job_opportunities, only: [:index, :show] do
     post 'job_seeker_subscribe', on: :member

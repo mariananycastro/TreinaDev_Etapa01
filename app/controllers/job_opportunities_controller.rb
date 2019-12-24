@@ -1,7 +1,7 @@
 class JobOpportunitiesController < ApplicationController
     before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription, :search]
-    before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show, :cancel_subscription]
-    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe, :search]
+    before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show, :cancel_subscription, :search]
+    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe]
     before_action :get_headhunter, except: [:job_seeker_subscribe]
     before_action :set_job_opportunity, only: [:edit, :update, :destroy]
     
@@ -93,10 +93,18 @@ class JobOpportunitiesController < ApplicationController
     end
 
     def search
+        if headhunter_signed_in?
+            @headhunter = current_headhunter
+            @search_hh_job_opportunities = @headhunter.job_opportunities.where(headhunter:@headhunter)&JobOpportunity.where(
+                'name LIKE :q OR description LIKE :q OR habilities LIKE :q OR salary_range LIKE :q OR region LIKE :q
+                                OR end_date_opportunity LIKE :q',
+                                q: "%#{params[:q]}%")
+            @job_opportunities_of_headhunter = @headhunter.job_opportunities
+        end
 
         @search_job_opportunities = JobOpportunity.where(
             'name LIKE :q OR description LIKE :q OR habilities LIKE :q OR salary_range LIKE :q OR region LIKE :q
-                            OR  end_date_opportunity LIKE :q',
+                            OR end_date_opportunity LIKE :q',
                             q: "%#{params[:q]}%")
             
         @all_job_opportunities = JobOpportunity.all
