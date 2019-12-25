@@ -74,7 +74,7 @@ require 'rails_helper'
         end
 
         
-        scenario 'by level' do
+        xscenario 'by level' do
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador', 

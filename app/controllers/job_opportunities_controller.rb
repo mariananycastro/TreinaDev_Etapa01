@@ -111,14 +111,13 @@ class JobOpportunitiesController < ApplicationController
             levels = JobOpportunity.opportunity_levels
             levels = levels.select {|key, value| key.include? params[:q]}
             s = levels.values
-            
-            puts s.inspect
+
             @search_job_opportunities = JobOpportunity.where('name LIKE :q 
                 OR description LIKE :q 
                 OR habilities LIKE :q 
                 OR salary_range LIKE :q 
                 OR region LIKE :q', q: "%#{params[:q]}%")
-                .where('end_date_opportunity > ?', Date.today)
+                .where('end_date_opportunity >= ?', Date.today)
       
 
             @all_job_opportunities = JobOpportunity.all
