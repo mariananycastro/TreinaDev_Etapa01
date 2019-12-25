@@ -95,19 +95,34 @@ class JobOpportunitiesController < ApplicationController
     def search
         if headhunter_signed_in?
             @headhunter = current_headhunter
-            @search_hh_job_opportunities = @headhunter.job_opportunities.where(headhunter:@headhunter)&JobOpportunity.where(
-                'name LIKE :q OR description LIKE :q OR habilities LIKE :q OR salary_range LIKE :q OR region LIKE :q
-                                OR end_date_opportunity LIKE :q',
-                                q: "%#{params[:q]}%")
+            
+            @search_hh_job_opportunities = @headhunter.job_opportunities.where('name LIKE :q 
+                    OR description LIKE :q 
+                    OR habilities LIKE :q 
+                    OR salary_range LIKE :q 
+                    OR end_date_opportunity LIKE :q 
+                    OR region LIKE :q', q: "%#{params[:q]}%")
+                    
+                               
             @job_opportunities_of_headhunter = @headhunter.job_opportunities
         end
 
-        @search_job_opportunities = JobOpportunity.where(
-            'name LIKE :q OR description LIKE :q OR habilities LIKE :q OR salary_range LIKE :q OR region LIKE :q
-                            OR end_date_opportunity LIKE :q',
-                            q: "%#{params[:q]}%")
+        if job_seeker_signed_in?
+            levels = JobOpportunity.opportunity_levels
+            levels = levels.select {|key, value| key.include? params[:q]}
+            s = levels.values
             
-        @all_job_opportunities = JobOpportunity.all
+            puts s.inspect
+            @search_job_opportunities = JobOpportunity.where('name LIKE :q 
+                OR description LIKE :q 
+                OR habilities LIKE :q 
+                OR salary_range LIKE :q 
+                OR region LIKE :q', q: "%#{params[:q]}%")
+                .where('end_date_opportunity > ?', Date.today)
+      
+
+            @all_job_opportunities = JobOpportunity.all
+        end
         render :index
     end
     

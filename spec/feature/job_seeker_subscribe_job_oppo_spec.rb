@@ -1,6 +1,6 @@
 require 'rails_helper'
     feature 'Job Seeker subscribe' do
-        it 'successfully' do
+        scenario 'successfully' do
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
@@ -22,7 +22,7 @@ require 'rails_helper'
             
         end
 
-        it 'view all' do
+        scenario 'view all' do
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
@@ -48,7 +48,7 @@ require 'rails_helper'
             
         end
 
-        it 'view none' do
+        scenario 'view none' do
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
@@ -64,7 +64,7 @@ require 'rails_helper'
             expect(page).to have_content('Não há Inscrições')           
         end
 
-        it 'and delete' do
+        scenario 'and delete' do
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',

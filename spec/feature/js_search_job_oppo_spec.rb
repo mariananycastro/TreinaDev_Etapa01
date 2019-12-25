@@ -74,7 +74,7 @@ require 'rails_helper'
         end
 
         
-        xscenario 'by level' do
+        scenario 'by level' do
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador', 
@@ -92,6 +92,7 @@ require 'rails_helper'
             visit root_path
             click_on 'Vagas'
             fill_in 'Buscar vaga:', with: 'Pleno'
+            
             click_on 'Pesquisar'
     
             expect(page).not_to have_css('#search', text: 'Programador Estagiário 2020-02-02 São Paulo')

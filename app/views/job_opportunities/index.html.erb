@@ -10,7 +10,7 @@
             <%= submit_tag 'Pesquisar' %>
         <% end %>
         <% if @search_hh_job_opportunities.present? %>
-            <% @search_hh_job_opportunities.each do |opportunity| %>
+            <% @search_hh_job_opportunities.order(:end_date_opportunity).each do |opportunity| %>
                 <ul> 
                     <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
                 </ul>
@@ -21,7 +21,7 @@
         <% if @job_opportunities_of_headhunter.empty? %>
             <p> Nenhuma vaga cadastrada </p>
         <% else %>
-            <% @job_opportunities_of_headhunter.each do |opportunity| %>
+            <% @job_opportunities_of_headhunter.order(:end_date_opportunity).each do |opportunity| %>
             <p>
             <%= link_to opportunity.description_job_opportunity, opportunity %>               
             </p>
@@ -41,9 +41,11 @@
         <% end %>
         <% if @search_job_opportunities.present? %>
             <% @search_job_opportunities.each do |opportunity| %>
+                
                 <ul> 
                     <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
                 </ul>
+                
             <% end %>
         <% end %>
     </div>
@@ -51,14 +53,14 @@
     <div id='all_job_opportunities'>
         <h4> Vagas: </h4>
 
-        <% if @all_job_opportunities.empty? %>
-            <p> Nenhuma vaga cadastrada </p>
-        <% else %>
-            <% @all_job_opportunities.each do |opportunity| %>
-            <p>
-            <%= link_to opportunity.description_job_opportunity, opportunity %>               
-            </p>
-            <% end %>
+
+        <% @all_job_opportunities.each do |opportunity| %>
+              
+                <p>
+                <%= link_to opportunity.description_job_opportunity, opportunity %>               
+                </p>
+            
+            
         <% end %>
     </div>
 <% end %>
