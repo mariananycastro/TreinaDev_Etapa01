@@ -2,7 +2,14 @@
 <p><%= render partial: 'shared/log_headhunter' %></p>
 
 <%= image_tag @profile.avatar, size: "150x150" %>
-<h3><%= @profile.name %></h3>
+<h3>
+    <%= @profile.name %>
+    <% if @profile.star %>
+        <%= link_to image_tag("/star.jpg", size: "40x40"), remove_star_profile_path(@profile) %>
+    <% else %>
+         <%= link_to image_tag("/empty_star.png", size: "20x20"), add_star_profile_path(@profile) %>
+    <% end %>
+</h3> 
     
 <ul>
     <li><%= @profile.nick_name %></li>
@@ -12,6 +19,8 @@
     <li><%= @profile.description %></li>
     <li><%= @profile.experience %></li>
 </ul>
+
+
 
 <% @subscriptions.each do |subscription|%>
     <p><%= subscription.job_opportunity.description_job_opportunity %>

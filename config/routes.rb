@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     resources :subscriptions, only: [:index]
   end 
   resources :profiles, only: [:show] do
-    get 'search', on: :collection    
+    get 'search', on: :collection
+    get 'add_star', on: :member   
+    get 'remove_star', on: :member    
   end
 
 end

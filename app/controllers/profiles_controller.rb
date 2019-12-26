@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_job_seeker!, except: [:show, :search]
+    before_action :authenticate_job_seeker!, except: [:show, :search, :add_star, :remove_star]
     before_action :authenticate_job_seeker_and_headhunter, only: [:show] 
-    before_action :authenticate_headhunter!, only: [:search]
+    before_action :authenticate_headhunter!, only: [:search, :add_star, :remove_star]
     before_action :get_job_seeker, except: [:show, :search]
     before_action :set_profile, only: [:edit, :update]
 
@@ -55,6 +55,21 @@ class ProfilesController < ApplicationController
                  OR document LIKE :q',
                     q: "%#{params[:q]}%")
         render :index
+    end
+
+    def add_star
+        @profile = Profile.find(params[:id])
+        @profile.star = true
+        @profile.save
+        redirect_to @profile
+    end
+
+    
+    def remove_star
+        @profile = Profile.find(params[:id])
+        @profile.star = false
+        @profile.save
+        redirect_to @profile
     end
     
 

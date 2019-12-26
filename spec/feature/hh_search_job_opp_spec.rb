@@ -17,6 +17,7 @@ require 'rails_helper'
         visit root_path
         click_on 'Vagas'
         fill_in 'Buscar vaga:', with: 'Ruby'
+        
         click_on 'Pesquisar'
 
         expect(page).to have_css('#search_hh', text: 'Programador Ruby Pleno 2020-02-02 São Paulo')

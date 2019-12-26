@@ -13,5 +13,6 @@ class Profile < ApplicationRecord
     def job_seeker_profile
         "#{name} #{document} #{education_level}"
     end
+
   
 end
