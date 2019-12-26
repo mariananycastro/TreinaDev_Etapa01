@@ -42,9 +42,7 @@ require 'rails_helper'
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                        region: 'São Paulo')
-    
-            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
-            subscription_comment = SubscriptionComment.create!(comment:'Gostei de  vc', subscription:subscription)          
+            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)      
     
             login_as(headhunter, scope: :headhunter)
             visit root_path

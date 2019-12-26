@@ -23,7 +23,7 @@ require 'rails_helper'
                     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
             click_on 'Adicionar Comentário'
-            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
+            fill_in 'Comentário', with: 'Gostei desse candidato'
             click_on 'Salvar Comentário'
             
             expect(page).to have_content ('Gostei desse candidato')
@@ -54,10 +54,10 @@ require 'rails_helper'
                     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
             click_on 'Adicionar Comentário'
-            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo', with: 'Gostei desse candidato'
+            fill_in 'Comentário', with: 'Gostei desse candidato'
             click_on 'Salvar Comentário'
             click_on 'Editar Comentário'
-            fill_in 'Programador Ruby Pleno 2020-02-02 São Paulo' , with: 'Não gosto mais'
+            fill_in 'Comentário' , with: 'Não gosto mais'
             click_on 'Salvar Comentário'
 
             expect(page).to have_content ('Não gosto mais')
@@ -80,7 +80,7 @@ require 'rails_helper'
                                                        region: 'São Paulo')
     
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
-            subscription_comment = SubscriptionComment.create!(comment:'Gostei de  vc', subscription:subscription)          
+            profile_comment = ProfileComment.create!(comment:'Gostei de  vc', profile:profile, headhunter:headhunter)          
     
             login_as(headhunter, scope: :headhunter)
             visit root_path
@@ -110,7 +110,7 @@ require 'rails_helper'
                                                         habilities: 'Saber programar', salary_range: 5000, 
                                                         opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                         region: 'São Paulo')
-            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity2)
+            subscription2 = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity2)
             
     
             login_as(headhunter, scope: :headhunter)

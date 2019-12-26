@@ -17,8 +17,12 @@ class ProfilesController < ApplicationController
             @profile = Profile.find(params[:id])
             @job_seeker = @profile.job_seeker
             @job_opportunities = JobOpportunity.where(headhunter:current_headhunter)
+            
             @subscriptions = Subscription.where(job_seeker:@job_seeker, job_opportunity:@job_opportunities)
-       end        
+            @subscriptions_opportunities = @subscriptions.map {|s| s.job_opportunity}
+            @job_opportunities.delete_if{|opportunity| @subscriptions_opportunities.include? opportunity}
+
+        end        
     end
 
     def new
@@ -70,6 +74,13 @@ class ProfilesController < ApplicationController
         @profile.star = false
         @profile.save
         redirect_to @profile
+    end
+
+    def create_subscription_and_send_to_invitation
+        @profile = Profile.find(params[:profile_id])
+        @job_opportunity = JobOpportunity.find(params[:id])
+        @subscription = Subscription.create!(profile: @profile, job_opportunity: @job_opportunity)
+        redirect_to new_job_opportunity_subscription_invitation_path(@job_opportunity, @subscription)
     end
     
 

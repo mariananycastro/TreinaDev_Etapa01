@@ -1,0 +1,25 @@
+
+<p><%= render partial: 'shared/log_headhunter' %></p>
+
+<% if @profile_comment.nil? %>
+    <p> Não há comentários </p>
+<% else %>
+    <h3><%= @profile.profile_description %></h3>
+    <h3><% @job_opportunity.job_opportunity_description %> </h3>
+<ul>
+    <li><%= @profile_comment.comment %></li>
+</ul>
+<% end %>
+
+
+<p><%= link_to 'Editar Comentário', 
+    edit_job_opportunity_profile_profile_comment_path(
+        @subscription.job_opportunity, @profile, @profile_comment) %></p>
+<p><%= link_to 'Deletar Comentário', 
+    job_opportunity_profile_profile_comment_path(
+        @subscription.job_opportunity, @profile, @profile_comment), method: 'delete' %></p>
+<p><%= link_to 'Home', root_path %> </p>
+<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p> <%= link_to 'Pesquisar Candidatos', search_profiles_path %>
+<p><%= link_to 'Back', :back %></p>

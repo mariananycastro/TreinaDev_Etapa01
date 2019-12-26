@@ -20,37 +20,43 @@
     <li><%= @profile.experience %></li>
 </ul>
 
-
-
-<% @subscriptions.each do |subscription|%>
-    <p><%= subscription.job_opportunity.description_job_opportunity %>
-    <% if subscription.subscription_comment.nil? || subscription.subscription_comment.comment.empty? %>
+    <% if @profile.profile_comment.nil? || @profile.profile_comment.comment.empty? %>
         <%= link_to 'Adicionar Comentário', 
-            new_job_opportunity_subscription_subscription_comment_path(
-                subscription.job_opportunity, subscription)  %> </p>
+             new_profile_profile_comment_path(@profile)  %> </p>
     <%else%>
-        <p>Comentário: <%= subscription.subscription_comment.comment %>
-        <%= link_to 'Editar Comentário', 
-            edit_job_opportunity_subscription_subscription_comment_path(
-                subscription.job_opportunity, subscription, subscription.subscription_comment) %>
+        <p>Comentário: <%= @profile.profile_comment.comment %></p>
+        <p><%= link_to 'Editar Comentário', 
+            edit_profile_profile_comment_path(@profile, @profile.profile_comment) %>
         <%= link_to 'Deletar Comentário', 
-            job_opportunity_subscription_subscription_comment_path(
-                subscription.job_opportunity, subscription, subscription.subscription_comment), method: 'delete' %></p>
+             profile_profile_comment_path(@profile, @profile.profile_comment), method: 'delete' %></p>
     <% end %>
-    <% if subscription.hh_answer.nil?%>
-       <p> <%= link_to 'Enviar Proposta', 
-                new_job_opportunity_subscription_invitation_path(
-                    subscription.job_opportunity, subscription) %> </p>
-        <p> <%= link_to 'Recusar Inscrição', 
-                new_job_opportunity_subscription_feedback_path(
-                    subscription.job_opportunity, subscription) %></p>
-    <% else %>
-        <p> Aguardando resposta </p>
-    <% end %>
-   
+
+<% @job_opportunities.each do |opportunity|%>
+    <%= opportunity.description_job_opportunity%>
+
+        <% if opportunity.subscriptions.nil? %> 
+            <p><%= link_to 'Enviar Proposta',
+                    create_subscription_and_send_to_invitation_profile_job_opportunity_path(@profile, @job_opportunity)%>
+        <% end %>
+<% end %>
+<% @subscriptions.each do |subscription|%>
+            <% if subscription.hh_answer.nil?%>
+                <p> <%= link_to 'Enviar Proposta', 
+                        new_job_opportunity_subscription_invitation_path(
+                            subscription.job_opportunity, subscription) %>
+                <%= link_to 'Recusar Inscrição', 
+                        new_job_opportunity_subscription_feedback_path(
+                            subscription.job_opportunity, subscription) %></p>
+            <% else %>
+                <p> Aguardando resposta </p>
+            <% end %>
+        <% end %>
+    
+
 <% end %>
 
 <p><%= link_to 'Home', root_path %> </p>
 <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
 <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
 <p> <%= link_to 'Pesquisar Candidatos', search_profiles_path %>
+<p><%= link_to 'Back', :back %></p>

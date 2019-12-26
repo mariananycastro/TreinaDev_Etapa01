@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   resources :job_opportunities, only: [:index, :show] do
     post 'job_seeker_subscribe', on: :member
     delete 'cancel_subscription', on: :member
-    get 'search', on: :collection
+    get 'search', on: :collection 
+  
     resources :subscriptions, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
-      resources :subscription_comments
       resources :feedbacks, except: [:index, :edit, :update, :destroy] 
       resources :invitations, except: [:index, :edit, :update, :destroy]
     end
@@ -26,7 +26,10 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show] do
     get 'search', on: :collection
     get 'add_star', on: :member   
-    get 'remove_star', on: :member    
+    get 'remove_star', on: :member  
+    resources :job_opportunities, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
+      get 'create_subscription_and_send_to_invitation', on: :member
+    end
+    resources :profile_comments, except: [:index] 
   end
-
 end

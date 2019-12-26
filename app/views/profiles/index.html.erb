@@ -11,12 +11,21 @@
 <% if @search.present? %>
     <% @search.each do |profile| %>
         <ul> 
-            <li><%= link_to profile.job_seeker_profile, profile %></li><br>
+            <li><%= link_to profile.job_seeker_profile, profile %>
+            <% if profile.star %>
+                <%= link_to image_tag("/star.jpg", size: "40x40"), remove_star_profile_path(profile) %>
+            <% else %>
+                 <%= link_to image_tag("/empty_star.png", size: "20x20"), add_star_profile_path(profile) %>
+            <% end %>
+            </li><br> 
         </ul>
     <% end %>
+<% else %>
+    <p> Resultado não encontrado </p>    
 <% end %>
 
 <p><%= link_to 'Home', root_path %> </p>
 <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
 <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p><%= link_to 'Back', :back %></p>
 

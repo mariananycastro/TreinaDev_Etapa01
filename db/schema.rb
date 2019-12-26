@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_123640) do
+ActiveRecord::Schema.define(version: 2019_12_26_145616) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -85,6 +85,17 @@ ActiveRecord::Schema.define(version: 2019_12_26_123640) do
     t.index ["reset_password_token"], name: "index_job_seekers_on_reset_password_token", unique: true
   end
 
+  create_table "profile_comments", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "profile_id"
+    t.integer "headhunter_id"
+    t.index ["headhunter_id"], name: "index_profile_comments_on_headhunter_id"
+    t.index ["profile_id", "headhunter_id"], name: "index_profile_comments_on_profile_id_and_headhunter_id", unique: true
+    t.index ["profile_id"], name: "index_profile_comments_on_profile_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.string "nick_name"
@@ -98,14 +109,6 @@ ActiveRecord::Schema.define(version: 2019_12_26_123640) do
     t.integer "job_seeker_id"
     t.boolean "star", default: false
     t.index ["job_seeker_id"], name: "index_profiles_on_job_seeker_id"
-  end
-
-  create_table "subscription_comments", force: :cascade do |t|
-    t.text "comment"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "subscription_id"
-    t.index ["subscription_id"], name: "index_subscription_comments_on_subscription_id", unique: true
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -125,8 +128,9 @@ ActiveRecord::Schema.define(version: 2019_12_26_123640) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "job_opportunities", "headhunters"
+  add_foreign_key "profile_comments", "headhunters"
+  add_foreign_key "profile_comments", "profiles"
   add_foreign_key "profiles", "job_seekers"
-  add_foreign_key "subscription_comments", "subscriptions"
   add_foreign_key "subscriptions", "job_opportunities"
   add_foreign_key "subscriptions", "job_seekers"
 end
