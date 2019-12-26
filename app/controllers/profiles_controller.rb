@@ -5,6 +5,9 @@ class ProfilesController < ApplicationController
     before_action :get_job_seeker, except: [:show, :search]
     before_action :set_profile, only: [:edit, :update]
 
+    def index
+    end
+
     def show 
         if job_seeker_signed_in?
             get_job_seeker

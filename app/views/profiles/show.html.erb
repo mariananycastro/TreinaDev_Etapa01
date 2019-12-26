@@ -1,63 +1,7 @@
 <% if headhunter_signed_in? %>
-    <p><%= render partial: 'shared/log_headhunter' %></p>
+    <%= render partial: 'hh_show' %>
 <% elsif job_seeker_signed_in? %>
-    <p><%= render partial: 'shared/log_headhunter' %></p>
+    <%= render partial: 'js_show' %>
 <% end %>
 
-
-<%= image_tag @profile.avatar, size: "150x150" %>
-<h3><%= @profile.name %></h3>
-    
-<ul>
-    <li><%= @profile.nick_name %></li>
-    <li><%= @profile.document %></li>
-    <li><%= @profile.day_of_birth %></li>
-    <li><%= @profile.education_level %></li>
-    <li><%= @profile.description %></li>
-    <li><%= @profile.experience %></li>
-</ul>
-
-<p><%= link_to 'Home', root_path %> </p>
-
-<% if job_seeker_signed_in? %>
-    <p><%= link_to 'Editar Perfil', edit_job_seeker_profile_path(@profile) %> </p>
-    <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
-<% end %>
-
-<% if headhunter_signed_in? %>
-    <% @subscriptions.each do |subscription|%>
-        <p><%= subscription.job_opportunity.description_job_opportunity %>
-        <% if subscription.subscription_comment.nil? || subscription.subscription_comment.comment.empty? %>
-            <%= link_to 'Adicionar Comentário', 
-                new_job_opportunity_subscription_subscription_comment_path(
-                    subscription.job_opportunity, subscription)  %> </p>
-        <%else%>
-            <p>Comentário: <%= subscription.subscription_comment.comment %>
-            <%= link_to 'Editar Comentário', 
-                edit_job_opportunity_subscription_subscription_comment_path(
-                    subscription.job_opportunity, subscription, subscription.subscription_comment) %>
-            <%= link_to 'Deletar Comentário', 
-                job_opportunity_subscription_subscription_comment_path(
-                    subscription.job_opportunity, subscription, subscription.subscription_comment), method: 'delete' %></p>
-        <% end %>
-        <% if  %>
-            <% if subscription.hh_answer.nil?%>
-           <p> <%= link_to 'Enviar Proposta', 
-                    new_job_opportunity_subscription_invitation_path(
-                        subscription.job_opportunity, subscription) %> </p>
-            <p> <%= link_to 'Recusar Inscrição', 
-                    new_job_opportunity_subscription_feedback_path(
-                        subscription.job_opportunity, subscription) %></p>
-            <% else %>
-                <p> Aguardando resposta </p>
-            <% end %>
-        <% end %>
-
-    <% end %>
-        <p><%= link_to 'Cadastrar Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %></p>
-        <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter,
-                                     current_headhunter.job_opportunities) %></p>Vagas
-        <p><#%= link_to 'Voltar', redirect_to :back %></p>
-    
-<% end %>
 

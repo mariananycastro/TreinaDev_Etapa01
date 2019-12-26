@@ -1,0 +1,47 @@
+
+<p><%= render partial: 'shared/log_headhunter' %></p>
+
+<%= image_tag @profile.avatar, size: "150x150" %>
+<h3><%= @profile.name %></h3>
+    
+<ul>
+    <li><%= @profile.nick_name %></li>
+    <li><%= @profile.document %></li>
+    <li><%= @profile.day_of_birth %></li>
+    <li><%= @profile.education_level %></li>
+    <li><%= @profile.description %></li>
+    <li><%= @profile.experience %></li>
+</ul>
+
+<% @subscriptions.each do |subscription|%>
+    <p><%= subscription.job_opportunity.description_job_opportunity %>
+    <% if subscription.subscription_comment.nil? || subscription.subscription_comment.comment.empty? %>
+        <%= link_to 'Adicionar Comentário', 
+            new_job_opportunity_subscription_subscription_comment_path(
+                subscription.job_opportunity, subscription)  %> </p>
+    <%else%>
+        <p>Comentário: <%= subscription.subscription_comment.comment %>
+        <%= link_to 'Editar Comentário', 
+            edit_job_opportunity_subscription_subscription_comment_path(
+                subscription.job_opportunity, subscription, subscription.subscription_comment) %>
+        <%= link_to 'Deletar Comentário', 
+            job_opportunity_subscription_subscription_comment_path(
+                subscription.job_opportunity, subscription, subscription.subscription_comment), method: 'delete' %></p>
+    <% end %>
+    <% if subscription.hh_answer.nil?%>
+       <p> <%= link_to 'Enviar Proposta', 
+                new_job_opportunity_subscription_invitation_path(
+                    subscription.job_opportunity, subscription) %> </p>
+        <p> <%= link_to 'Recusar Inscrição', 
+                new_job_opportunity_subscription_feedback_path(
+                    subscription.job_opportunity, subscription) %></p>
+    <% else %>
+        <p> Aguardando resposta </p>
+    <% end %>
+   
+<% end %>
+
+<p><%= link_to 'Home', root_path %> </p>
+<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p> <%= link_to 'Pesquisar Candidatos', search_profiles_path %>

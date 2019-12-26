@@ -1,0 +1,12 @@
+<%= render partial: 'shared/log_headhunter' %>
+
+<h2> Proposta para candidato: <%= @invitation.subscription.job_seeker.profile.nick_name %></h2>
+<h3> Vaga: <%= @invitation.subscription.job_opportunity.description_job_opportunity %> </h3>
+<p>  <%= @invitation.title %> </p>
+<p>  <%= @invitation.message %> </p>
+
+<p><%= link_to 'Home', root_path %> </p>
+<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+<p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(@invitation.subscription.job_opportunity) %> </p>
+<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p><%= link_to 'Pesquisar Candidatos', search_profiles_path %>

@@ -46,4 +46,6 @@
 <%end %>
 
 <p><%= link_to 'Home', root_path %> </p>
-<%= render partial: 'shared/log_job_seeker' %>
+<p> <%= link_to 'Vagas', job_opportunities_path %> </p>
+<p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
+

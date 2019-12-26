@@ -1,5 +1,8 @@
-<h1> Proposta para candidato: <%= @subscription.job_seeker.profile.nick_name %></h1>
-<h2> Vaga: <%= @subscription.job_opportunity.description_job_opportunity %> </h2>
+
+<%= render partial: 'shared/log_headhunter' %>
+
+<h2> Proposta para candidato: <%= @subscription.job_seeker.profile.nick_name %></h2>
+<h3> Vaga: <%= @subscription.job_opportunity.description_job_opportunity %> </h3>
 <%= form_with url: job_opportunity_subscription_invitations_path, local:true do |f| %>
     <%= f.label :title, 'Título:'%>
     <%= f.text_field :title %>
@@ -7,3 +10,9 @@
     <%= f.text_field :message %>
     <%= f.submit 'Enviar Proposta'%>
 <% end %>
+
+<p><%= link_to 'Home', root_path %> </p>
+<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+<p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(current_headhunter, @subscription.job_opportunity) %> </p>
+<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p><%= link_to 'Pesquisar Candidatos', search_profiles_path %>

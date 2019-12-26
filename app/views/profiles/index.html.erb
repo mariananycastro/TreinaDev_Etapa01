@@ -1,3 +1,6 @@
+<%= render partial: 'shared/log_headhunter' %>
+
+
 <h4> Pesquisar candidato </h4>
 <%= form_with url: search_profiles_path, local:true, method: :get do %>
     <%= label_tag :q, 'Buscar Candidatos:   ' %>
@@ -12,3 +15,8 @@
         </ul>
     <% end %>
 <% end %>
+
+<p><%= link_to 'Home', root_path %> </p>
+<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p> <%= link_to 'Pesquisar Candidatos', search_profiles_path %>

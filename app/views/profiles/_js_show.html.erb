@@ -1,0 +1,20 @@
+
+<p><%= render partial: 'shared/log_job_seeker' %></p>
+
+<%= image_tag @profile.avatar, size: "150x150" %>
+<h3><%= @profile.name %></h3>
+    
+<ul>
+    <li><%= @profile.nick_name %></li>
+    <li><%= @profile.document %></li>
+    <li><%= @profile.day_of_birth %></li>
+    <li><%= @profile.education_level %></li>
+    <li><%= @profile.description %></li>
+    <li><%= @profile.experience %></li>
+</ul>
+
+<p><%= link_to 'Home', root_path %> </p>
+<%= render partial: 'profiles/button_create_edit_profile' %>
+<p> <%= link_to 'Vagas', job_opportunities_path %> </p>
+<p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
+    

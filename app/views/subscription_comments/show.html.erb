@@ -19,3 +19,6 @@
     job_opportunity_subscription_subscription_comment_path(
         @subscription.job_opportunity, @subscription, @subscription_comment), method: 'delete' %></p>
 <p><%= link_to 'Home', root_path %> </p>
+<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
+<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
+<p> <%= link_to 'Pesquisar Candidatos', search_profiles_path %>

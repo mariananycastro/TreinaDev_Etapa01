@@ -1,0 +1,24 @@
+
+<p><%= render partial: 'shared/log_job_seeker' %></p>
+
+<h3><%= @job_opportunity.name %></h3>
+
+    <ul>
+        <li>Descrição Detalhada: <%= @job_opportunity.description %></li>
+        <li>Habilidades Desejadas: <%= @job_opportunity.habilities %></li>
+        <li>Faixa Salarial: <%= @job_opportunity.salary_range %></li>
+        <li>Nível da Vaga: <%= @job_opportunity.opportunity_level%></li>
+        <li>Data Limite para inscrição: <%= @job_opportunity.end_date_opportunity %></li>
+        <li>Região: <%= @job_opportunity.region %></li>
+    </ul>
+    
+<% if @subscription.nil? %>
+    <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(@job_opportunity, current_job_seeker), method: 'post' %> </p>
+<% else %>
+    <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(@subscription), method: 'delete' %> </p>
+<% end %>
+
+<p><%= link_to 'Home', root_path %> </p>
+<%= render partial: 'profiles/button_create_edit_profile' %>
+<p> <%= link_to 'Vagas', job_opportunities_path %> </p>
+<p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>

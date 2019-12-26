@@ -1,47 +1,9 @@
 <% if headhunter_signed_in? %>
-    <p><%= render partial: 'shared/log_headhunter' %></p>
+    <p><%= render partial: 'hh_show' %></p>
 <% elsif job_seeker_signed_in? %>
-    <p><%= render partial: 'shared/log_job_seeker' %></p>
+    <p><%= render partial: 'js_show' %></p>
 <% end %>
 
-    <h3><%= @job_opportunity.name %></h3>
-
-    <ul>
-        <li>Descrição Detalhada: <%= @job_opportunity.description %></li>
-        <li>Habilidades Desejadas: <%= @job_opportunity.habilities %></li>
-        <li>Faixa Salarial: <%= @job_opportunity.salary_range %></li>
-        <li>Nível da Vaga: <%= @job_opportunity.opportunity_level%></li>
-        <li>Data Limite para inscrição: <%= @job_opportunity.end_date_opportunity %></li>
-        <li>Região: <%= @job_opportunity.region %></li>
-    </ul>
-    
-    <p><%= link_to 'Home', root_path %> </p>
-
-<% if headhunter_signed_in? %>
-    <% if @subscriptions.empty?%>
-        <p> Não há inscrições para esta vaga <p>
-    <%else%>
-        <% @subscriptions.each do |subscription| %>
-        <ul>
-            <li><%= link_to subscription.job_seeker.profile.job_seeker_profile, profile_path(subscription.job_seeker.profile) %></li>
-         </ul>
-        <% end %>
-    <% end %>
-
-    <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
-    <p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(@job_opportunity) %> </p>
-    <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
-<% end %>
-
-<% if job_seeker_signed_in? %>
-    <% if @subscription.nil? %>
-        <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(@job_opportunity, current_job_seeker), method: 'post' %> </p>
-    <% else %>
-        <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(@subscription), method: 'delete' %> </p>
-    <% end %>
-    <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
-    <p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
-<% end %>
 
 
 
