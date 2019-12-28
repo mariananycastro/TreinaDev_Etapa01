@@ -32,18 +32,19 @@
          profile_profile_comment_path(@profile, @profile.profile_comment), method: 'delete' %></p>
 <% end %>
 
-<div id='without subscription'>
+<div id='without_subscription'>
 <% @job_opportunities.each do |opportunity|%>
-    <%= opportunity.description_job_opportunity%>
-    <p><%= link_to 'Enviar Proposta',
+    <p><%= opportunity.description_job_opportunity%>
+    <%= link_to 'Enviar Proposta',
                     invitation_without_subscription_job_opportunity_profile_path(opportunity, @profile)%>
 <% end %>
 </div>
 
-<div id='with subscription'>
-<% @subscriptions_opportunities.each do |subscription|%>
+<div id='with_subscription'>
+<% @filter_subscriptions_headhunter.each do |subscription|%>
     <% if subscription.hh_answer.nil?%>
-        <p> <%= link_to 'Enviar Proposta', 
+     <p><%= subscription.job_opportunity.description_job_opportunity%>
+         <%= link_to 'Enviar Proposta', 
                 new_job_opportunity_subscription_invitation_path(
                     subscription.job_opportunity, subscription) %>
         <%= link_to 'Recusar Inscrição', 

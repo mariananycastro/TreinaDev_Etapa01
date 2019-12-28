@@ -18,11 +18,12 @@ class ProfilesController < ApplicationController
             #todas as job opportunities deste headhunter
             @job_opportunities = JobOpportunity.where(headhunter:current_headhunter)
             #todas as subscriptions deste job seeker
-            @subscriptions = Subscription.where(job_seeker:@profile.job_seeker, job_opportunity:@job_opportunities)
+            subscriptions = Subscription.where(job_seeker:@profile.job_seeker, job_opportunity:@job_opportunities)
             #todos os job opportunities com subscription deste headhunter
-            @subscriptions_opportunities = @subscriptions.drop_while {|subscription| subscription.job_opportunity.headhunter != current_headhunter}
+            @filter_subscriptions_headhunter = subscriptions.drop_while {|subscription| subscription.job_opportunity.headhunter != current_headhunter}
             #job_opportunities sem subscriptions deste headhunter
-            @job_opportunities.drop_while {|opportunity| @subscriptions_opportunities.include? opportunity}
+            subscriptions_opportunities = @filter_subscriptions_headhunter.map {|subscription| subscription.job_opportunity}
+            @job_opportunities = @job_opportunities.drop_while {|opportunity| subscriptions_opportunities.include? opportunity}
         end        
     end
 

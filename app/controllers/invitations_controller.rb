@@ -12,6 +12,7 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new(params.permit(:title, :message))
         @invitation.save
         @subscription.update(hh_answer:@invitation, status:'invited')
+        @subscription.save!
         flash[:alert] = 'Proposta enviada com sucesso'
         redirect_to job_opportunity_subscription_invitation_path(@subscription.job_opportunity, @subscription, @invitation)
     end
