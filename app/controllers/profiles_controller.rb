@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
-    before_action :authenticate_job_seeker!, except: [:show, :search, :add_star, :remove_star]
+    before_action :authenticate_job_seeker!, except: [:show, :search, :add_star, :remove_star, :invitation_without_subscription]
     before_action :authenticate_job_seeker_and_headhunter, only: [:show] 
-    before_action :authenticate_headhunter!, only: [:search, :add_star, :remove_star]
+    before_action :authenticate_headhunter!, only: [:search, :add_star, :remove_star, :invitation_without_subscription]
     before_action :get_job_seeker, except: [:show, :search]
     before_action :set_profile, only: [:edit, :update]
 
@@ -15,13 +15,14 @@ class ProfilesController < ApplicationController
            
         elsif headhunter_signed_in?
             @profile = Profile.find(params[:id])
-            @job_seeker = @profile.job_seeker
+            #todas as job opportunities deste headhunter
             @job_opportunities = JobOpportunity.where(headhunter:current_headhunter)
-            
-            @subscriptions = Subscription.where(job_seeker:@job_seeker, job_opportunity:@job_opportunities)
-            @subscriptions_opportunities = @subscriptions.map {|s| s.job_opportunity}
-            @job_opportunities.delete_if{|opportunity| @subscriptions_opportunities.include? opportunity}
-
+            #todas as subscriptions deste job seeker
+            @subscriptions = Subscription.where(job_seeker:@profile.job_seeker, job_opportunity:@job_opportunities)
+            #todos os job opportunities com subscription deste headhunter
+            @subscriptions_opportunities = @subscriptions.drop_while {|subscription| subscription.job_opportunity.headhunter != current_headhunter}
+            #job_opportunities sem subscriptions deste headhunter
+            @job_opportunities.drop_while {|opportunity| @subscriptions_opportunities.include? opportunity}
         end        
     end
 
@@ -76,10 +77,12 @@ class ProfilesController < ApplicationController
         redirect_to @profile
     end
 
-    def create_subscription_and_send_to_invitation
-        @profile = Profile.find(params[:profile_id])
-        @job_opportunity = JobOpportunity.find(params[:id])
-        @subscription = Subscription.create!(profile: @profile, job_opportunity: @job_opportunity)
+    def invitation_without_subscription
+        @profile = Profile.find(params[:id])
+        @job_opportunity = JobOpportunity.find(params[:job_opportunity_id])
+        @subscription = Subscription.create!(job_seeker:@profile.job_seeker, job_opportunity: @job_opportunity)
+        @subscription.status = 5
+        @subscription.save
         redirect_to new_job_opportunity_subscription_invitation_path(@job_opportunity, @subscription)
     end
     

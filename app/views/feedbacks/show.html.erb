@@ -1,13 +1,5 @@
-<%= render partial: 'shared/log_headhunter' %>
-
-<h1> Feedback para candidato: <%= @feedback.subscription.job_seeker.profile.nick_name %></h1>
-<h2> Vaga: <%= @feedback.subscription.job_opportunity.description_job_opportunity %> </h2>
-<p>  <%= @feedback.title %> </p>
-<p>  <%= @feedback.message %> </p>
-
-<p><%= link_to 'Home', root_path %> </p>
-<p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>
-<p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(@invitation.subscription.job_opportunity) %> </p>
-<p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
-<p><%= link_to 'Pesquisar Candidatos', search_profiles_path %>
-<p><%= link_to 'Back', :back %></p>
+<% if headhunter_signed_in?%>
+<%= render partial: 'hh_show' %>
+<% elsif job_seeker_signed_in?%>
+<%= render partial: 'job_seeker_show' %>
+<% end %>

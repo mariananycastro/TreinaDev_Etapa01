@@ -1,0 +1,12 @@
+<%= render partial: 'shared/log_job_seeker' %>
+
+<h1> Feedback para candidato: <%= @feedback.subscription.job_seeker.profile.nick_name %></h1>
+<h2> Vaga: <%= @feedback.subscription.job_opportunity.description_job_opportunity %> </h2>
+<p>  <%= @feedback.title %> </p>
+<p>  <%= @feedback.message %> </p>
+
+<p><%= link_to 'Home', root_path %> </p>
+<%= render partial: 'profiles/button_create_edit_profile' %>
+<p> <%= link_to 'Vagas', job_opportunities_path %> </p>
+<p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
+<p><%= link_to 'Back', :back %></p>
