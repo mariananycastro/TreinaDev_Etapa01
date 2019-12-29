@@ -5,6 +5,15 @@
 <p>  <%= @invitation.title %> </p>
 <p>  <%= @invitation.message %> </p>
 
+<% if @subscription.status.nil?%>
+    <p><%= link_to 'Aceitar Convite', accept_invitation_job_opportunity_subscription_invitation_path(
+                                @subscription.job_opportunity, @subscription, @invitation) %>
+
+    <%= link_to 'Recusar Convite', reject_invitation_job_opportunity_subscription_invitation_path(
+                                @subscription.job_opportunity, @subscription, @invitation) %></p>
+<% end %>
+
+
 <p><%= link_to 'Home', root_path %> </p>
 <%= render partial: 'profiles/button_create_edit_profile' %>
 <p> <%= link_to 'Vagas', job_opportunities_path %> </p>

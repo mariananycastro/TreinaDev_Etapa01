@@ -4,17 +4,27 @@
 
 <% @subscriptions.each do |subscription|%>
 
-    <% if subscription.hh_answer.is_a?(Invitation) %>
-    
+<% if subscription.hh_answer.is_a?(Invitation) %>
+    <% if subscription.status.nil? %>
         <p> Você tem uma proposta para a vaga: 
         <%= link_to subscription.job_opportunity.description_job_opportunity, 
             job_opportunity_subscription_invitation_path(subscription.job_opportunity, subscription, subscription.hh_answer) %>
         </p>
-    <% elsif subscription.hh_answer.is_a?(Feedback) %>
-        <p> Você tem um feedback para a vaga: 
-        <%= link_to subscription.job_opportunity.description_job_opportunity, 
-            job_opportunity_subscription_feedback_path(subscription.job_opportunity, subscription, subscription.hh_answer) %>
-        </p>
+    <% elsif subscription.status %>
+        <p>Vagas aceitas:</p>
+        <%= "#{subscription.job_opportunity.name} #{subscription.job_opportunity.opportunity_level} #{subscription.job_opportunity.end_date_opportunity}"\
+                " #{subscription.job_opportunity.region}" %>
+        <% elsif !subscription.status %>
+        <p>Vagas recusadas:</p>
+        <%= "#{subscription.job_opportunity.name} #{subscription.job_opportunity.opportunity_level} #{subscription.job_opportunity.end_date_opportunity}"\
+                " #{subscription.job_opportunity.region}" %>
+    <% end %>        
+
+<% elsif subscription.hh_answer.is_a?(Feedback) %>
+    <p> Você tem um feedback para a vaga: 
+    <%= link_to subscription.job_opportunity.description_job_opportunity, 
+        job_opportunity_subscription_feedback_path(subscription.job_opportunity, subscription, subscription.hh_answer) %>
+    </p>
     <% end %>
 <% end %>
 

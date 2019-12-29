@@ -1,5 +1,5 @@
 require 'rails_helper'
-feature 'job seeker accepts headhunter invitation' do
+feature 'job seeker rejects headhunter invitation' do
     scenario 'successfully' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
         job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')   
@@ -20,15 +20,14 @@ feature 'job seeker accepts headhunter invitation' do
 
         visit root_path
         click_on 'Programador Ruby Pleno 2020-02-02 São Paulo'
-        click_on 'Aceitar Convite'
-        subscription.reload
+        click_on 'Recusar Convite'
         
-        expect(page).to have_content "Aceite enviado para Headhunter"
+        expect(page).to have_content "Convite recusado com sucesso"
         expect(page).not_to have_content 'Aceitar Convite'
         expect(page).not_to have_content 'Recusar Convite'
     end
 
-    scenario 'successfully in job opportunity page' do
+    scenario 'successfully when search for job opportunity page' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
         job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')   
         profile = Profile.create!(job_seeker: job_seeker, name: 'Joao da Silva', document: '595.487.167-12', nick_name: 'João', day_of_birth: '12/01/1986', 
@@ -49,9 +48,9 @@ feature 'job seeker accepts headhunter invitation' do
         click_on 'Vagas'
         click_on 'Programador Ruby Pleno 2020-02-02 São Paulo'
         click_on 'Visualizar Convite'
-        click_on 'Aceitar Convite'
+        click_on 'Recusar Convite'
         
-        expect(page).to have_content 'Aceite enviado para Headhunter'
+        expect(page).to have_content 'Convite recusado com sucesso'
         expect(page).not_to have_content 'Aceitar Convite'
         expect(page).not_to have_content 'Recusar Convite'
     end
@@ -69,14 +68,15 @@ feature 'job seeker accepts headhunter invitation' do
                                                  region: 'São Paulo')
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
         invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-        subscription.update(hh_answer:invitation, status:true)
+        subscription.update(hh_answer:invitation, status:false)
         subscription.reload
 
         login_as(job_seeker, scope: :job_seeker)
         visit root_path
         
-        expect(page).to have_content 'Vagas aceitas:'
+        expect(page).to have_content 'Vagas recusadas:'
         expect(page).to have_content "#{job_opportunity.name} #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+
     end
 
     
@@ -94,13 +94,13 @@ feature 'job seeker accepts headhunter invitation' do
                                                    region: 'Sâo Paulo')
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
         invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-        subscription.update(hh_answer:invitation, status:true)
+        subscription.update(hh_answer:invitation, status:false)
         subscription.reload
 
         login_as(headhunter, scope: :headhunter)
-        visit root_path       
+        visit root_path        
         
-        expect(page).to have_content "#{profile.name} #{profile.document} #{profile.education_level} aceitou convite para vaga #{job_opportunity.name}"\
+        expect(page).to have_content "#{profile.name} #{profile.document} #{profile.education_level} recusou convite para vaga #{job_opportunity.name}"\
         " #{job_opportunity.opportunity_level} #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
  
     end
@@ -119,7 +119,7 @@ feature 'job seeker accepts headhunter invitation' do
                                                    region: 'Sâo Paulo')
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
         invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-        subscription.update(hh_answer:invitation, status:true)
+        subscription.update(hh_answer:invitation, status:false)
         subscription.reload
 
         login_as(headhunter, scope: :headhunter)
@@ -127,11 +127,11 @@ feature 'job seeker accepts headhunter invitation' do
         click_on 'Vagas Cadastradas'
         click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
                 " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
+
         
-        expect(page).to have_content "#{profile.name} #{profile.document} #{profile.education_level} aceitou convite para a vaga"
+        expect(page).to have_content "#{profile.name} #{profile.document} #{profile.education_level} recusou convite para a vaga"
         expect(page).not_to have_content 'Enviar Proposta'
         expect(page).not_to have_content 'Rejeitar Inscrição'
-        
     end
     
 end

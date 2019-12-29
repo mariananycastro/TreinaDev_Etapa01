@@ -13,11 +13,13 @@ Rails.application.routes.draw do
     get 'search', on: :collection 
     resources :profiles, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
       get 'invitation_without_subscription', on: :member
-    end
-  
+    end  
     resources :subscriptions, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
       resources :feedbacks, except: [:index, :edit, :update, :destroy] 
-      resources :invitations, except: [:index, :edit, :update, :destroy]
+      resources :invitations, except: [:index, :edit, :update, :destroy] do
+        get 'accept_invitation', on: :member
+        get 'reject_invitation', on: :member 
+      end
     end
   end
 

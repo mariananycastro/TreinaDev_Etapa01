@@ -17,12 +17,38 @@
     <% if @subscriptions.empty?%>
         <p> Não há inscrições para esta vaga <p>
     <%else%>
-        <% @subscriptions.each do |subscription| %>
-        <ul>
-            <li><%= link_to subscription.job_seeker.profile.job_seeker_profile, profile_path(subscription.job_seeker.profile) %></li>
-         </ul>
+        <% @subscriptions.order(:hh_answer).each do |subscription| %>
+
+            <% if subscription.hh_answer.nil? %>
+                <ul>
+                    <li><%= link_to subscription.job_seeker.profile.job_seeker_profile, profile_path(subscription.job_seeker.profile) %></li>
+                </ul>
+
+            <% elsif subscription.hh_answer.is_a?(Invitation) %>                    
+                <% if subscription.status.nil? %>
+                    <p> Aguardando resposta do candidato: <%="#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document}"\
+                                " #{subscription.job_seeker.profile.education_level}" %></p>            
+                <p>
+                <% elsif subscription.status %>
+                    <%= link_to "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level}"\
+                            " aceitou convite para a vaga", profile_path(subscription.job_seeker.profile) %>
+                <% elsif !subscription.status %>
+                    <%= link_to "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level}"\
+                            " recusou convite para a vaga", profile_path(subscription.job_seeker.profile) %>
+                </p>
+                <% end %>
+
+            <% elsif subscription.hh_answer.is_a?(Feedback) %>
+                <p> Candidatos rejeitados </p>
+                <ul>
+                    <li><%= link_to subscription.job_seeker.profile.job_seeker_profile, profile_path(subscription.job_seeker.profile) %></li>
+                </ul>
+            <% end %>
+
         <% end %>
     <% end %>
+
+
 
     <p><%= link_to 'Home', root_path %> </p>
     <p><%= link_to 'Nova Vaga', new_headhunter_job_opportunity_path(current_headhunter) %> </p>

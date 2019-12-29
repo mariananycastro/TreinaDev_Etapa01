@@ -1,7 +1,7 @@
 class JobOpportunitiesController < ApplicationController
-    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription, :search]
+    before_action :authenticate_headhunter!, except: [:index, :show, :job_seeker_subscribe, :cancel_subscription, :search, :accept_invitation, :reject_invitation]
     before_action :authenticate_headhunter_and_job_seeker, only: [:index, :show, :cancel_subscription, :search]
-    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe]
+    before_action :authenticate_job_seeker!, only: [:job_seeker_subscribe, :accept_invitation, :reject_invitation]
     before_action :get_headhunter, except: [:job_seeker_subscribe]
     before_action :set_job_opportunity, only: [:edit, :update, :destroy]
     
@@ -31,12 +31,11 @@ class JobOpportunitiesController < ApplicationController
 
     def show
         find_job_opportunity
-
         @subscriptions = Subscription.where(job_opportunity:@job_opportunity)
-
-        find_profile
-        @job_seeker = current_job_seeker
-        @subscription = Subscription.find_by(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
+        if job_seeker_signed_in?
+            find_profile
+            @subscription = Subscription.find_by(job_seeker: current_job_seeker, job_opportunity: @job_opportunity)
+        end
     end
 
     def edit
@@ -117,14 +116,12 @@ class JobOpportunitiesController < ApplicationController
                 OR salary_range LIKE :q 
                 OR region LIKE :q', q: "%#{params[:q]}%")
                 .where('end_date_opportunity >= ?', Date.today)
-         
-      
 
             @all_job_opportunities = JobOpportunity.all
         end
         render :index
     end
-    
+
     private
 
     def authenticate_headhunter_and_job_seeker

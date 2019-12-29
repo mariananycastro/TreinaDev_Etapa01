@@ -1,6 +1,37 @@
 
 <%= render partial: 'shared/log_headhunter' %>
+
+<% if !@hh_subscriptions.empty?%>
+    <h3> Devolutiva dos candidatos </h3>
+    <% @hh_subscriptions.each do |subscription| %>
+    
+        <% if subscription.hh_answer.is_a?(Invitation)%>
+            <% if subscription.status.nil? %>
+                <p>Aguardando resposta:</p>
+                <p> <%= "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level} para a vaga "\
+                            "#{subscription.job_opportunity.name} #{subscription.job_opportunity.opportunity_level} #{subscription.job_opportunity.end_date_opportunity}"\
+                            " #{subscription.job_opportunity.region}" %></p>
+
+            <% elsif subscription.status %>
+                <p><%= "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level}"\
+                " aceitou convite para vaga #{subscription.job_opportunity.name} #{subscription.job_opportunity.opportunity_level}"\
+                " #{subscription.job_opportunity.end_date_opportunity} #{subscription.job_opportunity.region}" %></p>
+            
+            <% elsif !subscription.status %>
+                <p><%= "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level}"\
+                    " recusou convite para vaga #{subscription.job_opportunity.name} #{subscription.job_opportunity.opportunity_level}"\
+                    " #{subscription.job_opportunity.end_date_opportunity} #{subscription.job_opportunity.region}" %></p>
+            
+
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
+
+        
 <%= render partial: 'job_opportunities/create_edit_job_opportunity' %>
+
+
 
 
     
