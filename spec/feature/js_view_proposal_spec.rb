@@ -13,9 +13,8 @@ require 'rails_helper'
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
             invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-            subscription.update(hh_answer:invitation, status: 'invited')
+            subscription.update(hh_answer:invitation)
 
-    
             login_as(job_seeker, scope: :job_seeker)
             visit root_path
 
@@ -36,10 +35,8 @@ require 'rails_helper'
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
             invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
-            subscription.update(hh_answer:invitation, status: 'invited')
+            subscription.update(hh_answer:invitation)
 
-
-    
             login_as(job_seeker, scope: :job_seeker)
             visit root_path
             click_on 'Programador Ruby Pleno 2020-02-02 São Paulo'

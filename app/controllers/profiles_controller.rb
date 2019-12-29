@@ -82,8 +82,6 @@ class ProfilesController < ApplicationController
         @profile = Profile.find(params[:id])
         @job_opportunity = JobOpportunity.find(params[:job_opportunity_id])
         @subscription = Subscription.create!(job_seeker:@profile.job_seeker, job_opportunity: @job_opportunity)
-        @subscription.status = 5
-        @subscription.save
         redirect_to new_job_opportunity_subscription_invitation_path(@job_opportunity, @subscription)
     end
     

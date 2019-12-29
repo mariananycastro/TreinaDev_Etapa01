@@ -3,12 +3,14 @@
 <%= render partial: 'shared/log_job_seeker' %>
 
 <% @subscriptions.each do |subscription|%>
-    <% if subscription.status == 'invited' %>
+
+    <% if subscription.hh_answer.is_a?(Invitation) %>
+    
         <p> Você tem uma proposta para a vaga: 
         <%= link_to subscription.job_opportunity.description_job_opportunity, 
             job_opportunity_subscription_invitation_path(subscription.job_opportunity, subscription, subscription.hh_answer) %>
         </p>
-    <% elsif subscription.status == 'rejected' %>
+    <% elsif subscription.hh_answer.is_a?(Feedback) %>
         <p> Você tem um feedback para a vaga: 
         <%= link_to subscription.job_opportunity.description_job_opportunity, 
             job_opportunity_subscription_feedback_path(subscription.job_opportunity, subscription, subscription.hh_answer) %>

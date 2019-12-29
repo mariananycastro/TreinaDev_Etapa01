@@ -114,7 +114,6 @@ ActiveRecord::Schema.define(version: 2019_12_26_145616) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "job_seeker_id"
     t.integer "job_opportunity_id"
-    t.integer "subscriptions", default: 0
     t.integer "status", default: 0
     t.string "hh_answer_type"
     t.integer "hh_answer_id"

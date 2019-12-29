@@ -11,7 +11,7 @@ class FeedbacksController < ApplicationController
         @subscription = Subscription.find(params[:subscription_id])
         @feedback = Feedback.new(params.permit(:title, :message))
         @feedback.save
-        @subscription.update(hh_answer:@feedback, status:'rejected')
+        @subscription.update(hh_answer:@feedback)
         @subscription.save!
         flash[:alert] = 'Inscrição rejeitada. Feedback enviado com sucesso.'
         redirect_to job_opportunity_subscription_feedback_path(@subscription.job_opportunity, @subscription, @feedback)

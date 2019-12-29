@@ -12,7 +12,7 @@ require 'rails_helper'
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                        region: 'Sâo Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)        
-            expect(subscription.status).to eq 'not_set'
+            expect(subscription.hh_answer).to eq nil
 
             login_as(headhunter, scope: :headhunter)
             visit root_path
@@ -27,8 +27,8 @@ require 'rails_helper'
             subscription.reload
 
             expect(page).to have_content 'Proposta enviada com sucesso'
-            expect(subscription.status).to eq 'invited'
-
+            expect(subscription.hh_answer).to be_a(Invitation)
+            
         end
 
         scenario 'reject subscription' do
@@ -58,7 +58,7 @@ require 'rails_helper'
             
                 
             expect(page).to have_content 'Inscrição rejeitada. Feedback enviado com sucesso.'
-            expect(subscription.status).to eq 'rejected'
+            expect(subscription.hh_answer).to be_a(Feedback)
 
         end
     end

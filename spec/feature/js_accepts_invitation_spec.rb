@@ -13,8 +13,7 @@ feature 'job seeker accepts headhunter invitation' do
                                                  region: 'São Paulo')
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
         feedback = Feedback.create!(title:'Nao deu', message:'Sorry.')
-        subscription.update(hh_answer:feedback, status:'rejected')
-
+        subscription.update(hh_answer:feedback)
 
         login_as(job_seeker, scope: :job_seeker)
 
