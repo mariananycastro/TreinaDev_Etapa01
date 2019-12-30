@@ -8,6 +8,18 @@
     <%= f.text_field :title %>
     <%= f.label :message, 'Mensagem:'%>
     <%= f.text_field :message %>
+    <%= f.label :initial_date, 'Data de início:'%>
+    <%= f.date_field :initial_date %>
+    <%= f.label :salary, 'Salário:'%>
+    <%= f.number_field :salary %>
+    <%= f.label :position, 'Cargo:'%>
+    <%= f.text_field :position %>
+    <%= f.label :expectations, 'Expectativas:'%>
+    <%= f.text_field :expectations %>
+    <%= f.label :bonus, 'Bonus:'%>
+    <%= f.text_field :bonus %>
+    <%= f.label :benefits, 'Benefícios:'%>
+    <%= f.text_field :benefits %>
     <%= f.submit 'Enviar Proposta'%>
 <% end %>
 
@@ -16,4 +28,4 @@
 <p><%= link_to 'Editar Vaga', edit_headhunter_job_opportunity_path(current_headhunter, @subscription.job_opportunity) %> </p>
 <p><%= link_to 'Vagas Cadastradas', headhunter_job_opportunities_path(current_headhunter) %></p>
 <p><%= link_to 'Pesquisar Candidatos', search_profiles_path %>
-<p><%= link_to 'Back', :back %></p>
+<p><%= link_to 'Voltar', :back %></p>

@@ -1,0 +1,19 @@
+pt-BR:
+  
+  activerecord:
+    models:
+      job_opportunity: 'Vaga'
+    attributes:
+      job_opportunity:     
+          name: 'Nome da Vaga'
+          description: 'Descrição'
+          habilities: 'Habilidades'
+          salary_range: "Faixa Salarial"
+          opportunity_level: 'Nível'
+          end_date_opportunity: "Data limite de inscrição"
+          region: 'Região'
+
+
+
+
+    

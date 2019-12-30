@@ -1,9 +1,15 @@
 <%= render partial: 'shared/log_job_seeker' %>
 
-<h2> Proposta para candidato: <%= @invitation.subscription.job_seeker.profile.nick_name %></h2>
-<h3> Vaga: <%= @invitation.subscription.job_opportunity.description_job_opportunity %> </h3>
+<h2> Proposta para candidato: <%= @subscription.job_seeker.profile.nick_name %></h2>
+<h3> Vaga: <%= @subscription.job_opportunity.description_job_opportunity %> </h3>
 <p>  <%= @invitation.title %> </p>
 <p>  <%= @invitation.message %> </p>
+<p>  <%= @invitation.initial_date %> </p>
+<p>  <%= @invitation.salary %> </p>
+<p>  <%= @invitation.position %> </p>
+<p>  <%= @invitation.expectations %> </p>
+<p>  <%= @invitation.bonus %> </p>
+<p>  <%= @invitation.benefits %> </p>
 
 <% if @subscription.status.nil?%>
     <p><%= link_to 'Aceitar Convite', accept_invitation_job_opportunity_subscription_invitation_path(
@@ -18,4 +24,4 @@
 <%= render partial: 'profiles/button_create_edit_profile' %>
 <p> <%= link_to 'Vagas', job_opportunities_path %> </p>
 <p> <%= link_to 'Inscrições', job_seeker_subscriptions_path(current_job_seeker), method: :get %> </p>
-<p><%= link_to 'Back', :back %></p>
+<p><%= link_to 'Voltar', :back %></p>

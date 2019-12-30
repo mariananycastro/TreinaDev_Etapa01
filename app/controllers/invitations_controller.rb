@@ -10,7 +10,7 @@ class InvitationsController < ApplicationController
 
     def create
         @subscription = Subscription.find(params[:subscription_id])
-        @invitation = Invitation.new(params.permit(:title, :message))
+        @invitation = Invitation.new(params.permit(:title, :message, :initial_date, :salary, :position, :expectations, :bonus, :benefits))
         @invitation.save
         @subscription.update(hh_answer:@invitation)
         @subscription.save!
@@ -20,27 +20,27 @@ class InvitationsController < ApplicationController
 
     def show
         @invitation = Invitation.find(params[:id])
-        if job_seeker_signed_in?
-            @subscription = Subscription.find(params[:subscription_id])
-        end
+        @subscription = Subscription.find(params[:subscription_id])
     end
 
     def accept_invitation
         @invitation = Invitation.find(params[:id])
+        @subscription = Subscription.find(params[:subscription_id])
         @job_seeker = current_job_seeker
-        @invitation.subscription.status = true 
+        @subscription.status = true 
         flash[:alert] = 'Aceite enviado para Headhunter'
-        @invitation.subscription.save
-        redirect_to job_opportunity_subscription_invitation_path(@invitation.subscription.job_opportunity, @invitation.subscription, @invitation.subscription.hh_answer)
+        @subscription.save
+        redirect_to job_opportunity_subscription_invitation_path(@subscription.job_opportunity, @subscription, @subscription.hh_answer)
     end
 
     def reject_invitation
         @invitation = Invitation.find(params[:id])
+        @subscription = Subscription.find(params[:subscription_id])
         @job_seeker = current_job_seeker
-        @invitation.subscription.status = false
+        @subscription.status = false
         flash[:alert] = 'Convite recusado com sucesso'
-        @invitation.subscription.save
-        redirect_to job_opportunity_subscription_invitation_path(@invitation.subscription.job_opportunity, @invitation.subscription, @invitation.subscription.hh_answer)
+        @subscription.save
+        redirect_to job_opportunity_subscription_invitation_path(@subscription.job_opportunity, @subscription, @subscription.hh_answer)
     end
 
     private

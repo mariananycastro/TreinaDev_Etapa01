@@ -24,6 +24,12 @@ feature 'headhunter can invite jos seeker without his subscriptions to job oppor
         click_on 'Enviar Proposta'
         fill_in 'Título:', with: 'Candidato aceito'
         fill_in 'Mensagem:', with: 'Candidato aceito para entrevista'
+        fill_in 'Data de início:', with: '02/03/2020'
+        fill_in 'Salário:', with: 5000
+        fill_in 'Cargo:', with: 'Especialista'
+        fill_in 'Expectativas:', with: 'Tranbalhar bem'
+        fill_in 'Bonus:', with: 'PLR'
+        fill_in 'Benefícios:', with: 'VT e VR'
         click_on 'Enviar Proposta'
         
         expect(page).to have_content (profile.nick_name)

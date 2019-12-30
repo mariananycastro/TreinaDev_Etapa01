@@ -58,12 +58,13 @@ feature 'headhunter edit job opportunity' do
         click_on 'Enviar'
 
         expect(page).to have_content 'Você deve corrigir todos os erros para prosseguir'
-        expect(page).to have_content "Name não pode ficar em branco"
-        expect(page).to have_content "Description não pode ficar em branco"
-        expect(page).to have_content "Habilities não pode ficar em branco"
-        expect(page).to have_content "Salary range não pode ficar em branco"
-        expect(page).to have_content "End date opportunity não pode ficar em branco"
-        expect(page).to have_content "Region não pode ficar em branco"
+        expect(page).to have_content "Nome da Vaga não pode ficar em branco"
+        expect(page).to have_content "Descrição não pode ficar em branco"
+        expect(page).to have_content "Habilidades não pode ficar em branco"
+        expect(page).to have_content "Faixa Salarial não pode ficar em branco"
+        expect(page).to have_content "Data limite de inscrição não pode ficar em branco"
+        expect(page).to have_content "Região não pode ficar em branco"
+
 
     end
 

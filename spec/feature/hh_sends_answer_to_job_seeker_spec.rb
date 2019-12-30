@@ -22,6 +22,13 @@ require 'rails_helper'
             find('#with_subscription').click_on 'Enviar Proposta'
             fill_in 'Título:', with: 'Candidato aceito'
             fill_in 'Mensagem:', with: 'Candidato aceito para entrevista'
+            fill_in 'Data de início:', with:  '02/03/2020'
+            fill_in 'Salário:', with: 5000
+            fill_in 'Cargo:', with: 'Especialista'
+            fill_in 'Expectativas:', with: 'Tranbalhar bem'
+            fill_in 'Bonus:', with: 'PLR'
+            fill_in 'Benefícios:', with: 'VT e VR'
+            
             click_on 'Enviar Proposta'
             subscription.reload
 
@@ -73,7 +80,8 @@ require 'rails_helper'
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                        region: 'Sâo Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)        
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date:  '02/03/2020', salary: 5000, position: 'Especialista',
+                expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
             subscription.update(hh_answer:invitation, status:true)
             subscription.reload
 
@@ -97,7 +105,8 @@ require 'rails_helper'
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                        region: 'Sâo Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)        
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date:  '02/03/2020', salary: 5000, position: 'Especialista',
+                expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
             subscription.update(hh_answer:invitation, status:false)
             subscription.reload
 
@@ -120,8 +129,9 @@ require 'rails_helper'
                                                        habilities: 'Saber programar', salary_range: 5000, 
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                        region: 'Sâo Paulo')
-            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)        
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+            subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)
+            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date:  '02/03/2020', salary: 5000, position: 'Especialista',
+                expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
             subscription.update(hh_answer:invitation)
             subscription.reload
 
@@ -146,7 +156,8 @@ require 'rails_helper'
                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                        region: 'Sâo Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity)        
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date:  '02/03/2020', salary: 5000, position: 'Especialista',
+                expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
             subscription.update(hh_answer:invitation)
             subscription.reload
 

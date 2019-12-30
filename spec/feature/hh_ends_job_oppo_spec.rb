@@ -67,7 +67,8 @@ feature 'headhunter ends job opportunity' do
                                                    region: 'Sâo Paulo')   
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
         subscription2 = Subscription.create!(job_seeker:job_seeker2, job_opportunity:job_opportunity)        
-        invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+        invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date: '02/03/2020', salary: 5000, position: 'Especialista',
+            expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
         subscription.update(hh_answer:invitation, status:true)
             
         login_as(headhunter, scope: :headhunter)

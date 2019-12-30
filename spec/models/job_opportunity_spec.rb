@@ -74,7 +74,7 @@ RSpec.describe JobOpportunity, type: :model do
                                                    region: 'Sâo Paulo')
 
         expect(job_opportunity.valid?).to eq false
-        expect(job_opportunity.errors.full_messages).to include('End date opportunity deve ser maior que data de hoje')
+        expect(job_opportunity.errors.full_messages).to include('Data limite de inscrição deve ser maior que data de hoje')
       end
 
       it '>  today' do
@@ -97,7 +97,7 @@ RSpec.describe JobOpportunity, type: :model do
                                                    region: 'Sâo Paulo')
 
         expect(job_opportunity.valid?).to eq false
-        expect(job_opportunity.errors.full_messages).to include('End date opportunity deve ser maior que data de hoje')
+        expect(job_opportunity.errors.full_messages).to include('Data limite de inscrição deve ser maior que data de hoje')
       end
     end
 

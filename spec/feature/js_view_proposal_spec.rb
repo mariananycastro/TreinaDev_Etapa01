@@ -12,7 +12,8 @@ require 'rails_helper'
                                                      opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date:  '02/03/2020', salary: 5000, position: 'Especialista',
+                expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
             subscription.update(hh_answer:invitation)
 
             login_as(job_seeker, scope: :job_seeker)
@@ -34,7 +35,8 @@ require 'rails_helper'
                                                      opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
-            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.')
+            invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date:  '02/03/2020', salary: 5000, position: 'Especialista',
+                expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
             subscription.update(hh_answer:invitation)
 
             login_as(job_seeker, scope: :job_seeker)
