@@ -52,13 +52,13 @@ feature 'Job seeker edit profile' do
         click_on 'Enviar'
 
         expect(page).to have_content 'Você deve corrigir todos os erros para prosseguir'
-        expect(page).to have_content "Name can't be blank"
-        expect(page).to have_content "Document can't be blank"
-        expect(page).to have_content "Nick name can't be blank"
-        expect(page).to have_content "Day of birth can't be blank"
-        expect(page).to have_content "Education level can't be blank"
-        expect(page).to have_content "Description can't be blank"
-        expect(page).to have_content "Experience can't be blank"
+        expect(page).to have_content "Name não pode ficar em branco"
+        expect(page).to have_content "Document não pode ficar em branco"
+        expect(page).to have_content "Nick name não pode ficar em branco"
+        expect(page).to have_content "Day of birth não pode ficar em branco"
+        expect(page).to have_content "Education level não pode ficar em branco"
+        expect(page).to have_content "Description não pode ficar em branco"
+        expect(page).to have_content "Experience não pode ficar em branco"
 
     end
 

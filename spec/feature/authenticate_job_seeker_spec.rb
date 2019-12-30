@@ -11,7 +11,7 @@ feature 'log in job seeker' do
         click_on 'Log in'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Signed in successfully.')
+    expect(page).to have_content('Logado com sucesso.')
     expect(page).to have_link('Log out')
     expect(page).not_to have_link('Entrar')
     end
@@ -28,7 +28,7 @@ feature 'log in job seeker' do
         click_on 'Log out'
 
         expect(current_path).to eq(root_path)
-        expect(page).to have_content('Signed out successfully')
+        expect(page).to have_content('Saiu com sucesso')
         expect(page).to have_link('Entrar')
         expect(page).not_to have_link('Log out')
     end

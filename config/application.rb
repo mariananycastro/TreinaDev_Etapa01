@@ -31,5 +31,9 @@ module Etapa01
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    #i18n pt-BR
+    config.i18n.default_locale = :'pt-BR'
   end
 end
+
+
