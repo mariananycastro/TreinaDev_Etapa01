@@ -11,7 +11,7 @@
         <li>Região: <%= @job_opportunity.region %></li>
     </ul>
     
-    
+    <%= link_to 'Encerrar Vaga', end_job_opportunity_job_opportunity_path(@job_opportunity), data: { confirm: 'Are you sure?' } %>
 
 
     <% if @subscriptions.empty?%>
@@ -26,15 +26,12 @@
 
             <% elsif subscription.hh_answer.is_a?(Invitation) %>                    
                 <% if subscription.status.nil? %>
-                    <p> Aguardando resposta do candidato: <%="#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document}"\
-                                " #{subscription.job_seeker.profile.education_level}" %></p>            
+                    <p> Aguardando resposta do candidato: <%= subscription.job_seeker.profile.job_seeker_profile %></p>            
                 <p>
                 <% elsif subscription.status %>
-                    <%= link_to "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level}"\
-                            " aceitou convite para a vaga", profile_path(subscription.job_seeker.profile) %>
+                    <%= link_to "#{subscription.job_seeker.profile.job_seeker_profile} aceitou convite para a vaga", profile_path(subscription.job_seeker.profile) %>
                 <% elsif !subscription.status %>
-                    <%= link_to "#{subscription.job_seeker.profile.name} #{subscription.job_seeker.profile.document} #{subscription.job_seeker.profile.education_level}"\
-                            " recusou convite para a vaga", profile_path(subscription.job_seeker.profile) %>
+                    <%= link_to "#{subscription.job_seeker.profile.job_seeker_profile} recusou convite para a vaga", profile_path(subscription.job_seeker.profile) %>
                 </p>
                 <% end %>
 

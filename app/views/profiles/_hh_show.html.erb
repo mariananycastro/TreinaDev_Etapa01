@@ -36,7 +36,7 @@
 <% @job_opportunities.each do |opportunity|%>
     <p><%= opportunity.description_job_opportunity%>
     <%= link_to 'Enviar Proposta',
-                    invitation_without_subscription_job_opportunity_profile_path(opportunity, @profile)%>
+                    invitation_without_subscription_job_opportunity_profile_path(opportunity, @profile), data: { confirm: 'Are you sure?' }%>
 <% end %>
 </div>
 
@@ -46,10 +46,10 @@
      <p><%= subscription.job_opportunity.description_job_opportunity%>
          <%= link_to 'Enviar Proposta', 
                 new_job_opportunity_subscription_invitation_path(
-                    subscription.job_opportunity, subscription) %>
+                    subscription.job_opportunity, subscription), data: { confirm: 'Are you sure?' } %>
         <%= link_to 'Recusar Inscrição', 
                 new_job_opportunity_subscription_feedback_path(
-                    subscription.job_opportunity, subscription) %></p>
+                    subscription.job_opportunity, subscription), data: { confirm: 'Are you sure?' } %></p>
     <% else %>
         <p> Aguardando resposta </p>
     <% end %>

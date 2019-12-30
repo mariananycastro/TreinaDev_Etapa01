@@ -8,9 +8,11 @@
     <% end %>
     <% if @search_job_opportunities.present? %>
         <% @search_job_opportunities.each do |opportunity| %>
-            <ul> 
-                <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
-            </ul>
+            <% if opportunity.status == true%>
+                <ul> 
+                    <li><%= link_to opportunity.description_job_opportunity, opportunity %></li><br>
+                </ul>
+            <% end %>
         <% end %>
     <% else %>
         <p> Resultado não encontrado </p>

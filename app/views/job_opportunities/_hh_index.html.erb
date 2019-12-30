@@ -24,9 +24,11 @@
             <p> Nenhuma vaga cadastrada </p>
         <% else %>
             <% @job_opportunities_of_headhunter.order(:end_date_opportunity).each do |opportunity| %>
-            <p>
-            <%= link_to opportunity.description_job_opportunity, opportunity %>               
-            </p>
+                <% if opportunity.status %>
+                    <p> <%= link_to opportunity.description_job_opportunity, opportunity %> </p>
+                <% elsif !opportunity.status %>
+                    <p>Encerrada - <%= link_to opportunity.description_job_opportunity, opportunity %></p>
+                <% end %>
             <% end %>
            
         <% end %>

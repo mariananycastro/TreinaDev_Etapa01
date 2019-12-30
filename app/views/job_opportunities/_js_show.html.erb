@@ -13,9 +13,10 @@
     </ul>
     
 <% if @subscription.nil? %>
-    <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(@job_opportunity, current_job_seeker), method: 'post' %> </p>
+    <p><%= link_to 'Inscrição para Vaga', job_seeker_subscribe_job_opportunity_path(@job_opportunity, current_job_seeker), method: 'post',
+                 data: { confirm: 'Are you sure?' }%> </p>
 <% else %>
-    <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(@subscription), method: 'delete' %> </p>
+    <p><%= link_to 'Cancelar Inscrição', cancel_subscription_job_opportunity_path(@subscription), method: 'delete', data: { confirm: 'Are you sure?' }%> </p>
 
     <% if @subscription.hh_answer.is_a?(Invitation) %>
         <p><%= link_to 'Visualizar Convite', 

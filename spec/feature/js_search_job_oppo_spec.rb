@@ -98,4 +98,30 @@ require 'rails_helper'
             expect(page).not_to have_css('#search', text: 'Programador Estagiário 2020-02-02 São Paulo')
             expect(page).to have_css('#search', text: 'Desenvolvedor Java Pleno 2020-02-02 São Paulo')
         end
+
+        scenario 'cant find job opportunity that are closed' do
+            headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456') 
+            job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')        
+            job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
+                                                     description: 'Vaga para programador Ruby',
+                                                     habilities: 'Saber programar', salary_range: 5000, 
+                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                     region: 'São Paulo')
+            job_opportunity2 = JobOpportunity.create!(headhunter: headhunter, name: 'Desenvolvedor Ruby', 
+                                                     description: 'Vaga para programador',
+                                                     habilities: 'Saber programar', salary_range: 5000, 
+                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                     region: 'São Paulo', status: false)
+    
+            login_as(job_seeker, scope: :job_seeker)
+            visit root_path
+            click_on 'Vagas'
+            fill_in 'Buscar vaga:', with: 'Ruby'
+            click_on 'Pesquisar'
+    
+            expect(page).to have_css('#search', text: 'Programador Ruby Pleno 2020-02-02 São Paulo')
+            expect(page).not_to have_css('#search', text: 'Desenvolvedor Ruby Pleno 2020-02-02 São Paulo')
+            expect(job_opportunity.status).to eq true
+                
+            end
     end

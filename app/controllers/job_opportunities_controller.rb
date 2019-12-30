@@ -122,6 +122,21 @@ class JobOpportunitiesController < ApplicationController
         render :index
     end
 
+    def end_job_opportunity
+        @job_opportunity = JobOpportunity.find(params[:id])
+        @subscriptions = Subscription.where(job_opportunity:@job_opportunity)
+        @subscriptions.each do |subscription|
+            if subscription.hh_answer.nil?
+                create_feedback(subscription)
+            end    
+        end
+        @job_opportunity.status = false
+        @job_opportunity.save!
+        flash[:alert] = 'Vaga encerrada com sucesso'
+        
+        redirect_to @job_opportunity
+    end
+
     private
 
     def authenticate_headhunter_and_job_seeker
@@ -153,5 +168,12 @@ class JobOpportunitiesController < ApplicationController
         @profile = Profile.find_by(job_seeker:current_job_seeker)
     end
 
+    def create_feedback(subscription)
+        feedback = Feedback.new(title:"Feedback para vaga #{subscription.job_opportunity.name} #{subscription.job_opportunity.opportunity_level}"\
+            " #{subscription.job_opportunity.end_date_opportunity} #{subscription.job_opportunity.region}", message: 'Vaga encerrada. Obrigada pela participação')
+        feedback.save
+        subscription.update(hh_answer:feedback)
+        subscription.save!
+    end
  end
 
