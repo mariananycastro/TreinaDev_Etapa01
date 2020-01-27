@@ -35,4 +35,10 @@ Rails.application.routes.draw do
     get 'remove_star', on: :member  
     resources :profile_comments, except: [:index] 
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :job_opportunities, only: %i[show index create update destroy]
+    end
+  end
 end
