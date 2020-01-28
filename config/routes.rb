@@ -40,5 +40,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :job_opportunities, only: %i[show index create update destroy]
     end
+
+    #scope'/api/v1/' do
+     # resources :job_opportunity
+    #end 
+    #criaria rotas para job_opportunity com o mesmo controller
   end
 end

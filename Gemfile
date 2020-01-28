@@ -55,4 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #gem for autentication
 gem 'devise'
 
-
+group :development, :test do
+  gem 'factory_bot_rails'
+end
