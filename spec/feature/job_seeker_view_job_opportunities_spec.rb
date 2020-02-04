@@ -7,7 +7,7 @@ feature 'job seeker can view job opportunities' do
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                  description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
-                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                  region: 'São Paulo')
 
         login_as(job_seeker, scope: :job_seeker)
@@ -21,7 +21,7 @@ feature 'job seeker can view job opportunities' do
         expect(page).to have_content 'Saber programar'
         expect(page).to have_content '5000'
         expect(page).to have_content 'Pleno'
-        expect(page).to have_content '2020-02-02'
+        expect(page).to have_content '2021-02-02'
         expect(page).to have_content 'São Paulo'
 
     end

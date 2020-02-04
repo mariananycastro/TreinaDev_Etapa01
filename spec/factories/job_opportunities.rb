@@ -8,7 +8,7 @@ FactoryBot.define do
         habilities { 'Saber programar' }  
         salary_range { '5000' } 
         opportunity_level { 'Pleno' }  
-        end_date_opportunity { '2020-02-02' }
+        end_date_opportunity { '2021-02-02' }
         region { 'São Paulo' }
     end
 end

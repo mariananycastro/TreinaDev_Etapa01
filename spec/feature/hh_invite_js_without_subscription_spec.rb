@@ -10,7 +10,7 @@ feature 'headhunter can invite jos seeker without his subscriptions to job oppor
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                             description: 'Vaga para programador Ruby',
                             habilities: 'Saber programar', salary_range: 5000, 
-                            opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                            opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                             region: 'São Paulo')
                                     
 
@@ -24,7 +24,7 @@ feature 'headhunter can invite jos seeker without his subscriptions to job oppor
         click_on 'Enviar Proposta'
         fill_in 'Título:', with: 'Candidato aceito'
         fill_in 'Mensagem:', with: 'Candidato aceito para entrevista'
-        fill_in 'Data de início:', with: '02/03/2020'
+        fill_in 'Data de início:', with: '02/03/2021'
         fill_in 'Salário:', with: 5000
         fill_in 'Cargo:', with: 'Especialista'
         fill_in 'Expectativas:', with: 'Tranbalhar bem'
@@ -44,12 +44,12 @@ feature 'headhunter can invite jos seeker without his subscriptions to job oppor
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                         description: 'Vaga para programador Ruby',
                                                         habilities: 'Saber programar', salary_range: 5000, 
-                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                         region: 'São Paulo')
             job_opportunity2 = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby 2', 
                                                         description: 'Vaga para programador Ruby 2',
                                                         habilities: 'Saber programar 2', salary_range: 5000, 
-                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                        opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                         region: 'São Paulo')
             job_seeker = JobSeeker.create!(email: 'js@test.com', password: '123456')
             profile = Profile.create!(name: 'Pedro', nick_name: 'Pedrinho', day_of_birth: '1986-02-02', 
@@ -67,8 +67,8 @@ feature 'headhunter can invite jos seeker without his subscriptions to job oppor
             click_on "#{profile.name} #{profile.document} #{profile.education_level}"
 
 
-            expect(page).to have_css('#with_subscription', text: 'Programador Ruby Pleno 2020-02-02 São Paulo')
-            expect(page).to have_css('#without_subscription', text: 'Programador Ruby 2 Pleno 2020-02-02 São Paulo')
+            expect(page).to have_css('#with_subscription', text: 'Programador Ruby Pleno 2021-02-02 São Paulo')
+            expect(page).to have_css('#without_subscription', text: 'Programador Ruby 2 Pleno 2021-02-02 São Paulo')
           
             end
 end

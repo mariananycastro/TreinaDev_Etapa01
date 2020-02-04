@@ -9,7 +9,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                      description: 'Vaga para programador Ruby',
                                                      habilities: 'Saber programar', salary_range: 5000, 
-                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
             feedback = Feedback.create!(title:'Nao deu', message:'Sorry.')
@@ -20,7 +20,7 @@ require 'rails_helper'
     
             visit root_path
 
-            expect(page).to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2020-02-02 São Paulo'
+            expect(page).to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2021-02-02 São Paulo'
 
         end
 
@@ -33,7 +33,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                      description: 'Vaga para programador Ruby',
                                                      habilities: 'Saber programar', salary_range: 5000, 
-                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
             feedback = Feedback.create!(title:'Nao deu', message:'Sorry.')
@@ -43,7 +43,7 @@ require 'rails_helper'
     
             login_as(job_seeker, scope: :job_seeker)
             visit root_path
-            click_on 'Programador Ruby Pleno 2020-02-02 São Paulo'
+            click_on 'Programador Ruby Pleno 2021-02-02 São Paulo'
 
             expect(page).to have_content profile.nick_name
             expect(page).to have_content job_opportunity.description_job_opportunity        
@@ -65,7 +65,7 @@ require 'rails_helper'
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                      description: 'Vaga para programador Ruby',
                                                      habilities: 'Saber programar', salary_range: 5000, 
-                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                     opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                      region: 'São Paulo')
             subscription = Subscription.create!(job_seeker:job_seeker2, job_opportunity:job_opportunity) 
             feedback = Feedback.create!(title:'Nao deu', message:'Sorry.')
@@ -76,7 +76,7 @@ require 'rails_helper'
     
             visit root_path
 
-            expect(page).not_to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2020-02-02 São Paulo'
+            expect(page).not_to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2021-02-02 São Paulo'
 
         end
 

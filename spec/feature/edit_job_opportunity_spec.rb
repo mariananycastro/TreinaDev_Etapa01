@@ -6,7 +6,7 @@ feature 'headhunter edit job opportunity' do
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                  description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
-                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                  region: 'Sâo Paulo')
 
         login_as(headhunter, scope: :headhunter)
@@ -20,7 +20,7 @@ feature 'headhunter edit job opportunity' do
         fill_in 'Habilidades Desejadas', with: 'Formação em Computação'
         fill_in 'Faixa Salarial', with: '6000'
         choose 'Especialista'
-        fill_in 'Data Limite para inscrição', with: '2020-03-02'
+        fill_in 'Data Limite para inscrição', with: '2021-03-02'
         fill_in 'Região', with: 'Paraná'
         click_on 'Enviar'
         
@@ -29,7 +29,7 @@ feature 'headhunter edit job opportunity' do
         expect(page).to have_content 'Formação em Computação'
         expect(page).to have_content '6000'
         expect(page).to have_content 'Especialista'
-        expect(page).to have_content '2020-03-02'
+        expect(page).to have_content '2021-03-02'
         expect(page).to have_content 'Paraná'
 
         expect(page).to have_content 'Vaga atualizada com sucesso!'
@@ -40,7 +40,7 @@ feature 'headhunter edit job opportunity' do
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                  description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
-                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                  region: 'Sâo Paulo')
 
         login_as(headhunter, scope: :headhunter)

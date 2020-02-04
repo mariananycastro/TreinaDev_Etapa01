@@ -2,8 +2,7 @@ require 'rails_helper'
 
 feature 'headhunter create job opportunity' do
     scenario 'successfully' do
-        headhunter = Headhunter.create!(email: 'test@test.com', password: '123456')
-
+        headhunter = create(:headhunter)
         login_as(headhunter, scope: :headhunter)
         
         visit root_path
@@ -13,7 +12,7 @@ feature 'headhunter create job opportunity' do
         fill_in 'Habilidades Desejadas', with: 'Formação em Computação'
         fill_in 'Faixa Salarial', with: '5000'
         choose 'Pleno'
-        fill_in 'Data Limite para inscrição', with: '2020-02-02'
+        fill_in 'Data Limite para inscrição', with: '2021-02-02'
         fill_in 'Região', with: 'São Paulo'
         click_on 'Enviar'
 
@@ -22,7 +21,7 @@ feature 'headhunter create job opportunity' do
         expect(page).to have_content 'Formação em Computação'
         expect(page).to have_content '5000'
         expect(page).to have_content 'Pleno'
-        expect(page).to have_content  '2020-02-02'
+        expect(page).to have_content  '2021-02-02'
         expect(page).to have_content 'São Paulo'
 
         expect(page).to have_content 'Vaga criada com sucesso!'

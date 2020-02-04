@@ -5,7 +5,7 @@ require 'rails_helper'
             headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
             job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                        habilities: 'Saber programar', salary_range: 5000, 
-                                                       opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                       opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                        region: 'Sâo Paulo')
     
             login_as(job_seeker, scope: :job_seeker)

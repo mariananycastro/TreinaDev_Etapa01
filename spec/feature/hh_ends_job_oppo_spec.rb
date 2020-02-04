@@ -4,7 +4,7 @@ feature 'headhunter ends job opportunity' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                    habilities: 'Saber programar', salary_range: 5000, 
-                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                    region: 'Sâo Paulo')   
 
 
@@ -29,7 +29,7 @@ feature 'headhunter ends job opportunity' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                    habilities: 'Saber programar', salary_range: 5000, 
-                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                    region: 'Sâo Paulo')   
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
 
@@ -63,11 +63,11 @@ feature 'headhunter ends job opportunity' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                    habilities: 'Saber programar', salary_range: 5000, 
-                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                    region: 'Sâo Paulo')   
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
         subscription2 = Subscription.create!(job_seeker:job_seeker2, job_opportunity:job_opportunity)        
-        invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date: '02/03/2020', salary: 5000, position: 'Especialista',
+        invitation = Invitation.create!(title:'Passou', message:'Vamos agendar uma entrevista.', initial_date: '02/03/2021', salary: 5000, position: 'Especialista',
             expectations: 'Trabalhar bem', bonus: 'PLR', benefits:'VR, VT')
         subscription.update(hh_answer:invitation, status:true)
             
@@ -103,11 +103,11 @@ feature 'headhunter ends job opportunity' do
         headhunter = Headhunter.create!(email: 'hh@test.com', password: '123456')        
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
                                                    habilities: 'Saber programar', salary_range: 5000, 
-                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                   opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                    region: 'Sâo Paulo')  
         job_opportunity2 = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby 2', description: 'Vaga para programador Ruby 2',
                                                    habilities: 'Saber programar muito', salary_range: 6000, 
-                                                   opportunity_level: 'Especialista', end_date_opportunity: '02/02/2020',
+                                                   opportunity_level: 'Especialista', end_date_opportunity: '02/02/2021',
                                                    region: 'Paraná', status:false)   
 
         login_as(headhunter, scope: :headhunter)
@@ -136,7 +136,7 @@ feature 'headhunter ends job opportunity' do
         job_opportunity = JobOpportunity.create!(headhunter: headhunter, name: 'Programador Ruby', 
                                                  description: 'Vaga para programador Ruby',
                                                  habilities: 'Saber programar', salary_range: 5000, 
-                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2020',
+                                                 opportunity_level: 'Pleno', end_date_opportunity: '02/02/2021',
                                                  region: 'São Paulo')
         subscription = Subscription.create!(job_seeker:job_seeker, job_opportunity:job_opportunity) 
         subscription.reload    
@@ -152,7 +152,7 @@ feature 'headhunter ends job opportunity' do
         login_as(job_seeker, scope: :job_seeker)
         visit root_path
 
-        expect(page).to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2020-02-02 São Paulo'
+        expect(page).to have_content 'Você tem um feedback para a vaga: Programador Ruby Pleno 2021-02-02 São Paulo'
 
     end
 

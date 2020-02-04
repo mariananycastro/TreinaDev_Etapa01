@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :profile_comments, except: [:index] 
   end
 
-  namespace :api do
+  namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resources :job_opportunities, only: %i[show index create update destroy]
     end
