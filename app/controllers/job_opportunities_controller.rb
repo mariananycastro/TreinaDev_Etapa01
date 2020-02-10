@@ -56,9 +56,6 @@ class JobOpportunitiesController < ApplicationController
         redirect_to headhunter_job_opportunities_path
     end
 
-
-    
-
     def job_seeker_subscribe
         find_profile
         if @profile.nil?
@@ -71,6 +68,10 @@ class JobOpportunitiesController < ApplicationController
                 @subscription = Subscription.new(job_seeker: @job_seeker, job_opportunity: @job_opportunity)
                 if @subscription.save
                     flash[:alert] = 'Inscrição realizada com sucesso!'
+                    
+                    @headhunter = @job_opportunity.headhunter                
+                    HeadhunterMailer.welcome_email(@headhunter, @subscription).deliver_later
+
                     redirect_to job_opportunity_path(@job_opportunity)
                 end
             else
