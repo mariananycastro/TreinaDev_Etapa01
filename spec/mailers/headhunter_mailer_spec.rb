@@ -10,16 +10,15 @@ RSpec.describe HeadhunterMailer, type: :mailer do
       subscription = create(:subscription, job_seeker_id: job_seeker.id, job_opportunity_id: job_opportunity.id)
 
       ActiveJob::Base.queue_adapter = :test
-      email = HeadhunterMailer.welcome_email(headhunter, job_opportunity, job_seeker)
-      
-      expect { email.deliver_later }.to have_enqueued_job.on_queue('mailers')
-      #byebug
+      email = HeadhunterMailer.welcome_email(headhunter, subscription)
+
+      expect{ email.deliver_later }.to have_enqueued_job.on_queue('mailers')
       expect(email.subject).to eq 'teste'
       expect(email.body).to have_content 'email de teste'
       expect(email.body).to have_content (headhunter.email)
       expect(email.body).to have_content (job_opportunity.name)
       expect(email.body).to have_content (job_seeker.email)
-      expect(HeadhunterMailer.deliveries.count).to eq 1
+      
     end
 
     # since we have config.action_mailer.delivery_method  set to :test in our :test.rb, all 'sent' emails are gathered into the ActionMailer::Base.deliveries array.
@@ -31,9 +30,10 @@ RSpec.describe HeadhunterMailer, type: :mailer do
 
       expect {
         perform_enqueued_jobs do
-            HeadhunterMailer.welcome_email(headhunter).deliver_later
+            HeadhunterMailer.welcome_email(headhunter, subscription).deliver_later
         end
       }.to change { ActionMailer::Base.deliveries.size }.by(1)
+      expect(HeadhunterMailer.deliveries.count).to eq 1
     end
 
     it 'welcome_email is sent to the right user' do
@@ -41,8 +41,9 @@ RSpec.describe HeadhunterMailer, type: :mailer do
       job_seeker = create(:job_seeker)
       job_opportunity = create(:job_opportunity, headhunter_id: headhunter.id)
       subscription = create(:subscription, job_seeker_id: job_seeker.id, job_opportunity_id: job_opportunity.id)
+
       perform_enqueued_jobs do
-          HeadhunterMailer.welcome_email(headhunter).deliver_later
+          HeadhunterMailer.welcome_email(headhunter, subscription).deliver_later
       end
   
       mail = ActionMailer::Base.deliveries.last
@@ -51,8 +52,3 @@ RSpec.describe HeadhunterMailer, type: :mailer do
     end
   end
 end
-
-
-  
-
-    #to have_enqueued_job(ActionMailer::DeliveryJob).with('ReportMailer', 'update_mail', 'deliver_now', user.id)
