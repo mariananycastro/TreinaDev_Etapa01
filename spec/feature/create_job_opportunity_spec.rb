@@ -23,7 +23,6 @@ feature 'headhunter create job opportunity' do
         expect(page).to have_content 'Pleno'
         expect(page).to have_content  '2021-02-02'
         expect(page).to have_content 'São Paulo'
-
         expect(page).to have_content 'Vaga criada com sucesso!'
     end
 

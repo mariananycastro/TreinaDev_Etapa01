@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     delete 'cancel_subscription', on: :member
     get 'search', on: :collection 
     get 'end_job_opportunity', on: :member
+    get 'advanced_search', on: :member
     resources :profiles, except: [:index, :create, :new, :edit, :show, :update, :destroy] do
       get 'invitation_without_subscription', on: :member
     end  

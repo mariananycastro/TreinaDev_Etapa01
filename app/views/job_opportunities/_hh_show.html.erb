@@ -13,6 +13,7 @@
     
     <%= link_to 'Encerrar Vaga', end_job_opportunity_job_opportunity_path(@job_opportunity), data: { confirm: 'Are you sure?' } %>
 
+    <p><%= link_to 'Busca Avançada', advanced_search_job_opportunity_path(@job_opportunity)%>
 
     <% if @subscriptions.empty?%>
         <p> Não há inscrições para esta vaga <p>
