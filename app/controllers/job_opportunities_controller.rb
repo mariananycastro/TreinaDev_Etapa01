@@ -138,6 +138,18 @@ class JobOpportunitiesController < ApplicationController
         redirect_to @job_opportunity
     end
 
+    def advanced_search
+        find_job_opportunity
+        @result_search = @headhunter.job_opportunities.includes(:subscriptions).where('education_level LIKE :education_level 
+            AND description LIKE :description
+            AND experience LIKE :experience', 
+            education_level: "%#{params[:education_level]}%",
+            description: "%#{params[:description]}%",
+            experience: "%#{params[:experience]}%"
+        )
+
+    end
+
     private
 
     def authenticate_headhunter_and_job_seeker

@@ -1,1 +1,20 @@
-<p>teste</p>>
+<h3>Busca Avançada</h3>
+<p><%= @job_opportunity.description_job_opportunity%></p>
+
+<%= form_with url:advanced_search_job_opportunity_path, method: :get, local:true do %>
+  <%= label_tag :education_level, 'Escolaridade'%>
+  <%= text_field_tag :education_level %>
+  <%= label_tag :description, 'Descrição'%>
+  <%= text_field_tag :description %>
+  <%= label_tag :experience, 'Experiência'%>
+  <%= text_field_tag :experience %>
+  <%= submit_tag 'Pesquisar'%>
+<% end %>
+
+<% if @result_search.present? %>
+  <h3> Resultado da Pesquisa </h3>
+  <% @result_search.each do |subscription| %>
+    <%= subscription.job_seeker.name %> 
+  <% end %>
+<% end %>
+
