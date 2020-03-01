@@ -11,10 +11,10 @@
   <%= submit_tag 'Pesquisar'%>
 <% end %>
 
-<% if @result_search.present? %>
+<% if @search_result.present? %>
   <h3> Resultado da Pesquisa </h3>
-  <% @result_search.each do |subscription| %>
-    <%= subscription.job_seeker.name %> 
+  <% @search_result.each do |subscription| %>
+    <%= subscription.job_seeker.profile.name %> 
   <% end %>
 <% end %>
 

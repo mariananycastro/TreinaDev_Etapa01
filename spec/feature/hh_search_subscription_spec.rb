@@ -22,18 +22,16 @@ feature 'hh search for subscription' do
     click_on "#{job_opportunity.name} #{job_opportunity.opportunity_level}"\
     " #{job_opportunity.end_date_opportunity} #{job_opportunity.region}"
     click_on 'Busca Avançada'
-    byebug
     fill_in 'Escolaridade', with: 'Graduado'
     fill_in 'Descrição', with: ''
     fill_in 'Experiência', with: ''
     click_on 'Pesquisar'
 
-    expect(page).to have_content(job_seeker.name)
-    expect(page).not_to have_content(job_seeker2.name)
-    expect(page).to have_content(job_seeker3.name)
-
-
+    expect(page).to have_content(profile.name)
+    expect(page).not_to have_content(profile2.name)
+    expect(page).to have_content(profile3.name)
   end
+
   xscenario 'successfully with factorybot' do
     headhunter = create(:headhunter)
 

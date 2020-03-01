@@ -24,5 +24,5 @@ class JobOpportunity < ApplicationRecord
           errors.add(:end_date_opportunity, 'deve ser maior que data de hoje')    
         end    
     end
-      
+    
 end

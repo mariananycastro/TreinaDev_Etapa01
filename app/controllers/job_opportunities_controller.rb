@@ -140,14 +140,15 @@ class JobOpportunitiesController < ApplicationController
 
     def advanced_search
         find_job_opportunity
-        @result_search = @headhunter.job_opportunities.includes(:subscriptions).where('education_level LIKE :education_level 
-            AND description LIKE :description
-            AND experience LIKE :experience', 
-            education_level: "%#{params[:education_level]}%",
-            description: "%#{params[:description]}%",
-            experience: "%#{params[:experience]}%"
-        )
-
+        @search_result = @job_opportunity.subscriptions
+                .includes(job_seeker: [:profile])
+                .where('education_level LIKE :education_level 
+                    AND description LIKE :description
+                    AND experience LIKE :experience', 
+                    education_level: "%#{params[:education_level]}%",
+                    description: "%#{params[:description]}%",
+                    experience: "%#{params[:experience]}%")
+                .references(:job_seekers, :profiles)
     end
 
     private
