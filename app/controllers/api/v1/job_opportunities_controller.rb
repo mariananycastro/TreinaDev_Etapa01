@@ -25,7 +25,10 @@ class Api::V1::JobOpportunitiesController < Api::V1::ApiController
 
     def index
       @job_opportunities = JobOpportunity.all
+
       render json: @job_opportunities
+      
+      #ou render json: JobOpportunity.all
     end
 
     def create
