@@ -86,10 +86,12 @@ describe 'Job Opportunity Management' do
             headhunter = create(:headhunter)
             login_as(headhunter, scope: :headhunter)
 
-            post api_v1_job_opportunities_path, params: {headhunter_id: headhunter.id, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
-                                                        habilities: 'Saber programar', salary_range: '5000',
-                                                        opportunity_level: 'Pleno', end_date_opportunity: '2021-02-02',
-                                                        region: 'São Paulo'}
+            json = {headhunter_id: headhunter.id, name: 'Programador Ruby', description: 'Vaga para programador Ruby',
+                    habilities: 'Saber programar', salary_range: '5000',
+                    opportunity_level: 'Pleno', end_date_opportunity: '2021-02-02',
+                    region: 'São Paulo'}
+
+            post api_v1_job_opportunities_path, params: json
 
             json = JSON.parse(response.body, symbolize_names: true)
             
